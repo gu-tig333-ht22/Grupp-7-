@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import './dinmammaview.dart';
+import './model.dart';
 
 void main() {
+  var state = MyState();
   runApp(const MyApp());
 }
 
@@ -78,10 +80,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: [
           IconButton(
-            icon: Icon(Icons.heart_broken),
+            icon: const Icon(Icons.heart_broken),
             onPressed: () async {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DinMammaView()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DinMammaView()));
             },
           ),
         ],
