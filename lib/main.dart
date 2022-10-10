@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import './dinmammaview.dart';
-import './model.dart';
 
 void main() {
-  var state = MyState();
+  //var state = MyState();
   runApp(const MyApp());
 }
 

@@ -1,82 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import './model.dart';
 
 class DinMammaView extends StatelessWidget {
+  const DinMammaView({super.key});
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(248, 248, 248, 238),
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            _cloud3(),
-            Container(height: 50),
-            _likeornot(),
-            Container(height: 70),
-            _nextjoke(),
-          ],
-        ),
-      ),
-    );
+    return ChangeNotifierProvider(
+        create: (context) => MyState(),
+        builder: (context, child) => Scaffold(
+              backgroundColor: const Color.fromARGB(248, 248, 248, 238),
+              appBar: AppBar(),
+              body: Center(
+                child: Column(
+                  children: [
+                    _cloud(),
+                    Container(height: 50),
+                    _likeornot(),
+                    Container(height: 70),
+                    //_nextjoke(), VERKAR INTE FUNGERA ATT HA DENNA KNAPP UTANFÖR BUILDERN, DEN FATTAR INTE VAD CONTECT ÄR I PROVIDERN DÅ... DÄRFÖR STÅR DEN NEDANFÖR ISTÄLLET
+                    OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.lightBlue,
+                          shape: const StadiumBorder(),
+                          padding: const EdgeInsets.all(25),
+                        ),
+                        onPressed: () {
+                          Provider.of<MyState>(context, listen: false)
+                              .fetchFact();
+                        },
+                        child: const Text('Next joke, please!',
+                            style: TextStyle(fontSize: 20)))
+                  ],
+                ),
+              ),
+            ));
   }
 
-  Widget _cloud3() {
+  Widget _cloud() {
     return Stack(children: [
       Image.network(
         'https://www.pngitem.com/pimgs/m/533-5336200_transparent-background-cloud-clipart-png-download-animated-transparent.png',
         fit: BoxFit.cover,
       ),
-      const Positioned.fill(
+      Positioned.fill(
           child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          'Skääämt',
-          style: TextStyle(
-              fontSize: 18, fontFamily: 'Merriweather', color: Colors.cyan),
-        ),
-      ))
+              alignment: Alignment.center,
+              child: Consumer<MyState>(
+                builder: (context, state, child) => Text(
+                  '${state.fact}',
+                  style: const TextStyle(fontSize: 18, color: Colors.cyan),
+                ),
+              )))
     ]);
-  }
-
-  /*Widget _cloud2() {
-    return Container(
-      margin: EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 16),
-      width: 600,
-      height: 300,
-      color: Colors.transparent,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
-        child: GridTile(
-          child: Image.network(
-            'https://media.istockphoto.com/videos/cloud-in-flat-style-with-shadow-flat-design-paper-cut-style-loop-with-video-id1208148233?s=640x640',
-            fit: BoxFit.cover,
-          ),
-          footer: Container(
-            padding: EdgeInsets.all(8),
-            color: Colors.blue.withOpacity(.5),
-            child: Text(
-              'Skämt hahahhahaha',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }*/
-
-  Widget _cloud() {
-    return Container(
-        margin: EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 16),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30.0),
-          //child: Image.network('https://googleflutter.com/sample_image.jpg'),
-          child: Image.network(
-              'https://media.istockphoto.com/videos/cloud-in-flat-style-with-shadow-flat-design-paper-cut-style-loop-with-video-id1208148233?s=640x640'),
-        ) // Foreground widget here
-        );
   }
 
   Widget _likeornot() {
@@ -92,8 +69,6 @@ class DinMammaView extends StatelessWidget {
   Widget _thumbsup() {
     return TextButton.icon(
       onPressed: () {
-        style:
-        TextButton.styleFrom(backgroundColor: Colors.black);
         print('ThumbsUp!');
       },
       icon: const Icon(
@@ -119,18 +94,18 @@ class DinMammaView extends StatelessWidget {
     );
   }
 
-  Widget _nextjoke() {
+  /*Widget _nextjoke() {
     return OutlinedButton(
         style: OutlinedButton.styleFrom(
-          primary: Colors.white,
+          foregroundColor: Colors.white,
           backgroundColor: Colors.lightBlue,
           shape: const StadiumBorder(),
           padding: const EdgeInsets.all(25),
         ),
         onPressed: () {
-          print('Pressed');
-        },
-        child: const Text('Next joke, please!',
-            style: TextStyle(fontSize: 20, fontFamily: 'Merriweather')));
-  }
+          Provider.of<MyState>(context, listen: false).fetchFact();
+          },
+        child:
+            const Text('Next joke, please!', style: TextStyle(fontSize: 20)));
+  }*/
 }
