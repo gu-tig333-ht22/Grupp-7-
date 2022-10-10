@@ -53,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
             showDialog(
                 context: context,
-                builder: (_) => _showJoke(titel)); // ändra till lista av skämt
+                builder: (_) => ImageDialog(
+                    '')); // _showJoke(titel)); // ändra till lista av skämt
           },
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
