@@ -1,6 +1,12 @@
-//import 'dart:html';
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
+import 'package:template/HomePage.dart';
+import 'package:template/categorypage.dart';
+import 'data.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'homeViewTwo.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Prankster',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        //canvasColor: Colors.blueGrey,
-      ),
+      theme: ThemeData(),
       home: MyHomePage(),
     );
   }
