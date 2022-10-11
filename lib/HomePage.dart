@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'ImageDialog.dart';
-import 'SecondPage.dart';
+import 'homeViewTwo.dart';
 
 // TODO:
 // 1. randomnizea från lista/array av bilder
@@ -77,7 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(22.0),
           child: Image.network(
-              // för att lägga in meme evt: subject ['images']['large'] ??
               'https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2022-08/220805-border-collie-play-mn-1100-82d2f1.jpg',
               width: 300,
               height: 200,
@@ -97,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SecondPage(),
+                builder: (context) => HomeViewTwo(),
               ),
             );
           },

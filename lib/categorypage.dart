@@ -44,7 +44,7 @@ class CategoryPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(24),
                   child: Container(
-                      height: 500,
+                      height: 430,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           gradient: LinearGradient(
