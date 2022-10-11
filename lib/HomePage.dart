@@ -1,105 +1,341 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'ImageDialog.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
+import 'package:template/HomePage.dart';
+import 'package:template/categorypage.dart';
+import 'data.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'homeViewTwo.dart';
+import 'dart:math';
 
-// TODO:
-// 1. randomnizea från lista/array av bilder
-// som tagits från skämt och meme API
-// 2. fästa daglig skämt/meme på framsidan efter upplåst
-
-class MyHomePage extends StatefulWidget {
+class HomeView extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeViewState extends State<HomeView> {
+  bool isBack = true;
+  double angle = 0;
+
+  void _flip() {
+    setState(() {
+      angle = (angle + pi) % (2 * pi);
+    }); // return meme
+  }
+
+  void _flip2() {
+    setState(() {
+      angle = (angle + pi) % (2 * pi);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Welcome To Prankster"),
-        centerTitle: true,
+        backgroundColor: Color.fromARGB(
+            200, 255, 255, 255), //Color.fromARGB(255, 212, 137, 203),
+        systemOverlayStyle:
+            SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
+        elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _showJoke('Watch daily joke here'),
-            _showMemes(),
-            _continueFun(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /* add in _showJoke: width: 1000,
-          height: 600,
-          fit: BoxFit.cover, */
-
-  Widget _showJoke(titel) {
-    return Container(
-        width: 300,
-        height: 200,
-        margin: EdgeInsets.all(10),
+      body: Container(
         decoration: BoxDecoration(
-          color: Colors.deepPurple,
-          borderRadius: BorderRadius.circular(
-              22.0), // note: varför ändras inte kantera mer än bara lite grann?
+          gradient: LinearGradient(colors: [
+            Color.fromARGB(200, 255, 255, 255),
+            Color.fromARGB(255, 255, 255, 255),
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
-        child: ElevatedButton(
-          child: Text(titel),
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (_) => ImageDialog(
-                    '')); // _showJoke(titel)); // ändra till lista av skämt
-          },
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  const Color.fromARGB(255, 63, 29, 155)),
-              textStyle: MaterialStateProperty.all(
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-        ));
-  }
-
-  Widget _showMemes() {
-    return GestureDetector(
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (_) => ImageDialog(// lägg in dailyMemeList
-                'https://media.istockphoto.com/videos/cloud-in-flat-style-with-shadow-flat-design-paper-cut-style-loop-with-video-id1208148233?s=640x640')); // note: molnet som poppar upp
-      },
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(22.0),
-          child: Image.network(
-              'https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2022-08/220805-border-collie-play-mn-1100-82d2f1.jpg',
-              width: 300,
-              height: 200,
-              fit: BoxFit.cover),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: ListView(
+            children: [
+              Text('Welcome'),
+              Text('To'),
+              Text(
+                'Prankster',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 212, 137, 203),
+                    fontSize: 35,
+                    fontWeight: FontWeight.w700),
+              ),
+              _animatedText(),
+              _card1(),
+              _card2(),
+              _continueFun(context)
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  /* Padding(
+          padding: const EdgeInsets.only(left: 12, right: 12, top: 25),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            height: 490,
+            child: Stack(children: [
+              Column(children: [ */
+
+  Widget _animatedText() {
+    return Center(
+        child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
+      TyperAnimatedText('Explore the world of fun',
+          textStyle: TextStyle(
+            fontSize: 20,
+            color: Color.fromARGB(255, 233, 168, 170),
+          ),
+          speed: Duration(milliseconds: 70)),
+    ]));
+  }
+
+  Widget _card1() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+              onTap: _flip,
+              child: TweenAnimationBuilder(
+                  tween: Tween<double>(begin: 0, end: angle),
+                  duration: Duration(seconds: 1),
+                  builder: (BuildContext context, double val, __) {
+                    //here we will change the isBack val so we can change the content of the card
+                    if (val >= (pi / 2)) {
+                      isBack = false;
+                    } else {
+                      isBack = true;
+                    }
+                    return (Transform(
+                      alignment: Alignment.center,
+                      transform: Matrix4.identity()
+                        ..setEntry(
+                            3, 2, 0.001) // Adds some perspective on the card
+                        ..rotateY(val), //rotates the card
+                      child: Container(
+                        width: 300,
+                        height: 200,
+                        margin: EdgeInsets.all(10),
+                        child: isBack
+                            ? Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32)),
+                                elevation: 35,
+                                color: Colors.white,
+                                child: Container(
+                                  child: Text(
+                                    'Click to get your daily joke',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    // deisgn a meme card to import as asset
+                                    borderRadius: BorderRadius.circular(32),
+                                    gradient: LinearGradient(colors: [
+                                      Color.fromARGB(255, 212, 137, 203),
+                                      Color.fromARGB(255, 233, 168, 170),
+                                    ]),
+                                  ),
+                                ),
+                              )
+                            : Transform(
+                                alignment: Alignment.center,
+                                transform: Matrix4.identity()..rotateY(pi),
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(32),
+                                  image: DecorationImage(
+                                      image: AssetImage("assets/no_meme.jpg"),
+                                      fit: BoxFit.cover),
+                                )),
+                              ),
+                      ),
+                    )
+                        /* Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(32)),
+                                  elevation: 25,
+                                  color: Colors.white,
+                                ), */
+
+                        );
+                  })),
+        ],
+      ),
+    );
+    // ]
+    // )
+    /* Container(
+                          width: 300,
+                          height: 200,
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(32),
+                              gradient: LinearGradient(colors: [
+                                Color.fromARGB(255, 212, 137, 203),
+                                Color.fromARGB(255, 233, 168, 170),
+                              ])),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(32)),
+                            elevation: 45,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ) */
+    //      ,
+    //      ))
+    // ]));
+  }
+
+  Widget _card2() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+              onTap: _flip2,
+              child: TweenAnimationBuilder(
+                  tween: Tween<double>(begin: 0, end: angle),
+                  duration: Duration(seconds: 1),
+                  builder: (BuildContext context, double val, __) {
+                    //here we will change the isBack val so we can change the content of the card
+                    if (val >= (pi / 2)) {
+                      isBack = false;
+                    } else {
+                      isBack = true;
+                    }
+                    return (Transform(
+                        alignment: Alignment.center,
+                        transform: Matrix4.identity()
+                          ..setEntry(
+                              3, 2, 0.001) // Adds some perspective on the card
+                          ..rotateY(val), //rotates the card
+                        child: Container(
+                          width: 300,
+                          height: 200,
+                          margin: EdgeInsets.all(10),
+                          child: isBack
+                              ? Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(32)),
+                                  elevation: 25,
+                                  color: Colors.white,
+                                  child: Container(
+                                    child: Text(
+                                      'Click to get your daily meme',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      // deisgn a meme card to import as asset
+                                      borderRadius: BorderRadius.circular(32),
+                                      gradient: LinearGradient(colors: [
+                                        Color.fromARGB(255, 212, 137, 203),
+                                        Color.fromARGB(255, 233, 168, 170),
+                                      ]),
+                                    ),
+                                  ),
+                                )
+                              : Transform(
+                                  alignment: Alignment.center,
+                                  transform: Matrix4.identity()..rotateY(pi),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(32),
+                                        image: DecorationImage(
+                                          image:
+                                              AssetImage("assets/no_meme.jpg"),
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                ),
+                        )
+                        /* Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(32)),
+                                  elevation: 25,
+                                  color: Colors.white,
+                                ), */
+
+                        ));
+                  })),
+        ],
+      ),
+    );
+    // ]
+    // )
+    /* Container(
+                          width: 300,
+                          height: 200,
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(32),
+                              gradient: LinearGradient(colors: [
+                                Color.fromARGB(255, 212, 137, 203),
+                                Color.fromARGB(255, 233, 168, 170),
+                              ])),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(32)),
+                            elevation: 45,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ) */
+    //      ,
+    //      ))
+    // ]));
   }
 
   Widget _continueFun(context) {
     return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(90),
+        padding: EdgeInsets.all(5),
         child: ElevatedButton(
-          child: Text('Continue The Fun'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeViewTwo(),
-              ),
-            );
-          },
-        ));
+            child: Text('Continue The Fun'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeViewTwo(),
+                ),
+              );
+            },
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                    Colors.pink[200])))); ////255, 212, 137, 203
+  }
+
+  Widget _hej() {
+    return Text('hej');
   }
 }
+
+
+//**********************Icon ovanför box******************************/
+
+/* Container(alignment: Alignment.center,
+                          height: 200,
+                          child: Image.network(
+                            categories[index].iconImage,
+                            width: 150,
+                            height: 150,
+                          )*/

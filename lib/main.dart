@@ -7,6 +7,7 @@ import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'homeViewTwo.dart';
 import 'dart:math';
+import 'HomePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Prankster',
       theme: ThemeData(),
-      home: MyHomePage(),
+      home: HomeView(),
     );
   }
 }
