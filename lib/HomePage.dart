@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
-import 'package:template/HomePage.dart';
-import 'package:template/categorypage.dart';
-import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'homeViewTwo.dart';
 import 'dart:math';
