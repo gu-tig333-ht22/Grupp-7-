@@ -37,17 +37,17 @@ class HomeViewTwo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Have some fun',
+                    'Let\'s continue the fun',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 38,
+                        fontSize: 28,
                         fontWeight: FontWeight.w700),
                   ),
                   AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-                    TyperAnimatedText('Have some fun',
+                    TyperAnimatedText('Choose a category to explore',
                         textStyle: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 233, 229, 229),
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
                         speed: Duration(milliseconds: 70)),
                   ])
@@ -86,8 +86,11 @@ class HomeViewTwo extends StatelessWidget {
                             ),
                             Card(
                               shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 208, 207, 207)),
                                   borderRadius: BorderRadius.circular(32)),
-                              elevation: 8,
+                              elevation: 6,
                               color: Colors.white,
                               child: Padding(
                                 padding: const EdgeInsets.all(20),
