@@ -2,18 +2,25 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:template/rotate_animation_test.dart';
 import 'homeviewtwo.dart';
+import 'animationtestpage.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-          backgroundColor: Color.fromARGB(255, 233, 213, 225),
-          elevation: 0,
-        ),
+        // appBar: AppBar(
+        //   systemOverlayStyle:
+        //       SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+        //   backgroundColor: Color.fromARGB(255, 0, 116, 71),
+        //   elevation: 0,
+        // ),
         body: flipcards(context));
   }
 
@@ -21,33 +28,45 @@ class HomeView extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
+            // alt. lägga in bakgrundsbild?
             gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 233, 213, 219),
-          Color.fromARGB(255, 253, 253, 253)
+          Color.fromARGB(255, 158, 117, 137),
+          Color.fromARGB(255, 255, 255, 255),
+          Color.fromARGB(255, 158, 117, 137)
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: ListView(
           children: [
-            _title(context),
-            _dailyjoke(context),
-            _dailymeme(context),
-            _next(context)
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _title(context),
+                _animationTestButton(context),
+                _dailyjoke(context),
+                _dailymeme(context),
+                _next(context)
+              ],
+            ),
           ],
         ));
   }
 
   Widget _title(context) {
-    return SizedBox(
-      height: 150,
-      child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-        TyperAnimatedText('Welcome to Prankster',
-            textStyle: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            speed: Duration(milliseconds: 70))
-      ]),
+    return Padding(
+      padding: EdgeInsets.all(45),
+      child: SizedBox(
+        height: 150,
+        child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
+          TyperAnimatedText('Welcome\nTo\nPrankster!',
+              textAlign: TextAlign.center,
+              textStyle: TextStyle(
+                fontSize: 36.9,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'PermanentMarker',
+                color: Color.fromARGB(255, 9, 44, 12),
+              ),
+              speed: Duration(milliseconds: 70))
+        ]),
+      ),
     );
   }
 
@@ -56,10 +75,87 @@ class HomeView extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 30),
       child: FlipCard(
           speed: 800,
-          front: Container(
+          front: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            elevation: 25,
+            color: Color.fromARGB(197, 255, 255,
+                255), //verkar inte göra någon skillnad med färgval?
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 2.5),
+                  borderRadius: BorderRadius.circular(6),
+                  gradient: LinearGradient(colors: [
+                    Color.fromARGB(255, 212, 137, 203),
+                    Color.fromARGB(255, 233, 168, 170),
+                  ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+              child: SizedBox(
+                width: 300,
+                height: 200,
+                child: Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'PRANKSTER',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 0, 0, 0)),
+                        ),
+                        Text(
+                          'Click to see today\'s joke',
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.w400),
+                        )
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Color.fromARGB(255, 0, 0, 0), width: 1.5),
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        shape: BoxShape.circle),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          back: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            elevation: 25,
+            //color: Colors.white,
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 2.5),
+                  borderRadius: BorderRadius.circular(6),
+                  gradient: LinearGradient(
+                      colors: [Colors.red, Colors.pink],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight)),
+              child: SizedBox(
+                child: Center(child: Text('Your daily joke')),
+                width: 300,
+                height: 200,
+              ),
+            ),
+          )),
+    );
+  }
+
+  Widget _dailymeme(context) {
+    return FlipCard(
+        speed: 800,
+        front: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          elevation: 25,
+          color: Colors.white,
+          child: Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 1.5),
-                borderRadius: BorderRadius.circular(2),
+                border: Border.all(color: Colors.white, width: 2.5),
+                borderRadius: BorderRadius.circular(6),
                 gradient: LinearGradient(colors: [
                   Color.fromARGB(255, 212, 137, 203),
                   Color.fromARGB(255, 233, 168, 170),
@@ -81,89 +177,35 @@ class HomeView extends StatelessWidget {
                             color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                       Text(
-                        'Click to see today\'s joke',
+                        'Click to see today\'s meme',
                         style: TextStyle(
                             fontSize: 10, fontWeight: FontWeight.w400),
                       )
                     ],
                   ),
                   decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Color.fromARGB(255, 0, 0, 0), width: 1.5),
                       color: Color.fromARGB(255, 255, 255, 255),
                       shape: BoxShape.circle),
                 ),
               ),
             ),
           ),
-          back: Container(
+        ),
+        back: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          elevation: 25,
+          color: Colors.white,
+          child: Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 1.5),
-                borderRadius: BorderRadius.circular(2),
-                gradient: LinearGradient(
-                    colors: [Colors.red, Colors.pink],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight)),
+              border: Border.all(color: Colors.white, width: 2.5),
+              image: DecorationImage(
+                  image: AssetImage("assets/no_meme.jpg"), fit: BoxFit.fill),
+              borderRadius: BorderRadius.circular(6),
+            ),
             child: SizedBox(
-              child: Center(child: Text('Your daily joke')),
               width: 300,
               height: 200,
             ),
-          )),
-    );
-  }
-
-  Widget _dailymeme(context) {
-    return FlipCard(
-        speed: 800,
-        front: Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 1.5),
-              borderRadius: BorderRadius.circular(2),
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 212, 137, 203),
-                Color.fromARGB(255, 233, 168, 170),
-              ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-          child: SizedBox(
-            width: 300,
-            height: 200,
-            child: Padding(
-              padding: const EdgeInsets.all(30),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'PRANKSTER',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Color.fromARGB(255, 0, 0, 0)),
-                    ),
-                    Text(
-                      'Click to see today\'s meme',
-                      style:
-                          TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
-                    )
-                  ],
-                ),
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    shape: BoxShape.circle),
-              ),
-            ),
-          ),
-        ),
-        back: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 1.5),
-            image: DecorationImage(
-                image: AssetImage("assets/no_meme.jpg"), fit: BoxFit.fill),
-            borderRadius: BorderRadius.circular(2),
-          ),
-          child: SizedBox(
-            width: 300,
-            height: 200,
           ),
         ));
   }
@@ -178,21 +220,53 @@ class HomeView extends StatelessWidget {
               MaterialPageRoute(
                   builder: (BuildContext context) => HomeViewTwo()));
         },
+        //child: Card(
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        // elevation: 25,
+        // color: Colors.white,
+        // margin: EdgeInsets.zero, //only(left: 12),
+        // child: FittedBox(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'CONTINUE THE FUN',
-              style:
-                  TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 16),
+              style: TextStyle(
+                  color: Color.fromARGB(255, 9, 44, 12), fontSize: 16),
             ),
             Icon(
               Icons.arrow_forward,
-              color: Colors.black,
+              color: Color.fromARGB(255, 9, 44, 12),
             )
           ],
         ),
       ),
     );
+    //),
+    //);
+  }
+
+  Widget _animationTestButton(context) {
+    return TextButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => AnimationTestPage()));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'animation tests',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 9, 44, 12), fontSize: 16),
+            ),
+            Icon(
+              Icons.arrow_forward,
+              color: Color.fromARGB(255, 9, 44, 12),
+            )
+          ],
+        ));
   }
 }
