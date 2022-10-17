@@ -5,9 +5,11 @@ import 'package:template/HomePage.dart';
 import 'package:template/categorypage.dart';
 import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'getapi.dart';
 import 'homeViewTwo.dart';
 import 'dart:math';
 import 'HomePage.dart';
+import 'memesPage.dart';
 
 void main() {
   runApp(const MyApp());

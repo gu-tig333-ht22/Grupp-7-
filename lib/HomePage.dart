@@ -7,6 +7,7 @@ import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'homeViewTwo.dart';
 import 'dart:math';
+import 'getapi.dart';
 
 class HomeView extends StatefulWidget {
   @override
