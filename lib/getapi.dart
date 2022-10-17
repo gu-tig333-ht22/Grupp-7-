@@ -13,7 +13,6 @@ class MyState extends ChangeNotifier {
   var list = ['fetchFact()', 'fetchChuckNorris()']; // används inte
 
   //fixa en get till alla olika sidor
-  //
 
   Future fetchFact() async {
     http.Response response = await http
