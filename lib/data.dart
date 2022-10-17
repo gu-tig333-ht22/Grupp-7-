@@ -1,5 +1,4 @@
 // Klass för att skapa de olika kategorierna
-import 'package:flutter/cupertino.dart';
 
 class Categories {
   final String name;
