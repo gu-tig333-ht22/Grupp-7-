@@ -6,6 +6,7 @@ import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:template/categorypage.dart';
 import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'klockren.dart';
 import 'memesPage.dart';
 
 class HomeViewTwo extends StatelessWidget {
@@ -75,7 +76,25 @@ class HomeViewTwo extends StatelessWidget {
                 ) {
                   return InkWell(
                     onTap: () {
-                      if (categories[index].name != 'MEMES') {
+                      if (categories[index].name == 'MEMES') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => memesPage()));
+                      } else if (categories[index].name == 'KLOCKREN') {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Clock()));
+                      } else {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (context, a, b) =>
+                                    CategoryPage(categories[index])));
+                      }
+
+                      /*if (categories[index].name != 'MEMES' ||
+                          categories[index].name != 'KLOCKREN') {
+                        //or KLOCKREN!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         Navigator.push(
                             context,
                             PageRouteBuilder(
@@ -86,7 +105,10 @@ class HomeViewTwo extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => memesPage()));
-                      }
+                      } else if (categories[index].name == 'KLOCKREN') {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Clock()));
+                      }*/
                     },
                     child: Stack(
                       children: [

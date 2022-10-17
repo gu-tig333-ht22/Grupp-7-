@@ -46,4 +46,9 @@ List<Categories> categories = [
       name: 'MEMES',
       iconImage: 'https://cdn-icons-png.flaticon.com/512/3475/3475926.png',
       description: 'A list with memes'),
+  Categories(
+      name: 'KLOCKREN',
+      iconImage:
+          'https://365psd.com/images/previews/1c9/cartoon-moose-51988.png',
+      description: 'A list with memes'),
 ];
