@@ -1,4 +1,5 @@
 // Klass för att skapa de olika kategorierna
+import 'package:flutter/cupertino.dart';
 
 class Categories {
   final String name;
@@ -14,9 +15,9 @@ class Categories {
 
 List<Categories> categories = [
   Categories(
-      name: 'DAD JOKES',
+      name: 'YO MOMMA JOKES',
       iconImage: 'https://cdn-icons-png.flaticon.com/128/7251/7251743.png',
-      description: 'A list with dad jokes'),
+      description: 'A list with ya momma jokes'),
   Categories(
       name: 'RANDOM FACTS',
       iconImage: 'https://cdn-icons-png.flaticon.com/512/5619/5619947.png',
@@ -26,9 +27,9 @@ List<Categories> categories = [
       iconImage: 'https://cdn-icons-png.flaticon.com/512/686/686751.png',
       description: 'A list with excuses'),
   Categories(
-      name: 'YO MOMMA JOKES',
+      name: 'DAD JOKES',
       iconImage: 'https://cdn-icons-png.flaticon.com/512/686/686751.png',
-      description: 'A list with yo momma jokes'),
+      description: 'A list with dad jokes'),
   Categories(
       name: 'PICK UP LINES',
       iconImage: 'https://cdn-icons-png.flaticon.com/128/677/677684.png',
@@ -38,7 +39,7 @@ List<Categories> categories = [
       iconImage: 'https://cdn-icons-png.flaticon.com/512/4383/4383956.png',
       description: 'A list with Chuck Norris jokes'),
   Categories(
-      name: 'GEEK JOKES',
+      name: 'DEVELOPER JOKES',
       iconImage: 'https://cdn-icons-png.flaticon.com/512/6601/6601160.png',
       description: 'A list with geek jokes'),
   Categories(

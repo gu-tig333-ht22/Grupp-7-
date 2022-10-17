@@ -6,6 +6,7 @@ import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:template/categorypage.dart';
 import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'memesPage.dart';
 
 class HomeViewTwo extends StatelessWidget {
   @override
@@ -37,17 +38,17 @@ class HomeViewTwo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Let\'s continue the fun',
+                    'Have some fun',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 28,
+                        fontSize: 38,
                         fontWeight: FontWeight.w700),
                   ),
                   AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-                    TyperAnimatedText('Choose a category to explore',
+                    TyperAnimatedText('Have some fun',
                         textStyle: TextStyle(
-                          fontSize: 18,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 233, 229, 229),
                         ),
                         speed: Duration(milliseconds: 70)),
                   ])
@@ -68,14 +69,24 @@ class HomeViewTwo extends StatelessWidget {
                 layout: SwiperLayout.STACK,
                 itemCount: categories.length,
                 itemWidth: MediaQuery.of(context).size.width - 2 * 64,
-                itemBuilder: (context, index) {
+                itemBuilder: (
+                  context,
+                  index,
+                ) {
                   return InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                              pageBuilder: (context, a, b) =>
-                                  CategoryPage(categories[index])));
+                      if (categories[index].name != 'MEMES') {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (context, a, b) =>
+                                    CategoryPage(categories[index])));
+                      } else if (categories[index].name == 'MEMES') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => memesPage()));
+                      }
                     },
                     child: Stack(
                       children: [
@@ -86,11 +97,8 @@ class HomeViewTwo extends StatelessWidget {
                             ),
                             Card(
                               shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      color:
-                                          Color.fromARGB(255, 208, 207, 207)),
                                   borderRadius: BorderRadius.circular(32)),
-                              elevation: 6,
+                              elevation: 8,
                               color: Colors.white,
                               child: Padding(
                                 padding: const EdgeInsets.all(20),

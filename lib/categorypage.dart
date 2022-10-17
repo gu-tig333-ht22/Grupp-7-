@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:template/data.dart';
 import 'getapi.dart';
-import 'homeViewTwo.dart';
 
 class CategoryPage extends StatelessWidget {
   final Categories categories;

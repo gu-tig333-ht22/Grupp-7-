@@ -2,9 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:template/rotate_animation_test.dart';
 import 'homeviewtwo.dart';
-import 'animationtestpage.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -15,12 +13,12 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   systemOverlayStyle:
-        //       SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-        //   backgroundColor: Color.fromARGB(255, 0, 116, 71),
-        //   elevation: 0,
-        // ),
+        //appBar: AppBar(
+        //systemOverlayStyle:
+        //SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+        //backgroundColor: Color.fromARGB(255, 0, 116, 71),
+        //elevation: 0,
+        //),
         body: flipcards(context));
   }
 
@@ -40,7 +38,6 @@ class _HomeViewState extends State<HomeView> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _title(context),
-                _animationTestButton(context),
                 _dailyjoke(context),
                 _dailymeme(context),
                 _next(context)
@@ -220,12 +217,6 @@ class _HomeViewState extends State<HomeView> {
               MaterialPageRoute(
                   builder: (BuildContext context) => HomeViewTwo()));
         },
-        //child: Card(
-        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-        // elevation: 25,
-        // color: Colors.white,
-        // margin: EdgeInsets.zero, //only(left: 12),
-        // child: FittedBox(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -242,31 +233,5 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
     );
-    //),
-    //);
-  }
-
-  Widget _animationTestButton(context) {
-    return TextButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => AnimationTestPage()));
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'animation tests',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 9, 44, 12), fontSize: 16),
-            ),
-            Icon(
-              Icons.arrow_forward,
-              color: Color.fromARGB(255, 9, 44, 12),
-            )
-          ],
-        ));
   }
 }
