@@ -197,7 +197,11 @@ packages:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
+    version: "1.7.0"
+=======
     version: "1.8.0"
+>>>>>>> da2962431f1dbc18d472ce27318a64f3427a7584
   nested:
     dependency: transitive
     description:
@@ -211,6 +215,9 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
+    version: "1.8.1"
+=======
     version: "1.8.2"
   petitparser:
     dependency: transitive
@@ -219,6 +226,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0"
+>>>>>>> da2962431f1dbc18d472ce27318a64f3427a7584
   provider:
     dependency: "direct main"
     description:

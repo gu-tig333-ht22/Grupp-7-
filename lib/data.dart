@@ -52,3 +52,19 @@ List<Categories> categories = [
           'https://365psd.com/images/previews/1c9/cartoon-moose-51988.png',
       description: 'A list with memes'),
 ];
+
+class Fact {
+  String afact;
+
+  Fact({required this.afact});
+
+  static Fact fromJson(afact) {
+    return Fact(afact: afact['text']);
+  }
+}
+
+class Meme {
+  String URL;
+
+  Meme({required this.URL});
+}
