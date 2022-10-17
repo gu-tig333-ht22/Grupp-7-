@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:template/data.dart';
 
 class MyState extends ChangeNotifier {
   var _fact = '';
@@ -15,6 +14,7 @@ class MyState extends ChangeNotifier {
     http.Response response = await http
         .get(Uri.parse('https://uselessfacts.jsph.pl/random.json?language=en'));
     var result = response.body;
+    print(result);
     var fact = jsonDecode(result);
     _fact = fact['text'];
     notifyListeners();
