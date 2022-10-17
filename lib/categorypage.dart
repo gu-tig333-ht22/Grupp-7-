@@ -11,21 +11,25 @@ class CategoryPage extends StatelessWidget {
   final Categories categories;
   const CategoryPage(this.categories);
 
-  static String nogot = 'lala';
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) {
-          var s = MyState();
+          var firstYoke = MyState();
           if (categories.name == 'RANDOM FACTS') {
-            s.fetchFact();
+            firstYoke.fetchFact();
           }
           if (categories.name == 'CHUCK NORRIS JOKES') {
-            s.fetchChuckNorris();
+            firstYoke.fetchChuckNorris();
+          }
+          if (categories.name == 'YO MOMMA JOKES') {
+            firstYoke.fetchYoMamma();
           }
 
-          return s;
+          //för alla apier som fungerar bör en sådan här läggas till.
+          // detta gör att ett skämt/fact finns direkt på sidan
+
+          return firstYoke;
         },
         builder: (context, child) => Scaffold(
               backgroundColor: Colors.white,

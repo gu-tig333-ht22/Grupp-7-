@@ -91,8 +91,9 @@ class ClockState extends State<Clock> {
         //Clock
         child: Stack(
           children: <Widget>[
-            Image.network(
-              'http://content.mycutegraphics.com/graphics/household/clock-face-without-hands.png',
+            const Image(
+              image: NetworkImage(
+                  'http://content.mycutegraphics.com/graphics/household/clock-face-without-hands.png'),
               fit: BoxFit.cover,
             ),
             Positioned(

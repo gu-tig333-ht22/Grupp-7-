@@ -8,7 +8,17 @@ class memesPage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => MyState(),
+        create: (context) {
+          var firstYoke = MyState();
+          {
+            firstYoke.fetchMeme();
+          }
+
+          //för alla apier som fungerar bör en sådan här läggas till.
+          // detta gör att ett skämt/fact finns direkt på sidan
+
+          return firstYoke;
+        },
         builder: (context, child) => Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
@@ -21,13 +31,15 @@ class memesPage extends StatelessWidget {
               body: Center(
                 child: Column(
                   children: [
-                    ElevatedButton.icon(
+                    TextButton(
                       onPressed: () {
                         Provider.of<MyState>(context, listen: false)
                             .fetchMeme();
                       },
-                      icon: Icon(Icons.save, size: 24.0),
-                      label: Text('SAVE'), // <-- Text
+                      child: Text(
+                        'VIEW NEXT',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     ),
                     Consumer<MyState>(
                         builder: (context, state, child) => Image(
