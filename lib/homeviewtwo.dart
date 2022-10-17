@@ -80,7 +80,7 @@ class HomeViewTwo extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => memesPage()));
+                                builder: (context) => MemesPage()));
                       } else if (categories[index].name == 'KLOCKREN') {
                         Navigator.push(
                             context,

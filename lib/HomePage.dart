@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
-import 'package:template/HomePage.dart';
-import 'package:template/categorypage.dart';
-import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'homeViewTwo.dart';
 import 'dart:math';
-import 'getapi.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -34,14 +29,14 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(
+        backgroundColor: const Color.fromARGB(
             200, 255, 255, 255), //Color.fromARGB(255, 212, 137, 203),
         systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
+            const SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
             Color.fromARGB(200, 255, 255, 255),
             Color.fromARGB(255, 255, 255, 255),
@@ -51,9 +46,9 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.all(12),
           child: ListView(
             children: [
-              Text('Welcome'),
-              Text('To'),
-              Text(
+              const Text('Welcome'),
+              const Text('To'),
+              const Text(
                 'Prankster',
                 style: TextStyle(
                     color: Color.fromARGB(255, 212, 137, 203),
@@ -83,11 +78,11 @@ class _HomeViewState extends State<HomeView> {
     return Center(
         child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
       TyperAnimatedText('Explore the world of fun',
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
             fontSize: 20,
             color: Color.fromARGB(255, 233, 168, 170),
           ),
-          speed: Duration(milliseconds: 70)),
+          speed: const Duration(milliseconds: 70)),
     ]));
   }
 
@@ -100,7 +95,7 @@ class _HomeViewState extends State<HomeView> {
               onTap: _flip,
               child: TweenAnimationBuilder(
                   tween: Tween<double>(begin: 0, end: angle),
-                  duration: Duration(seconds: 1),
+                  duration: const Duration(seconds: 1),
                   builder: (BuildContext context, double val, __) {
                     //here we will change the isBack val so we can change the content of the card
                     if (val >= (pi / 2)) {
@@ -117,7 +112,7 @@ class _HomeViewState extends State<HomeView> {
                       child: Container(
                         width: 300,
                         height: 200,
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: isBack
                             ? Card(
                                 shape: RoundedRectangleBorder(
@@ -125,7 +120,15 @@ class _HomeViewState extends State<HomeView> {
                                 elevation: 35,
                                 color: Colors.white,
                                 child: Container(
-                                  child: Text(
+                                  decoration: BoxDecoration(
+                                    // deisgn a meme card to import as asset
+                                    borderRadius: BorderRadius.circular(32),
+                                    gradient: const LinearGradient(colors: [
+                                      Color.fromARGB(255, 212, 137, 203),
+                                      Color.fromARGB(255, 233, 168, 170),
+                                    ]),
+                                  ),
+                                  child: const Text(
                                     'Click to get your daily joke',
                                     style: TextStyle(
                                       fontSize: 25,
@@ -133,14 +136,6 @@ class _HomeViewState extends State<HomeView> {
                                       color: Colors.white,
                                     ),
                                     textAlign: TextAlign.center,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    // deisgn a meme card to import as asset
-                                    borderRadius: BorderRadius.circular(32),
-                                    gradient: LinearGradient(colors: [
-                                      Color.fromARGB(255, 212, 137, 203),
-                                      Color.fromARGB(255, 233, 168, 170),
-                                    ]),
                                   ),
                                 ),
                               )
@@ -150,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
                                 child: Container(
                                     decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(32),
-                                  image: DecorationImage(
+                                  image: const DecorationImage(
                                       image: AssetImage("assets/no_meme.jpg"),
                                       fit: BoxFit.cover),
                                 )),
@@ -207,7 +202,7 @@ class _HomeViewState extends State<HomeView> {
               onTap: _flip2,
               child: TweenAnimationBuilder(
                   tween: Tween<double>(begin: 0, end: angle),
-                  duration: Duration(seconds: 1),
+                  duration: const Duration(seconds: 1),
                   builder: (BuildContext context, double val, __) {
                     //here we will change the isBack val so we can change the content of the card
                     if (val >= (pi / 2)) {
@@ -224,7 +219,7 @@ class _HomeViewState extends State<HomeView> {
                         child: Container(
                           width: 300,
                           height: 200,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: isBack
                               ? Card(
                                   shape: RoundedRectangleBorder(
@@ -232,7 +227,15 @@ class _HomeViewState extends State<HomeView> {
                                   elevation: 25,
                                   color: Colors.white,
                                   child: Container(
-                                    child: Text(
+                                    decoration: BoxDecoration(
+                                      // deisgn a meme card to import as asset
+                                      borderRadius: BorderRadius.circular(32),
+                                      gradient: const LinearGradient(colors: [
+                                        Color.fromARGB(255, 212, 137, 203),
+                                        Color.fromARGB(255, 233, 168, 170),
+                                      ]),
+                                    ),
+                                    child: const Text(
                                       'Click to get your daily meme',
                                       style: TextStyle(
                                         fontSize: 25,
@@ -240,14 +243,6 @@ class _HomeViewState extends State<HomeView> {
                                         color: Colors.white,
                                       ),
                                       textAlign: TextAlign.center,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      // deisgn a meme card to import as asset
-                                      borderRadius: BorderRadius.circular(32),
-                                      gradient: LinearGradient(colors: [
-                                        Color.fromARGB(255, 212, 137, 203),
-                                        Color.fromARGB(255, 233, 168, 170),
-                                      ]),
                                     ),
                                   ),
                                 )
@@ -257,7 +252,7 @@ class _HomeViewState extends State<HomeView> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(32),
-                                        image: DecorationImage(
+                                        image: const DecorationImage(
                                           image:
                                               AssetImage("assets/no_meme.jpg"),
                                           fit: BoxFit.cover,
@@ -309,9 +304,8 @@ class _HomeViewState extends State<HomeView> {
   Widget _continueFun(context) {
     return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: ElevatedButton(
-            child: Text('Continue The Fun'),
             onPressed: () {
               Navigator.push(
                 context,
@@ -321,12 +315,8 @@ class _HomeViewState extends State<HomeView> {
               );
             },
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    Colors.pink[200])))); ////255, 212, 137, 203
-  }
-
-  Widget _hej() {
-    return Text('hej');
+                backgroundColor: MaterialStateProperty.all(Colors.pink[200])),
+            child: const Text('Continue The Fun'))); ////255, 212, 137, 203
   }
 }
 
