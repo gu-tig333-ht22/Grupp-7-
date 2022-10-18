@@ -49,5 +49,5 @@ List<Categories> categories = [
       name: 'KLOCKREN',
       iconImage:
           'https://365psd.com/images/previews/1c9/cartoon-moose-51988.png',
-      description: 'A list with memes'),
+      description: 'A moose clock'),
 ];
