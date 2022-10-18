@@ -1,11 +1,12 @@
 // Hemvy 2 - Välja mellan olika kategorier
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:template/categorypage.dart';
 import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'klockren.dart';
+import 'memesPage.dart';
 
 class HomeViewTwo extends StatelessWidget {
   @override
@@ -71,11 +72,26 @@ class HomeViewTwo extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                              pageBuilder: (context, a, b) =>
-                                  CategoryPage(categories[index])));
+                      if (categories[index].name == 'MEMES') {
+                        // await state.fetchMeme()
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => memesPage(
+                                      imageUrl: 'imageurlgoeshere',
+                                    )));
+                      } else if (categories[index].name == 'KLOCKREN') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Clock()));
+                      } else {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (context, a, b) =>
+                                    CategoryPage(categories[index])));
+                      }
                     },
                     child: Stack(
                       children: [

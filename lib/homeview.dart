@@ -37,17 +37,21 @@ class HomeView extends StatelessWidget {
   }
 
   Widget _title(context) {
-    return SizedBox(
-      height: 150,
-      child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-        TyperAnimatedText('Welcome to Prankster',
-            textStyle: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            speed: Duration(milliseconds: 70))
-      ]),
+    return Padding(
+      padding: const EdgeInsets.all(45),
+      child: SizedBox(
+        height: 150,
+        child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
+          TyperAnimatedText('Welcome\nTo\nPrankster!',
+              textAlign: TextAlign.center,
+              textStyle: TextStyle(
+                fontSize: 36.9,
+                fontWeight: FontWeight.w700,
+                color: Color.fromARGB(255, 255, 255, 255),
+              ),
+              speed: Duration(milliseconds: 70))
+        ]),
+      ),
     );
   }
 
