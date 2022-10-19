@@ -156,11 +156,10 @@ class HomeViewTwo extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          height: 200,
-                          child: Image.network(
-                            categories[index].iconImage,
-                            width: 150,
-                            height: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(categories[index].iconImage)),
                           ),
                         ),
                       ],
