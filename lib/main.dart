@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'homeview.dart';
+import 'package:provider/provider.dart';
+import 'getapi.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => MyState(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

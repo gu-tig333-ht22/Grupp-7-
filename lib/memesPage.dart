@@ -4,10 +4,6 @@ import 'package:provider/provider.dart';
 import 'getapi.dart';
 
 class memesPage extends StatelessWidget {
-  final String imageUrl;
-
-  const memesPage({super.key, required this.imageUrl});
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

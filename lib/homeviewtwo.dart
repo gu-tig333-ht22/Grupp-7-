@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:template/categorypage.dart';
+import 'package:template/getapi.dart';
 import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'klockren.dart';
@@ -73,13 +74,15 @@ class HomeViewTwo extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       if (categories[index].name == 'MEMES') {
-                        // await state.fetchMeme()
+                        Future<String> x = MyState.fetchMeme();
+                        
+                          return Future.delayed(
+                              Duration(seconds: 2), () => "Partly cloudy");
+                        }
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => memesPage(
-                                      imageUrl: 'imageurlgoeshere',
-                                    )));
+                                builder: (context) => memesPage()));
                       } else if (categories[index].name == 'KLOCKREN') {
                         Navigator.push(
                             context,

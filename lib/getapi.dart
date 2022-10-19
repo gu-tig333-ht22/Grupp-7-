@@ -5,7 +5,7 @@ import 'dart:convert';
 class MyState extends ChangeNotifier {
   var _fact = '';
   get fact => _fact;
-  var _meme = '';
+  var _meme = 'https://i.redd.it/dqtzl9ln4nu91.gif';
   get meme => _meme;
 
   var list = ['fetchFact()', 'fetchChuckNorris()']; // används inte

@@ -91,13 +91,16 @@ class CategoryPage extends StatelessWidget {
                                     end: Alignment.bottomCenter)),
                             child: Center(
                                 child: Consumer<MyState>(
-                              builder: (context, state, child) => Text(
-                                  '${state.fact}',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 65,
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255))),
+                              builder: (context, state, child) => Padding(
+                                padding: EdgeInsets.only(
+                                    top: 25, left: 25, right: 25),
+                                child: Text('${state.fact}',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 35,
+                                        color: Color.fromARGB(
+                                            255, 255, 255, 255))),
+                              ),
                             )),
                           ),
                         )
