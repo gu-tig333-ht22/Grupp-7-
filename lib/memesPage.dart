@@ -4,38 +4,39 @@ import 'package:provider/provider.dart';
 import 'getapi.dart';
 
 class memesPage extends StatelessWidget {
-//  AddItemView();
+  final String imageUrl;
+
+  const memesPage({super.key, required this.imageUrl});
 
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => MyState(),
-        builder: (context, child) => Scaffold(
-              backgroundColor: Colors.white,
-              appBar: AppBar(
-                iconTheme: IconThemeData(color: Colors.grey),
-                backgroundColor: Colors.white,
-                systemOverlayStyle:
-                    SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-                elevation: 0,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.grey),
+        backgroundColor: Colors.white,
+        systemOverlayStyle:
+            SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+        elevation: 0,
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            TextButton(
+              onPressed: () {
+                Provider.of<MyState>(context, listen: false).fetchMeme();
+              },
+              child: Text(
+                'VIEW NEXT',
+                style: TextStyle(color: Colors.grey),
               ),
-              body: Center(
-                child: Column(
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        Provider.of<MyState>(context, listen: false)
-                            .fetchMeme();
-                      },
-                      icon: Icon(Icons.save, size: 24.0),
-                      label: Text('SAVE'), // <-- Text
-                    ),
-                    Consumer<MyState>(
-                        builder: (context, state, child) => Image(
-                              image: NetworkImage(state.meme),
-                            )),
-                  ],
-                ),
-              ),
-            ));
+            ),
+            Consumer<MyState>(
+                builder: (context, state, child) => Image(
+                      image: NetworkImage(state.meme),
+                    )),
+          ],
+        ),
+      ),
+    );
   }
 }

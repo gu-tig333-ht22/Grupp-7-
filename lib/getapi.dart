@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:template/data.dart';
-
 class MyState extends ChangeNotifier {
   var _fact = '';
   get fact => _fact;
-  var _meme = 'https://cdn-icons-png.flaticon.com/512/3475/3475926.png';
+  var _meme = '';
   get meme => _meme;
 
   var list = ['fetchFact()', 'fetchChuckNorris()']; // används inte
-
-  //fixa en get till alla olika sidor
 
   Future fetchFact() async {
     http.Response response = await http
         .get(Uri.parse('https://uselessfacts.jsph.pl/random.json?language=en'));
     var result = response.body;
+    print(result);
     var fact = jsonDecode(result);
     _fact = fact['text'];
     notifyListeners();
@@ -43,9 +40,11 @@ class MyState extends ChangeNotifier {
   }
 
   Future fetchMeme() async {
-    http.Response response = await http.get(
-      Uri.parse('https://meme-api.herokuapp.com/gimme'),
-    );
+    print("abcd");
+    var uri = Uri.parse('https://meme-api.herokuapp.com/gimme');
+    print("2zzzz");
+    http.Response response = await http.get(uri);
+    print("efgh");
     var result = response.body;
     var meme = jsonDecode(result);
     _meme = meme['url'];

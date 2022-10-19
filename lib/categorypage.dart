@@ -1,6 +1,3 @@
-// Sidan du kommer till när du valt kategori
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -17,15 +14,21 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) {
-          var s = MyState();
+          var firstYoke = MyState();
           if (categories.name == 'RANDOM FACTS') {
-            s.fetchFact();
+            firstYoke.fetchFact();
           }
           if (categories.name == 'CHUCK NORRIS JOKES') {
-            s.fetchChuckNorris();
+            firstYoke.fetchChuckNorris();
+          }
+          if (categories.name == 'YO MOMMA JOKES') {
+            firstYoke.fetchYoMamma();
           }
 
-          return s;
+          //för alla apier som fungerar bör en sådan här läggas till.
+          // detta gör att ett skämt/fact finns direkt på sidan
+
+          return firstYoke;
         },
         builder: (context, child) => Scaffold(
               backgroundColor: Colors.white,
@@ -90,13 +93,16 @@ class CategoryPage extends StatelessWidget {
                                     end: Alignment.bottomCenter)),
                             child: Center(
                                 child: Consumer<MyState>(
-                              builder: (context, state, child) => Text(
-                                  '${state.fact}',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 65,
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255))),
+                              builder: (context, state, child) => Padding(
+                                padding: EdgeInsets.only(
+                                    top: 25, right: 25, left: 25),
+                                child: Text('${state.fact}',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 35,
+                                        color: Color.fromARGB(
+                                            255, 255, 255, 255))),
+                              ),
                             )),
                           ),
                         )

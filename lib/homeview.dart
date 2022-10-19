@@ -3,6 +3,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'homeviewtwo.dart';
+import 'getapi.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -49,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _title(context) {
     return Padding(
-      padding: EdgeInsets.all(45),
+      padding: const EdgeInsets.all(45),
       child: SizedBox(
         height: 150,
         child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
@@ -57,9 +58,9 @@ class _HomeViewState extends State<HomeView> {
               textAlign: TextAlign.center,
               textStyle: TextStyle(
                 fontSize: 36.9,
+                fontFamily: "PermanentMarker",
                 fontWeight: FontWeight.w700,
-                fontFamily: 'PermanentMarker',
-                color: Color.fromARGB(255, 9, 44, 12),
+                color: Color.fromARGB(255, 10, 29, 13),
               ),
               speed: Duration(milliseconds: 70))
         ]),
@@ -196,7 +197,8 @@ class _HomeViewState extends State<HomeView> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.white, width: 2.5),
               image: DecorationImage(
-                  image: AssetImage("assets/no_meme.jpg"), fit: BoxFit.fill),
+                  image: AssetImage("assets/no_meme.jpg"),
+                  fit: BoxFit.fill), // ist för assets: MyState.fetchMeme()
               borderRadius: BorderRadius.circular(6),
             ),
             child: SizedBox(
