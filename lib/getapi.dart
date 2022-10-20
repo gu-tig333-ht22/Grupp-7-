@@ -14,6 +14,7 @@ class MyState extends ChangeNotifier {
     http.Response response = await http
         .get(Uri.parse('https://uselessfacts.jsph.pl/random.json?language=en'));
     var result = response.body;
+    print(result);
     var fact = jsonDecode(result);
     _fact = fact['text'];
     notifyListeners();
