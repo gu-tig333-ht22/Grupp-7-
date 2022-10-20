@@ -1,5 +1,4 @@
 // Sidan du kommer till när du valt kategori
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +8,7 @@ import 'getapi.dart';
 
 class CategoryPage extends StatelessWidget {
   final Categories categories;
-  const CategoryPage(this.categories);
+  const CategoryPage(this.categories, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +33,10 @@ class CategoryPage extends StatelessWidget {
         builder: (context, child) => Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
-                iconTheme: IconThemeData(color: Colors.grey),
+                iconTheme: const IconThemeData(color: Colors.grey),
                 backgroundColor: Colors.white,
-                systemOverlayStyle:
-                    SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarBrightness: Brightness.light),
                 elevation: 0,
               ),
               body: Stack(
@@ -50,7 +49,7 @@ class CategoryPage extends StatelessWidget {
                           child: Text(
                             categories.name,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 40,
                             ),
                           ),
@@ -74,7 +73,7 @@ class CategoryPage extends StatelessWidget {
                                   .fetchDevYoke();
                             }
                           },
-                          child: Text(
+                          child: const Text(
                             'VIEW NEXT',
                             style: TextStyle(color: Colors.grey),
                           ),
@@ -85,7 +84,7 @@ class CategoryPage extends StatelessWidget {
                             height: 430,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                     colors: [
                                       Color.fromARGB(255, 212, 137, 203),
                                       Color.fromARGB(255, 233, 168, 170)
@@ -97,7 +96,7 @@ class CategoryPage extends StatelessWidget {
                               builder: (context, state, child) => Text(
                                   '${state.fact}',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 65,
                                       color:
                                           Color.fromARGB(255, 255, 255, 255))),

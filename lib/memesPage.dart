@@ -4,28 +4,21 @@ import 'package:provider/provider.dart';
 import 'getapi.dart';
 
 class memesPage extends StatelessWidget {
+
+
+  const memesPage({Key? key}) : super(key: key);
+
 //  AddItemView();
 
+  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) {
-          var firstYoke = MyState();
-          {
-            firstYoke.fetchMeme();
-          }
-
-          //för alla apier som fungerar bör en sådan här läggas till.
-          // detta gör att ett skämt/fact finns direkt på sidan
-
-          return firstYoke;
-        },
-        builder: (context, child) => Scaffold(
+    return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
-                iconTheme: IconThemeData(color: Colors.grey),
+                iconTheme: const IconThemeData(color: Colors.grey),
                 backgroundColor: Colors.white,
-                systemOverlayStyle:
-                    SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarBrightness: Brightness.light),
                 elevation: 0,
               ),
               body: Center(
@@ -36,7 +29,7 @@ class memesPage extends StatelessWidget {
                         Provider.of<MyState>(context, listen: false)
                             .fetchMeme();
                       },
-                      child: Text(
+                      child: const Text(
                         'VIEW NEXT',
                         style: TextStyle(color: Colors.grey),
                       ),

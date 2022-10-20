@@ -8,15 +8,18 @@ import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'klockren.dart';
 import 'memesPage.dart';
+import 'getapi.dart';
 
 class HomeViewTwo extends StatelessWidget {
+  const HomeViewTwo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 212, 137, 203),
+          backgroundColor: const Color.fromARGB(255, 212, 137, 203),
           systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+              const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
           elevation: 0,
         ),
         body: categoryview(context));
@@ -24,21 +27,21 @@ class HomeViewTwo extends StatelessWidget {
 
   Widget categoryview(context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
         Color.fromARGB(255, 212, 137, 203),
         Color.fromARGB(255, 233, 168, 170)
       ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Have some fun',
                     style: TextStyle(
                         color: Colors.white,
@@ -47,11 +50,11 @@ class HomeViewTwo extends StatelessWidget {
                   ),
                   AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
                     TyperAnimatedText('Have some fun',
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(255, 233, 229, 229),
                         ),
-                        speed: Duration(milliseconds: 70)),
+                        speed: const Duration(milliseconds: 70)),
                   ])
                 ],
               ),
@@ -60,10 +63,10 @@ class HomeViewTwo extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 12, right: 12, top: 70),
             child: Container(
-              padding: EdgeInsets.only(left: 28),
+              padding: const EdgeInsets.only(left: 28),
               height: 470,
               child: Swiper(
-                pagination: SwiperPagination(
+                pagination: const SwiperPagination(
                     margin: EdgeInsets.only(top: 20),
                     builder: DotSwiperPaginationBuilder(
                         activeColor: Colors.white, color: Colors.grey)),
@@ -77,13 +80,17 @@ class HomeViewTwo extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       if (categories[index].name == 'MEMES') {
+                        fetchMeme();
+}
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => memesPage()));
+                                builder: (context) => const memesPage()));
                       } else if (categories[index].name == 'KLOCKREN') {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Clock()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Clock()));
                       } else {
                         Navigator.push(
                             context,
@@ -114,7 +121,7 @@ class HomeViewTwo extends StatelessWidget {
                       children: [
                         Column(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 90,
                             ),
                             Card(
@@ -131,13 +138,13 @@ class HomeViewTwo extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        SizedBox(height: 50),
+                                        const SizedBox(height: 50),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(top: 30),
                                           child: Text(
                                             categories[index].name,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 letterSpacing: 1,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 28),
@@ -150,7 +157,7 @@ class HomeViewTwo extends StatelessWidget {
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
-                                            children: [
+                                            children: const [
                                               Text(
                                                 'Explore this category',
                                                 style: TextStyle(fontSize: 15),

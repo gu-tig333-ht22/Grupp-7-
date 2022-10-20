@@ -1,10 +1,11 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'homeviewtwo.dart';
 
 class HomeView extends StatefulWidget {
+  const HomeView({Key? key}) : super(key: key);
+
   @override
   State<HomeView> createState() => _HomeViewState();
 }
@@ -25,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
   Widget flipcards(context) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             // alt. lägga in bakgrundsbild?
             gradient: LinearGradient(colors: [
           Color.fromARGB(255, 158, 117, 137),
@@ -49,19 +50,19 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _title(context) {
     return Padding(
-      padding: EdgeInsets.all(45),
+      padding: const EdgeInsets.all(45),
       child: SizedBox(
         height: 150,
         child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
           TyperAnimatedText('Welcome\nTo\nPrankster!',
               textAlign: TextAlign.center,
-              textStyle: TextStyle(
+              textStyle: const TextStyle(
                 fontSize: 36.9,
                 fontWeight: FontWeight.w700,
                 fontFamily: 'PermanentMarker',
                 color: Color.fromARGB(255, 9, 44, 12),
               ),
-              speed: Duration(milliseconds: 70))
+              speed: const Duration(milliseconds: 70))
         ]),
       ),
     );
@@ -76,13 +77,13 @@ class _HomeViewState extends State<HomeView> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
             elevation: 25,
-            color: Color.fromARGB(197, 255, 255,
+            color: const Color.fromARGB(197, 255, 255,
                 255), //verkar inte göra någon skillnad med färgval?
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white, width: 2.5),
                   borderRadius: BorderRadius.circular(6),
-                  gradient: LinearGradient(colors: [
+                  gradient: const LinearGradient(colors: [
                     Color.fromARGB(255, 212, 137, 203),
                     Color.fromARGB(255, 233, 168, 170),
                   ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
@@ -92,9 +93,15 @@ class _HomeViewState extends State<HomeView> {
                 child: Padding(
                   padding: const EdgeInsets.all(30),
                   child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            width: 1.5),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        shape: BoxShape.circle),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           'PRANKSTER',
                           style: TextStyle(
@@ -109,11 +116,6 @@ class _HomeViewState extends State<HomeView> {
                         )
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Color.fromARGB(255, 0, 0, 0), width: 1.5),
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        shape: BoxShape.circle),
                   ),
                 ),
               ),
@@ -128,14 +130,14 @@ class _HomeViewState extends State<HomeView> {
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white, width: 2.5),
                   borderRadius: BorderRadius.circular(6),
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                       colors: [Colors.red, Colors.pink],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight)),
-              child: SizedBox(
-                child: Center(child: Text('Your daily joke')),
+              child: const SizedBox(
                 width: 300,
                 height: 200,
+                child: Center(child: Text('Your daily joke')),
               ),
             ),
           )),
@@ -153,7 +155,7 @@ class _HomeViewState extends State<HomeView> {
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.white, width: 2.5),
                 borderRadius: BorderRadius.circular(6),
-                gradient: LinearGradient(colors: [
+                gradient: const LinearGradient(colors: [
                   Color.fromARGB(255, 212, 137, 203),
                   Color.fromARGB(255, 233, 168, 170),
                 ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
@@ -163,9 +165,12 @@ class _HomeViewState extends State<HomeView> {
               child: Padding(
                 padding: const EdgeInsets.all(30),
                 child: Container(
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      shape: BoxShape.circle),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text(
                         'PRANKSTER',
                         style: TextStyle(
@@ -180,9 +185,6 @@ class _HomeViewState extends State<HomeView> {
                       )
                     ],
                   ),
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      shape: BoxShape.circle),
                 ),
               ),
             ),
@@ -195,11 +197,11 @@ class _HomeViewState extends State<HomeView> {
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.white, width: 2.5),
-              image: DecorationImage(
+              image: const DecorationImage(
                   image: AssetImage("assets/no_meme.jpg"), fit: BoxFit.fill),
               borderRadius: BorderRadius.circular(6),
             ),
-            child: SizedBox(
+            child: const SizedBox(
               width: 300,
               height: 200,
             ),
@@ -215,11 +217,11 @@ class _HomeViewState extends State<HomeView> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => HomeViewTwo()));
+                  builder: (BuildContext context) => const HomeViewTwo()));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text(
               'CONTINUE THE FUN',
               style: TextStyle(

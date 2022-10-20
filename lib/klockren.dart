@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'data.dart';
-import 'getapi.dart';
-import 'homeviewtwo.dart';
 
 /*class klockren extends StatelessWidget {
 //  AddItemView();
@@ -47,7 +42,6 @@ import 'homeviewtwo.dart';
 
 import 'dart:async';
 import 'dart:math';
-import 'package:flutter/material.dart';
 
 class Clock extends StatefulWidget {
   const Clock({Key? key}) : super(key: key);

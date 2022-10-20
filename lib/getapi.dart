@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:template/data.dart';
 
 class MyState extends ChangeNotifier {
   var _fact = '';
@@ -54,7 +53,6 @@ class MyState extends ChangeNotifier {
     http.Response response = await http
         .get(Uri.parse('https://backend-omega-seven.vercel.app/api/getjoke'));
     var result = response.body;
-    print(result);
     var qandP = jsonDecode(result);
     var Q = qandP['question'];
     var P = qandP['punchline'];
