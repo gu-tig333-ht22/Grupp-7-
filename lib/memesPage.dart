@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:template/data.dart';
 import 'getapi.dart';
 
 class memesPage extends StatelessWidget {
@@ -27,9 +28,12 @@ class memesPage extends StatelessWidget {
               ),
             ),
             Consumer<MyState>(
-                builder: (context, state, child) => Image(
-                      image: NetworkImage(state.meme),
-                    )),
+                builder: (context, state, child) =>
+                    Provider.of<MyState>(context, listen: false).loading
+                        ? Image(image: AssetImage('assets/klockren.png'))
+                        : Image(
+                            image: NetworkImage(state.meme),
+                          )),
           ],
         ),
       ),

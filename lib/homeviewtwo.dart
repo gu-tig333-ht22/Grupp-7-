@@ -86,7 +86,26 @@ class HomeViewTwo extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const Clock()));
-                      } else {
+                      } else if (categories[index].name == 'RANDOM FACTS') {
+                        Provider.of<MyState>(context, listen: false)
+                            .fetchFact();
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (context, a, b) =>
+                                    CategoryPage(categories[index])));
+                      } else if (categories[index].name ==
+                          'CHUCK NORRIS JOKES') {
+                        Provider.of<MyState>(context, listen: false)
+                            .fetchChuckNorris();
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (context, a, b) =>
+                                    CategoryPage(categories[index])));
+                      } else if (categories[index].name == 'YO MOMMA JOKES') {
+                        Provider.of<MyState>(context, listen: false)
+                            .fetchYoMamma();
                         Navigator.push(
                             context,
                             PageRouteBuilder(
