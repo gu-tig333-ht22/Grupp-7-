@@ -29,6 +29,12 @@ class ClockState extends State<Clock> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    timer.cancel();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         color: const Color.fromARGB(255, 177, 82, 218),

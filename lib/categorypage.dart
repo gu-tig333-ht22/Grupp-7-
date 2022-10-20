@@ -10,25 +10,25 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) {
-          var firstYoke = MyState();
-          if (categories.name == 'RANDOM FACTS') {
-            firstYoke.fetchFact();
-          }
-          if (categories.name == 'CHUCK NORRIS JOKES') {
-            firstYoke.fetchChuckNorris();
-          }
-          if (categories.name == 'YO MOMMA JOKES') {
-            firstYoke.fetchYoMamma();
-          }
+    return Consumer<MyState>(
+        builder: (BuildContext context, state, child) =>
+            // var firstYoke = MyState();
+            // if (categories.name == 'RANDOM FACTS') {
+            //   firstYoke.fetchFact();
+            // }
+            // if (categories.name == 'CHUCK NORRIS JOKES') {
+            //   firstYoke.fetchChuckNorris();
+            // }
+            // if (categories.name == 'YO MOMMA JOKES') {
+            //   firstYoke.fetchYoMamma();
+            // }
 
-          //för alla apier som fungerar bör en sådan här läggas till.
-          // detta gör att ett skämt/fact finns direkt på sidan
+            // //för alla apier som fungerar bör en sådan här läggas till.
+            // // detta gör att ett skämt/fact finns direkt på sidan
 
-          return firstYoke;
-        },
-        builder: (context, child) => Scaffold(
+            // return firstYoke;
+
+            Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
                 iconTheme: IconThemeData(color: Colors.grey),

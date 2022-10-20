@@ -8,6 +8,7 @@ import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'klockren.dart';
 import 'memesPage.dart';
+import 'package:provider/provider.dart';
 
 class HomeViewTwo extends StatelessWidget {
   @override
@@ -74,11 +75,8 @@ class HomeViewTwo extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       if (categories[index].name == 'MEMES') {
-                        Future<String> x = MyState.fetchMeme();
-                        
-                          return Future.delayed(
-                              Duration(seconds: 2), () => "Partly cloudy");
-                        }
+                        Provider.of<MyState>(context, listen: false)
+                            .fetchMeme();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
