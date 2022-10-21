@@ -16,13 +16,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MainView(),
+      home: HomeView(),
     );
   }
 }
 
-class MainView extends StatelessWidget {
-  const MainView({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => (WordleView())));
+            },
+            child: const Text('Till Wordle'),
+          ),
+        ));
+  }
+}
+
+class WordleView extends StatelessWidget {
+  const WordleView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +149,7 @@ class MainView extends StatelessWidget {
       context,
       listen: false,
     );
+
     var index = state.guessNo;
     var myGuess = state.guesses[index];
 
@@ -159,14 +179,21 @@ class MainView extends StatelessWidget {
             },
             child: const Text('Backspace')),
         ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               state.evaluateGuess(myGuess.word);
               state.setResult();
+              bool isValid = await state.validateGuess();
+              print(isValid);
+
               var result = state.todaysResult.status;
-              print(result);
-              print(state.guessNo);
-              if (result == 'won' || result == 'lost') {
-                _resultDialogue(context, result);
+              if ((result == 'won' || result == 'lost') && (isValid == true)) {
+                var replay = await _resultDialogue(context, state);
+                print(replay);
+                if (replay == 'Cancel') {
+                  Navigator.pop(context);
+                } else {
+                  state.gameReset();
+                }
               }
             },
             child: const Text('GUESS!')),
@@ -174,20 +201,25 @@ class MainView extends StatelessWidget {
     );
   }
 
-  Future _resultDialogue(context, String result) {
+  Future _resultDialogue(context, state) {
+    var result = state.todaysResult.status;
     return showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: Text('You ${result}'),
-        content: const Text('Good job. Better luck tomorrow.'),
+        title: Text('You $result'),
+        content: result == 'won'
+            ? const Text(
+                'Good job! Bet you feel great about yourself!\n\n\n\nUp for another round?')
+            : Text(
+                'Too bad, we feel sorry for you. \nThe correct answer was: \n\n\n${state.dailyWord}'),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, 'Cancel'),
-            child: const Text('Cancel'),
+            child: const Text('Ehm, maybe later...'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, 'OK'),
-            child: const Text('OK'),
+            child: const Text('Sure!'),
           ),
         ],
       ),

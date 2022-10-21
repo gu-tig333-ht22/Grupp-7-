@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:template/daily_word.dart';
 
 class MyState extends ChangeNotifier {
-  final List<Guess> _guesses = [
+  List<Guess> _guesses = [
     Guess(),
     Guess(),
     Guess(),
@@ -21,7 +21,7 @@ class MyState extends ChangeNotifier {
   final ordLista = WordList();
   String dailyWord = "coola".toUpperCase();
 
-  late final Map<String, List<Color>> _displayColor = {
+  late Map<String, List<Color>> _displayColor = {
     "0": startColors(),
     "1": startColors(),
     "2": startColors(),
@@ -89,6 +89,9 @@ class MyState extends ChangeNotifier {
       flashRed();
       return;
     }
+    // } else {
+    //   _guesses[guessNo].makeValid();
+    // }
 
     for (int i = 0; i < word.length; i++) {
       var char = _guesses[guessNo].word[i];
@@ -124,6 +127,42 @@ class MyState extends ChangeNotifier {
       }
     }
   }
+
+  Future<bool> validateGuess() async {
+    var word = guesses[guessNo].word;
+    var allWords = await ordLista.allWords;
+    if (word.length < 5 == true ||
+        allWords.contains(word.toLowerCase()) == false) {
+      flashRed();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  void gameReset() async {
+    _guesses = [
+      Guess(),
+      Guess(),
+      Guess(),
+      Guess(),
+      Guess(),
+      Guess(),
+    ];
+    _guessNo = 0;
+    _displayColor = {
+      "0": startColors(),
+      "1": startColors(),
+      "2": startColors(),
+      "3": startColors(),
+      "4": startColors(),
+      "5": startColors()
+    };
+    buttonColorMap = {};
+    notifyListeners();
+    dailyWord = await WordList.getRandom();
+    todaysResult = Result();
+  }
 }
 
 class Guess {
@@ -131,6 +170,9 @@ class Guess {
   List<String> get letters => _letters;
   String _word = '';
   String get word => _word;
+
+  // bool _isValid = false;
+  // bool get isValid => _isValid;
 
   Guess();
 
@@ -155,6 +197,11 @@ class Guess {
     _letters[index] = '';
     _wordFromLetters();
   }
+
+  // void makeValid() {
+  //   _isValid = true;
+  // }
+
 }
 
 class Result {
