@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import 'package:template/data.dart';
 import 'getapi.dart';
 
@@ -38,5 +39,6 @@ class memesPage extends StatelessWidget {
         ),
       ),
     );
+
   }
 }

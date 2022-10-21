@@ -29,12 +29,14 @@ class ClockState extends State<Clock> {
   }
 
   @override
+
   void dispose() {
     super.dispose();
     timer.cancel();
   }
 
   @override
+
   Widget build(BuildContext context) {
     return Container(
         color: const Color.fromARGB(255, 177, 82, 218),
@@ -55,6 +57,7 @@ class ClockState extends State<Clock> {
                 //Clock
                 child: Stack(
                   children: <Widget>[
+
                     Image(
                         image: AssetImage('assets/siffror_klocka.png'),
                         fit: BoxFit.cover),
@@ -67,6 +70,7 @@ class ClockState extends State<Clock> {
                             fit: BoxFit.cover),
                       ),
                     ),
+
                     //Seconds
                     Transform.rotate(
                       angle: secondsAngle,
