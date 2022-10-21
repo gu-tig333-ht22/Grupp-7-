@@ -16,7 +16,7 @@ class memesPage extends StatelessWidget {
         elevation: 0,
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: [
             TextButton(
               onPressed: () {
