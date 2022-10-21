@@ -4,6 +4,7 @@ import 'dart:math';
 
 class WordList {
   static final randomWord = getRandom();
+  late final allWords = readJson();
 
   static Future<List> readJson() async {
     final String response =

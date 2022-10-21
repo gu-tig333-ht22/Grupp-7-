@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:template/daily_word.dart';
 
 class MyState extends ChangeNotifier {
   final List<Guess> _guesses = [
@@ -15,6 +16,7 @@ class MyState extends ChangeNotifier {
   int _guessNo = 0;
   int get guessNo => _guessNo;
 
+  final ordLista = WordList();
   String dailyWord = "tjena".toUpperCase();
 
   late final Map<String, List<Color>> _displayColor = {
@@ -59,10 +61,17 @@ class MyState extends ChangeNotifier {
     buttonColorMap[key] = Colors.grey;
   }
 
-  void evaluateGuess(String word) {
+  void evaluateGuess(String word) async {
+    var allWords = await ordLista.allWords;
+
     if (word.length < 5 == true) {
       return;
     }
+
+    if (allWords.contains(word.toLowerCase()) == false) {
+      return;
+    }
+
     for (int i = 0; i < word.length; i++) {
       var char = _guesses[guessNo].word[i];
       Color changeColorTo;
