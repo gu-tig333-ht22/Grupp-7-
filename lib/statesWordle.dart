@@ -61,14 +61,34 @@ class MyState extends ChangeNotifier {
     buttonColorMap[key] = Colors.grey;
   }
 
+  void flashRed() {
+    var key = guessNo.toString();
+    var backToGrey = Future.delayed(Duration(milliseconds: 20));
+    _displayColor[key] = [
+      Colors.red,
+      Colors.red,
+      Colors.red,
+      Colors.red,
+      Colors.red,
+    ];
+    notifyListeners();
+
+    backToGrey.then((value) {
+      _displayColor[key] = startColors();
+      notifyListeners();
+    });
+  }
+
   void evaluateGuess(String word) async {
     var allWords = await ordLista.allWords;
 
     if (word.length < 5 == true) {
+      flashRed();
       return;
     }
 
     if (allWords.contains(word.toLowerCase()) == false) {
+      flashRed();
       return;
     }
 
