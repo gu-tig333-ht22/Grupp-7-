@@ -137,34 +137,60 @@ class MainView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton(
-            onPressed: () {
-              myGuess.removeLast();
-              state.switchToRed('');
-            },
-            child: const Text('Backspace')),
-        ElevatedButton(
-
-            ///Denna ska tas bort sen, endast för testning
-            onPressed: () {
-              state.decrementGuessNo();
-              myGuess = state.guesses[index];
-
-              state.switchToRed('');
-            },
-            child: const Text('Back')),
-        ElevatedButton(
-            onPressed: () {
-              //state function to test each char
-              state.evaluateGuess(myGuess.word);
-            },
-            child: const Text('Guess!')),
-        ElevatedButton(
             onPressed: () async {
               var dailyWord = WordList.getRandom();
               print(await dailyWord);
             },
-            child: const Text('ORDLISTA'))
+            child: const Text('ORDLISTA')),
+        ElevatedButton(
+
+            ///Denna knapp ska tas bort sen, endast för testning
+            onPressed: () {
+              state.decrementGuessNo();
+              myGuess = state.guesses[index];
+
+              state.notifyListeners();
+            },
+            child: const Text('Previous')),
+        ElevatedButton(
+            onPressed: () {
+              myGuess.removeLast();
+              state.notifyListeners();
+            },
+            child: const Text('Backspace')),
+        ElevatedButton(
+            onPressed: () {
+              state.evaluateGuess(myGuess.word);
+              state.setResult();
+              var result = state.todaysResult.status;
+              print(result);
+              print(state.guessNo);
+              if (result == 'won' || result == 'lost') {
+                _resultDialogue(context, result);
+              }
+            },
+            child: const Text('GUESS!')),
       ],
+    );
+  }
+
+  Future _resultDialogue(context, String result) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('You ${result}'),
+        content: const Text('Good job. Better luck tomorrow.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
     );
   }
 }
