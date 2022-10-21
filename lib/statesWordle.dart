@@ -192,35 +192,6 @@ class CustomKeyboard {
 
   CustomKeyboard(this.context);
 
-  Map<String, Widget> keyboard() {
-    var state = Provider.of<MyState>(
-      context,
-      listen: false,
-    );
-    var index = state.guessNo;
-    var myGuess = state.guesses[index];
-
-    Map<String, Widget> keyMap =
-        {}; // JAG TROR INTE DENNA KOMMER BEHÖVAS, MEN DEN LIGGER KVAR TILLS JAG VET
-    swedishAlpha.forEach(
-      (char) {
-        if (state.buttonColorMap.containsKey(char) == false) {
-          state.addToColorMap(char);
-        }
-        keyMap[char] = ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(state.buttonColorMap[char])),
-            onPressed: () {
-              state.switchToRed(char);
-              myGuess.addLetter(char);
-            },
-            child: Text(char));
-      },
-    );
-    return keyMap;
-  }
-
   List<Widget> keysList() {
     var state = Provider.of<MyState>(
       context,
