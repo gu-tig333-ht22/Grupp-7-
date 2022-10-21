@@ -16,8 +16,10 @@ class MyState extends ChangeNotifier {
   int _guessNo = 0;
   int get guessNo => _guessNo;
 
+  var todaysResult = Result();
+
   final ordLista = WordList();
-  String dailyWord = "tjena".toUpperCase();
+  String dailyWord = "coola".toUpperCase();
 
   late final Map<String, List<Color>> _displayColor = {
     "0": startColors(),
@@ -63,7 +65,7 @@ class MyState extends ChangeNotifier {
 
   void flashRed() {
     var key = guessNo.toString();
-    var backToGrey = Future.delayed(Duration(milliseconds: 20));
+    var backToGrey = Future.delayed(const Duration(milliseconds: 20));
     _displayColor[key] = [
       Colors.red,
       Colors.red,
@@ -82,12 +84,8 @@ class MyState extends ChangeNotifier {
   void evaluateGuess(String word) async {
     var allWords = await ordLista.allWords;
 
-    if (word.length < 5 == true) {
-      flashRed();
-      return;
-    }
-
-    if (allWords.contains(word.toLowerCase()) == false) {
+    if (word.length < 5 == true ||
+        allWords.contains(word.toLowerCase()) == false) {
       flashRed();
       return;
     }
@@ -113,14 +111,18 @@ class MyState extends ChangeNotifier {
       notifyListeners();
     }
     incrementGuessNo();
+    notifyListeners();
   }
 
-  void switchToRed(String key) {
-    //Denna här ska också tas bort, endast för testning
-    // buttonColorMap[key] == Colors.red
-    //     ? buttonColorMap[key] = Colors.grey
-    //     : buttonColorMap[key] = Colors.red;
-    notifyListeners();
+  void setResult() {
+    if (_guesses[guessNo].word == dailyWord.toUpperCase()) {
+      todaysResult.won();
+      notifyListeners();
+    } else {
+      if (guessNo > 4) {
+        todaysResult.lost();
+      }
+    }
   }
 }
 
@@ -152,6 +154,19 @@ class Guess {
     var index = _word.isNotEmpty ? _word.length - 1 : 0;
     _letters[index] = '';
     _wordFromLetters();
+  }
+}
+
+class Result {
+  String _status = "in session";
+  String get status => _status;
+
+  void won() {
+    _status = "won";
+  }
+
+  void lost() {
+    _status = "lost";
   }
 }
 
@@ -211,7 +226,7 @@ class CustomKeyboard {
                 backgroundColor:
                     MaterialStateProperty.all(state.buttonColorMap[char])),
             onPressed: () {
-              state.switchToRed(char);
+              state.notifyListeners();
               myGuess.addLetter(char);
             },
             child: Text(char, style: const TextStyle(fontSize: 18))));
