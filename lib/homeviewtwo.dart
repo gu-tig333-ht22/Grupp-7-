@@ -1,13 +1,16 @@
 // Hemvy 2 - Välja mellan olika kategorier
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:template/categorypage.dart';
+import 'package:template/getapi.dart';
 import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'klockren.dart';
 import 'memesPage.dart';
+
+import 'package:provider/provider.dart';
+
 
 class HomeViewTwo extends StatelessWidget {
   @override
@@ -77,6 +80,10 @@ class HomeViewTwo extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       if (categories[index].name == 'MEMES') {
+
+                        Provider.of<MyState>(context, listen: false)
+                            .fetchMeme();
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -86,7 +93,31 @@ class HomeViewTwo extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const Clock()));
-                      } else {
+
+                      } else if (categories[index].name == 'RANDOM FACTS') {
+                        Provider.of<MyState>(context, listen: false)
+                            .fetchFact();
+
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (context, a, b) =>
+                                    CategoryPage(categories[index])));
+
+                      } else if (categories[index].name ==
+                          'CHUCK NORRIS JOKES') {
+                        Provider.of<MyState>(context, listen: false)
+                            .fetchChuckNorris();
+
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (context, a, b) =>
+                                    CategoryPage(categories[index])));
+
+                      } else if (categories[index].name == 'YO MOMMA JOKES') {
+                        Provider.of<MyState>(context, listen: false)
+                            .fetchYoMamma();
                         Navigator.push(
                             context,
                             PageRouteBuilder(
@@ -94,23 +125,6 @@ class HomeViewTwo extends StatelessWidget {
                                     CategoryPage(categories[index])));
                       }
 
-                      /*if (categories[index].name != 'MEMES' ||
-                          categories[index].name != 'KLOCKREN') {
-                        //or KLOCKREN!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                                pageBuilder: (context, a, b) =>
-                                    CategoryPage(categories[index])));
-                      } else if (categories[index].name == 'MEMES') {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => memesPage()));
-                      } else if (categories[index].name == 'KLOCKREN') {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Clock()));
-                      }*/
                     },
                     child: Stack(
                       children: [
@@ -172,11 +186,10 @@ class HomeViewTwo extends StatelessWidget {
                         ),
                         Container(
                           alignment: Alignment.center,
-                          height: 200,
-                          child: Image.network(
-                            categories[index].iconImage,
-                            width: 150,
-                            height: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(categories[index].iconImage)),
                           ),
                         ),
                       ],

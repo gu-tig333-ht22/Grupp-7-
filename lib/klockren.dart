@@ -29,6 +29,14 @@ class ClockState extends State<Clock> {
   }
 
   @override
+
+  void dispose() {
+    super.dispose();
+    timer.cancel();
+  }
+
+  @override
+
   Widget build(BuildContext context) {
     return Container(
         color: const Color.fromARGB(255, 177, 82, 218),
@@ -49,18 +57,20 @@ class ClockState extends State<Clock> {
                 //Clock
                 child: Stack(
                   children: <Widget>[
-                    Image.network(
-                      'http://content.mycutegraphics.com/graphics/household/clock-face-without-hands.png',
-                      fit: BoxFit.cover,
-                    ),
+
+                    Image(
+                        image: AssetImage('assets/siffror_klocka.png'),
+                        fit: BoxFit.cover),
                     Positioned(
-                        top: 30,
-                        child: SizedBox(
-                            height: 237,
-                            child: Image.network(
-                              'https://365psd.com/images/previews/1c9/cartoon-moose-51988.png',
-                              fit: BoxFit.cover,
-                            ))),
+                      top: 30,
+                      child: SizedBox(
+                        height: 237,
+                        child: Image(
+                            image: AssetImage('assets/klockren.png'),
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+
                     //Seconds
                     Transform.rotate(
                       angle: secondsAngle,
