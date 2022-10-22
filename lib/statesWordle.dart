@@ -81,28 +81,44 @@ class MyState extends ChangeNotifier {
     });
   }
 
+  Map charsIn(String word) {
+    Map charMap = {};
+
+    for (int i = 0; i < word.length; i++) {
+      var char = word[i];
+      charMap[char] == null ? charMap[char] = 1 : charMap[char]++;
+    }
+    return charMap;
+  }
+
   void evaluateGuess(String word) async {
     var allWords = await ordLista.allWords;
+    var charsInWord = charsIn(dailyWord);
+    var charsInGuess = charsIn(_guesses[guessNo].word);
 
     if (word.length < 5 == true ||
         allWords.contains(word.toLowerCase()) == false) {
       flashRed();
       return;
     }
-    // } else {
-    //   _guesses[guessNo].makeValid();
-    // }
 
     for (int i = 0; i < word.length; i++) {
       var char = _guesses[guessNo].word[i];
-      Color changeColorTo;
+
+      Color changeColorTo = Color.fromARGB(255, 103, 103, 103);
+
+      if (charsInWord[char] == null) {
+        charsInWord[char] = 0;
+      }
 
       if (dailyWord[i] == char) {
         buttonColorMap[char] = Colors.green;
         changeColorTo = Colors.green;
       } else if (dailyWord.contains(char) && dailyWord[i] != char) {
-        changeColorTo = Colors.purple;
-
+        charsInGuess[char]--;
+        if (charsInWord[char] > charsInGuess[char]) {
+          changeColorTo = Colors.purple;
+        }
         if (buttonColorMap[char] != Colors.green) {
           buttonColorMap[char] = Colors.purple;
         }
@@ -115,6 +131,7 @@ class MyState extends ChangeNotifier {
     }
     incrementGuessNo();
     notifyListeners();
+    print('$charsInGuess\n$charsInWord');
   }
 
   void setResult() {

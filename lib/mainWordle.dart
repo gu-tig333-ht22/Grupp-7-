@@ -27,6 +27,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 221, 136, 229),
         appBar: AppBar(),
         body: Center(
           child: ElevatedButton(
@@ -41,7 +42,7 @@ class HomeView extends StatelessWidget {
 }
 
 class WordleView extends StatelessWidget {
-  const WordleView({super.key});
+  WordleView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,7 @@ class WordleView extends StatelessWidget {
     DateTime date = DateTime(now.year, now.month, now.day);
     String dateToday = date.toString().substring(0, 10);
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 41, 42, 66),
         appBar: AppBar(
           title: const Text('Wördlde'),
         ),
@@ -161,7 +163,7 @@ class WordleView extends StatelessWidget {
               var dailyWord = WordList.getRandom();
               print(await dailyWord);
             },
-            child: const Text('ORDLISTA')),
+            child: const Text('ORDLISTA\n[Debug only]')),
         ElevatedButton(
 
             ///Denna knapp ska tas bort sen, endast för testning
@@ -171,7 +173,7 @@ class WordleView extends StatelessWidget {
 
               state.notifyListeners();
             },
-            child: const Text('Previous')),
+            child: const Text('Previous\n[Debug only]')),
         ElevatedButton(
             onPressed: () {
               myGuess.removeLast();
@@ -215,11 +217,11 @@ class WordleView extends StatelessWidget {
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, 'Cancel'),
-            child: const Text('Ehm, maybe later...'),
+            child: const Text('Maybe later...'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, 'OK'),
-            child: const Text('Sure!'),
+            child: const Text('Of Course!'),
           ),
         ],
       ),
