@@ -28,12 +28,15 @@ class memesPage extends StatelessWidget {
               ),
             ),
             Consumer<MyState>(
-                builder: (context, state, child) =>
-                    Provider.of<MyState>(context, listen: false).loading
-                        ? Image(image: AssetImage('assets/klockren.png'))
-                        : Image(
-                            image: NetworkImage(state.meme),
-                          )),
+                builder: (context, state, child) => Provider.of<MyState>(
+                            context,
+                            listen: false)
+                        .loading
+                    ? /*Image(image: AssetImage('assets/klockren.png'))*/ Text(
+                        ' ')
+                    : Image(
+                        image: NetworkImage(state.meme),
+                      )),
           ],
         ),
       ),
