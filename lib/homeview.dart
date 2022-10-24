@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:template/getapi.dart';
@@ -25,16 +26,20 @@ class HomeView extends StatelessWidget {
           ),
           body: flipcards(context)),
     );
+
   }
 
   Widget flipcards(context) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
+            // alt. lägga in bakgrundsbild?
             gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 233, 213, 219),
-          Color.fromARGB(255, 253, 253, 253)
+          Color.fromARGB(255, 158, 117, 137),
+          Color.fromARGB(255, 255, 255, 255),
+          Color.fromARGB(255, 158, 117, 137)
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround, //space around
           children: [
@@ -42,11 +47,13 @@ class HomeView extends StatelessWidget {
             _dailyrandomfact(context),
             _dailymeme(context),
             _next(context)
+
           ],
         ));
   }
 
   Widget _title(context) {
+
     return SizedBox(
       child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
         TyperAnimatedText('Welcome\nTo\nPrankster!',
@@ -58,6 +65,7 @@ class HomeView extends StatelessWidget {
             ),
             speed: Duration(milliseconds: 70))
       ]),
+
     );
   }
 
@@ -66,6 +74,7 @@ class HomeView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: FlipCard(
+
         onFlip: () async {
           Provider.of<MyState>(context, listen: false).fetchFact();
         },
@@ -101,6 +110,7 @@ class HomeView extends StatelessWidget {
                           TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
                     )
                   ],
+
                 ),
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -111,6 +121,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ),
+
         back: Container(
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white, width: 1.5),
@@ -190,6 +201,7 @@ class HomeView extends StatelessWidget {
           child: SizedBox(
             width: 300,
             height: 200,
+
           ),
         ));
   }
@@ -206,15 +218,15 @@ class HomeView extends StatelessWidget {
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text(
               'CONTINUE THE FUN',
-              style:
-                  TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 16),
+              style: TextStyle(
+                  color: Color.fromARGB(255, 9, 44, 12), fontSize: 16),
             ),
             Icon(
               Icons.arrow_forward,
-              color: Colors.black,
+              color: Color.fromARGB(255, 9, 44, 12),
             )
           ],
         ),
