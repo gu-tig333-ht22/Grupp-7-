@@ -61,7 +61,7 @@ class ClockState extends State<Clock> {
                     height: 370,
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: Color.fromARGB(115, 119, 3, 110), width: 8),
+                          color: Color.fromARGB(115, 230, 182, 226), width: 8),
                       borderRadius: BorderRadius.circular(200),
                     ),
                     //Clock
