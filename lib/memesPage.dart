@@ -17,7 +17,7 @@ class memesPage extends StatelessWidget {
         elevation: 0,
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: [
             TextButton(
               onPressed: () {
@@ -29,12 +29,15 @@ class memesPage extends StatelessWidget {
               ),
             ),
             Consumer<MyState>(
-                builder: (context, state, child) =>
-                    Provider.of<MyState>(context, listen: false).loading
-                        ? Image(image: AssetImage('assets/klockren.png'))
-                        : Image(
-                            image: NetworkImage(state.meme),
-                          )),
+                builder: (context, state, child) => Provider.of<MyState>(
+                            context,
+                            listen: false)
+                        .loading
+                    ? /*Image(image: AssetImage('assets/klockren.png'))*/ Text(
+                        ' ')
+                    : Image(
+                        image: NetworkImage(state.meme),
+                      )),
           ],
         ),
       ),
