@@ -38,6 +38,11 @@ class MyState extends ChangeNotifier {
     return [Colors.grey, Colors.grey, Colors.grey, Colors.grey, Colors.grey];
   }
 
+  void setRandomWord() async {
+    dailyWord = await WordList.randomWord;
+    notifyListeners();
+  }
+
   void incrementGuessNo() {
     if (guessNo < 5) {
       _guessNo++;
