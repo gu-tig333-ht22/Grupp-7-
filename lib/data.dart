@@ -32,5 +32,5 @@ List<Categories> categories = [
   Categories(
       name: 'KLOCKREN',
       iconImage: 'assets/klockren.png',
-      description: 'A list with memes'),
+      description: 'Klockren'),
 ];
