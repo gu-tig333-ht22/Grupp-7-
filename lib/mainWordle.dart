@@ -39,6 +39,9 @@ class HomeView extends StatelessWidget {
               var saveData = MyAppStorage();
               saveData.writeState();
               print(await saveData.readJSON());
+
+              Provider.of<MyState>(context, listen: false).setRandomWord();
+
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => (WordleView())));
             },
@@ -60,16 +63,6 @@ class WordleView extends StatelessWidget {
         ),
         body: Consumer<MyState>(
           builder: (context, state, child) => wordleGame(context),
-          // child: Column(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   children: [
-          //     Text(dateToday),
-          //     guessDisplay(context),
-          //     _keyBoard(context),
-          //     _buttonRow(context),
-          //   ],
-          // ),
         ));
   }
 
@@ -82,7 +75,7 @@ class WordleView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(dateToday),
+          // Text(dateToday),
           guessDisplay(context),
           _keyBoard(context),
           _buttonRow(context),

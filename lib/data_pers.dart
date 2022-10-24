@@ -31,9 +31,7 @@ class MyAppStorage {
 
       // Read the file
       String contents = await file.readAsString();
-      // if (contents == "") {
-      //   return {};
-      // }
+
       var jsonResponse = jsonDecode(contents);
 
       return jsonResponse;
