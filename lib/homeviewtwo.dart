@@ -11,7 +11,6 @@ import 'memesPage.dart';
 
 import 'package:provider/provider.dart';
 
-
 class HomeViewTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -80,7 +79,6 @@ class HomeViewTwo extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       if (categories[index].name == 'MEMES') {
-
                         Provider.of<MyState>(context, listen: false)
                             .fetchMeme();
 
@@ -93,7 +91,6 @@ class HomeViewTwo extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const Clock()));
-
                       } else if (categories[index].name == 'RANDOM FACTS') {
                         Provider.of<MyState>(context, listen: false)
                             .fetchFact();
@@ -103,7 +100,6 @@ class HomeViewTwo extends StatelessWidget {
                             PageRouteBuilder(
                                 pageBuilder: (context, a, b) =>
                                     CategoryPage(categories[index])));
-
                       } else if (categories[index].name ==
                           'CHUCK NORRIS JOKES') {
                         Provider.of<MyState>(context, listen: false)
@@ -114,7 +110,6 @@ class HomeViewTwo extends StatelessWidget {
                             PageRouteBuilder(
                                 pageBuilder: (context, a, b) =>
                                     CategoryPage(categories[index])));
-
                       } else if (categories[index].name == 'YO MOMMA JOKES') {
                         Provider.of<MyState>(context, listen: false)
                             .fetchYoMamma();
@@ -124,7 +119,6 @@ class HomeViewTwo extends StatelessWidget {
                                 pageBuilder: (context, a, b) =>
                                     CategoryPage(categories[index])));
                       }
-
                     },
                     child: Stack(
                       children: [
