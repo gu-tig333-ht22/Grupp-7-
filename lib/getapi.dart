@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MyState extends ChangeNotifier {
-
   String _fact = '';
   String get fact => _fact;
   String _meme = 'https://i.redd.it/lkzgjs3botu91.jpg';
@@ -28,7 +27,6 @@ class MyState extends ChangeNotifier {
   }
 
   Future fetchChuckNorris() async {
-
     _loading = true;
     notifyListeners();
 
@@ -44,11 +42,9 @@ class MyState extends ChangeNotifier {
   }
 
   Future fetchYoMamma() async {
-
     _loading = true;
     notifyListeners();
 
-    //funkar inte när jag använder
     http.Response response =
         await http.get(Uri.parse('https://yomomma-api.herokuapp.com/jokes'));
     var result = response.body;
@@ -61,7 +57,6 @@ class MyState extends ChangeNotifier {
   }
 
   Future fetchMeme() async {
-
     _loading = true;
     notifyListeners();
     var uri = Uri.parse('https://meme-api.herokuapp.com/gimme');
@@ -75,7 +70,6 @@ class MyState extends ChangeNotifier {
   }
 
   Future fetchDevYoke() async {
-
     _loading = true;
     notifyListeners();
 
