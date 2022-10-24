@@ -3,12 +3,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MyState extends ChangeNotifier {
-  var _fact = '';
-  get fact => _fact;
-  var _meme = '';
-  get meme => _meme;
-
-  var list = ['fetchFact()', 'fetchChuckNorris()']; // används inte
+  String _fact = '';
+  String get fact => _fact;
+  String _meme = 'https://i.redd.it/lkzgjs3botu91.jpg';
+  String get meme => _meme;
 
   Future fetchFact() async {
     http.Response response = await http
