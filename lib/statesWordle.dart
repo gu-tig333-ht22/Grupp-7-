@@ -40,6 +40,7 @@ class MyState extends ChangeNotifier {
 
   void setRandomWord() async {
     dailyWord = await WordList.randomWord;
+    notifyListeners();
   }
 
   void incrementGuessNo() {

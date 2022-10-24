@@ -4,15 +4,6 @@ import 'dart:convert';
 
 import 'package:path_provider/path_provider.dart';
 
-// void main() {
-//   runApp(
-//     MaterialApp(
-//       title: 'Reading and Writing Files',
-//       home: FlutterDemo(storage: CounterStorage()),
-//     ),
-//   );
-// }
-
 class MyAppStorage {
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
@@ -22,87 +13,38 @@ class MyAppStorage {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/kussimurran.json');
+    return File('$path/myDir.json');
   }
 
-  Future<Map> readJSON() async {
-    try {
-      final file = await _localFile;
+  Future<Map<String, dynamic>> readJsonFile() async {
+    File file = await _localFile;
 
-      // Read the file
-      String contents = await file.readAsString();
-
-      var jsonResponse = jsonDecode(contents);
-
-      return jsonResponse;
-    } catch (e) {
-      print(e); // If encountering an error, return 0
-      return {};
+    if (await file.exists()) {
+      try {
+        var fileContent = await file.readAsString();
+        return jsonDecode(fileContent);
+      } catch (e) {
+        print(e);
+      }
     }
+
+    print('file dont exist!');
+    return {};
   }
 
-  void writeState() async {
+  void writeState(String today, String cat, String cont) async {
     final file = await _localFile;
-    var content = await readJSON();
+    final content = await readJsonFile(); //await readJSON();
 
-    content['data'] = {'hej'};
-    var newJsonContent = jsonEncode(content.toString());
+    content[today] = {cat: cont};
+
+    var jsonContent = jsonEncode(content);
+
     // Write the file
-    file.writeAsString(newJsonContent);
+    file.writeAsString(jsonContent);
   }
 
   void printPath() async {
     print(await _localPath);
   }
 }
-
-// class FlutterDemo extends StatefulWidget {
-//   const FlutterDemo({super.key, required this.storage});
-
-//   final CounterStorage storage;
-
-//   @override
-//   State<FlutterDemo> createState() => _FlutterDemoState();
-// }
-
-// class _FlutterDemoState extends State<FlutterDemo> {
-//   int _counter = 0;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     widget.storage.readCounter().then((value) {
-//       setState(() {
-//         _counter = value;
-//       });
-//     });
-//   }
-
-//   Future<File> _incrementCounter() {
-//     setState(() {
-//       _counter++;
-//     });
-
-//     // Write the variable as a string to the file.
-//     return widget.storage.writeCounter(_counter);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Reading and Writing Files'),
-//       ),
-//       body: Center(
-//         child: Text(
-//           'Button tapped $_counter time${_counter == 1 ? '' : 's'}.',
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: _incrementCounter,
-//         tooltip: 'Increment',
-//         child: const Icon(Icons.add),
-//       ),
-//     );
-//   }
-// }

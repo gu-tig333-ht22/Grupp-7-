@@ -30,17 +30,23 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var state = Provider.of<MyState>(context, listen: false);
+    state.setRandomWord();
+
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 221, 136, 229),
         appBar: AppBar(),
         body: Center(
           child: ElevatedButton(
             onPressed: () async {
-              var saveData = MyAppStorage();
-              saveData.writeState();
-              print(await saveData.readJSON());
+              DateTime now = DateTime.now();
+              DateTime date = DateTime(now.year, now.month, now.day);
+              String dateToday = date.toString().substring(0, 10);
 
-              Provider.of<MyState>(context, listen: false).setRandomWord();
+              var saveData = MyAppStorage();
+              saveData.writeState(dateToday, 'dailyWord', state.dailyWord);
+
+              print(await saveData.readJsonFile());
 
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => (WordleView())));
@@ -67,15 +73,11 @@ class WordleView extends StatelessWidget {
   }
 
   Widget wordleGame(context) {
-    DateTime now = DateTime.now();
-    DateTime date = DateTime(now.year, now.month, now.day);
-    String dateToday = date.toString().substring(0, 10);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Text(dateToday),
           guessDisplay(context),
           _keyBoard(context),
           _buttonRow(context),
