@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:template/getapi.dart';
@@ -9,25 +10,17 @@ import 'getapi.dart';
 
 //https://docs.flutter.dev/cookbook/persistence
 
-//safearea
-//note: får inte safearea till att funka med
-//att undvika renderflex (mediaquery?)
-
-//scrolla singlechildscrollview
-// note: undviker renderflex pga scroll,
-//men blir inte snyggt på andriod
-
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<MyState>(
       builder: (BuildContext context, state, child) => Scaffold(
-          // appBar: AppBar(
-          //   systemOverlayStyle:
-          //       SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-          //   backgroundColor: Color.fromARGB(255, 158, 117, 137),
-          //   elevation: 0,
-          // ),
+          appBar: AppBar(
+            systemOverlayStyle:
+                SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+            backgroundColor: Color.fromARGB(255, 158, 117, 137),
+            elevation: 0,
+          ),
           body: flipcards(context)),
     );
   }
@@ -53,11 +46,11 @@ class HomeView extends StatelessWidget {
               ),
               Flexible(
                 flex: 1,
-                child: _dailyrandomfact(context),
+                child: _dailyRandomFact(context),
               ),
               Flexible(
                 flex: 1,
-                child: _dailymeme(context),
+                child: _dailyMeme(context),
               ),
               Flexible(flex: 1, child: _next(context)),
             ],
@@ -67,12 +60,11 @@ class HomeView extends StatelessWidget {
 
   Widget _title(context) {
     return AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-      TyperAnimatedText(
-          'Welcome\nTo\nPrankster!', // ska anpassas efter flexible
+      TyperAnimatedText('Welcome To\nPrankster!', // ska anpassas efter flexible
           textAlign: TextAlign.center,
           textStyle: TextStyle(
-            fontSize: 37,
-            fontFamily: "PermanentMarker",
+            fontSize: 40,
+            fontFamily: "GloriaHallelujah",
             fontWeight: FontWeight.w700,
             color: Color.fromARGB(255, 28, 68, 51),
           ),
@@ -80,7 +72,7 @@ class HomeView extends StatelessWidget {
     ]);
   }
 
-  Widget _dailyrandomfact(context) {
+  Widget _dailyRandomFact(context) {
     var state = Provider.of<MyState>(context, listen: false);
     return FlipCard(
       onFlip: () async {
@@ -89,7 +81,7 @@ class HomeView extends StatelessWidget {
       speed: 800,
       front: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 1.5),
+            border: Border.all(color: Colors.white, width: 2),
             borderRadius: BorderRadius.circular(2),
             gradient: LinearGradient(colors: [
               Color.fromARGB(255, 212, 137, 203),
@@ -107,9 +99,11 @@ class HomeView extends StatelessWidget {
                   Text(
                     'PRANKSTER', // ska anpassas efter flexible
                     style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontFamily: 'PermanentMarker',
+                    ),
                   ),
                   Text(
                     textAlign: TextAlign.center,
@@ -129,7 +123,7 @@ class HomeView extends StatelessWidget {
       ),
       back: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 1.5),
+            border: Border.all(color: Colors.white, width: 2),
             borderRadius: BorderRadius.circular(2),
             gradient: LinearGradient(colors: [
               Color.fromARGB(255, 68, 74, 65),
@@ -156,7 +150,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _dailymeme(context) {
+  Widget _dailyMeme(context) {
     var state = Provider.of<MyState>(context, listen: false);
     return FlipCard(
       onFlip: () async {
@@ -165,7 +159,7 @@ class HomeView extends StatelessWidget {
       speed: 800,
       front: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 1.5),
+            border: Border.all(color: Colors.white, width: 2),
             borderRadius: BorderRadius.circular(2),
             gradient: LinearGradient(colors: [
               Color.fromARGB(255, 212, 137, 203),
@@ -183,18 +177,24 @@ class HomeView extends StatelessWidget {
                   Text(
                     'PRANKSTER',
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 0, 0, 0)),
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontFamily: 'PermanentMarker'),
                   ),
                   Text(
                     textAlign: TextAlign.center,
                     'Click to see today\'s\nmeme',
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                    ),
                   )
                 ],
               ),
               decoration: BoxDecoration(
+                  border:
+                      Border.all(color: Color.fromARGB(255, 0, 0, 0), width: 2),
                   color: Color.fromARGB(255, 255, 255, 255),
                   shape: BoxShape.circle),
             ),
@@ -203,7 +203,7 @@ class HomeView extends StatelessWidget {
       ),
       back: Container(
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 1.5),
+              border: Border.all(color: Colors.white, width: 2),
               borderRadius: BorderRadius.circular(2),
               gradient: LinearGradient(colors: [
                 Color.fromARGB(255, 68, 74, 65),

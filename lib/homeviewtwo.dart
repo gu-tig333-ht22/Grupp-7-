@@ -17,9 +17,9 @@ class HomeViewTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 212, 137, 203),
+          backgroundColor: const Color.fromARGB(255, 212, 137, 203),
           systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+              const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
           elevation: 0,
         ),
         body: categoryview(context));
@@ -98,11 +98,29 @@ class HomeViewTwo extends StatelessWidget {
                 if (categories[index].name == 'MEMES') {
                   Provider.of<MyState>(context, listen: false).fetchMeme();
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => memesPage()));
+                      MaterialPageRoute(builder: (context) => MemesPage()));
                 } else if (categories[index].name == 'KLOCKREN') {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Clock()));
-                } else {
+                } else if (categories[index].name == 'RANDOM FACTS') {
+                  Provider.of<MyState>(context, listen: false).fetchFact();
+
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (context, a, b) =>
+                              CategoryPage(categories[index])));
+                } else if (categories[index].name == 'CHUCK NORRIS JOKES') {
+                  Provider.of<MyState>(context, listen: false)
+                      .fetchChuckNorris();
+
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (context, a, b) =>
+                              CategoryPage(categories[index])));
+                } else if (categories[index].name == 'YO MOMMA JOKES') {
+                  Provider.of<MyState>(context, listen: false).fetchYoMamma();
                   Navigator.push(
                       context,
                       PageRouteBuilder(

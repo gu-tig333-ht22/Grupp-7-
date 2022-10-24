@@ -1,5 +1,4 @@
 // Klass för att skapa de olika kategorierna
-import 'package:flutter/cupertino.dart';
 
 class Categories {
   final String name;
@@ -16,24 +15,22 @@ class Categories {
 List<Categories> categories = [
   Categories(
       name: 'YO MOMMA JOKES',
-      iconImage: 'assets/klockren.png', // förslag:
+      iconImage: 'assets/klockren.png',
       description: 'A list with ya momma jokes'),
   Categories(
       name: 'RANDOM FACTS',
-      iconImage: 'assets/klockren.png', // förslag:
+      iconImage: 'assets/klockren.png',
       description: 'A list with random facts'),
   Categories(
       name: 'CHUCK NORRIS JOKES',
-      iconImage: 'assets/klockren.png', // förslag:
+      iconImage: 'assets/klockren.png',
       description: 'A list with Chuck Norris jokes'),
   Categories(
       name: 'MEMES',
-      iconImage: 'assets/klockren.png', // förslag:
+      iconImage: 'assets/klockren.png',
       description: 'A list with memes'),
   Categories(
       name: 'KLOCKREN',
-      iconImage: 'assets/klockren.png', // ?? förslag:
-      description: 'A list with memes'),
+      iconImage: 'assets/klockren.png',
+      description: 'Klockren'),
 ];
-
-// note: gillade teddybjönren/pandan i manga/anime format
