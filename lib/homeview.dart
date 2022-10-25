@@ -6,23 +6,20 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:template/getapi.dart';
 import 'homeviewtwo.dart';
-import 'getapi.dart';
-
-//https://docs.flutter.dev/cookbook/persistence
 
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<MyState>(
-      builder: (BuildContext context, state, child) => Scaffold(
-          appBar: AppBar(
-            systemOverlayStyle:
-                SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-            backgroundColor: Color.fromARGB(255, 158, 117, 137),
-            elevation: 0,
-          ),
-          body: flipcards(context)),
-    );
+        builder: (BuildContext context, state, child) => Scaffold(
+              appBar: AppBar(
+                systemOverlayStyle:
+                    SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+                backgroundColor: Color.fromARGB(255, 158, 117, 137),
+                elevation: 0,
+              ),
+              body: flipcards(context),
+            ));
   }
 
   Widget flipcards(context) {
