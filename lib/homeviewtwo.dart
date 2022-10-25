@@ -53,17 +53,17 @@ class HomeViewTwo extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 15),
             child: Text(
-              'Have some fun',
+              'Dags att utforska kategorierna',
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 38,
+                  fontSize: 30,
                   fontWeight: FontWeight.w700),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 15),
             child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-              TyperAnimatedText('Have some fun',
+              TyperAnimatedText('Ha det så skoj!',
                   textStyle: TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 233, 229, 229),
@@ -197,7 +197,7 @@ class HomeViewTwo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Explore this category',
+        Text('Utforska kategorin',
             style: TextStyle(fontSize: 15), textAlign: TextAlign.left),
         Icon(Icons.arrow_forward),
       ],

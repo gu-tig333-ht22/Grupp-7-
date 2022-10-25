@@ -58,10 +58,10 @@ dev_dependencies:
 
 
 flutter_native_splash:
-  color: "#E9A8AA"
-  image: assets/kidding.png
+  color: "#d489ca"
+  image: assets/loading.png
   color_dark: "#1a1a1a"
-  image_dark: assets/kidding.png
+  image_dark: assets/loading.png
   android: true
   ios: true
   android_gravity: fill

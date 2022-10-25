@@ -86,22 +86,26 @@ class CategoryPage extends StatelessWidget {
   }
 
   Widget _viewNext(context) {
-    return TextButton(
-      onPressed: () {
-        if (categories.name == 'RANDOM FACTS') {
-          Provider.of<MyState>(context, listen: false).fetchFact();
-        }
-        if (categories.name == 'CHUCK NORRIS JOKES') {
-          Provider.of<MyState>(context, listen: false).fetchChuckNorris();
-        }
-        if (categories.name == 'YO MOMMA JOKES') {
-          Provider.of<MyState>(context, listen: false).fetchYoMamma();
-        }
-        if (categories.name == 'DEVELOPER JOKES') {
-          Provider.of<MyState>(context, listen: false).fetchDevYoke();
-        }
-      },
-      child: Text('VIEW NEXT', style: TextStyle(color: Colors.grey)),
-    );
+    return OutlinedButton(
+        style: OutlinedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 212, 137, 203)),
+        onPressed: () {
+          if (categories.name == 'RANDOM FACTS') {
+            Provider.of<MyState>(context, listen: false).fetchFact();
+          }
+          if (categories.name == 'CHUCK NORRIS JOKES') {
+            Provider.of<MyState>(context, listen: false).fetchChuckNorris();
+          }
+          if (categories.name == 'YO MOMMA JOKES') {
+            Provider.of<MyState>(context, listen: false).fetchYoMamma();
+          }
+          if (categories.name == 'DEVELOPER JOKES') {
+            Provider.of<MyState>(context, listen: false).fetchDevYoke();
+          }
+        },
+        child: Text(
+          'SE NÄSTA',
+          style: TextStyle(color: Colors.white),
+        ));
   }
 }
