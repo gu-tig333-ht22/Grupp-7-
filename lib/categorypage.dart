@@ -90,13 +90,13 @@ class CategoryPage extends StatelessWidget {
         style: OutlinedButton.styleFrom(
             backgroundColor: Color.fromARGB(255, 212, 137, 203)),
         onPressed: () {
-          if (categories.name == 'RANDOM FACTS') {
+          if (categories.name == 'RANDOM FAKTA') {
             Provider.of<MyState>(context, listen: false).fetchFact();
           }
-          if (categories.name == 'CHUCK NORRIS JOKES') {
+          if (categories.name == 'CHUCK NORRIS-SKÄMT') {
             Provider.of<MyState>(context, listen: false).fetchChuckNorris();
           }
-          if (categories.name == 'YO MOMMA JOKES') {
+          if (categories.name == 'DIN MAMMA-SKÄMT') {
             Provider.of<MyState>(context, listen: false).fetchYoMamma();
           }
           if (categories.name == 'DEVELOPER JOKES') {
