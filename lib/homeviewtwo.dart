@@ -8,6 +8,7 @@ import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'klockren.dart';
 import 'memesPage.dart';
+import './mainWordle.dart';
 import 'package:provider/provider.dart';
 
 // wrappa hela sidan i Flexible
@@ -102,6 +103,9 @@ class HomeViewTwo extends StatelessWidget {
                 } else if (categories[index].name == 'KLOCKREN') {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Clock()));
+                } else if (categories[index].name == 'WORDLE') {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => (WordleView())));
                 } else if (categories[index].name == 'RANDOM FACTS') {
                   Provider.of<MyState>(context, listen: false).fetchFact();
 
