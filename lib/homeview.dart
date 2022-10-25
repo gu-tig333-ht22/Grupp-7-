@@ -123,11 +123,9 @@ class HomeView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Center(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  '${state.fact}',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
+                child: Image(
+                    image: AssetImage('assets/klockren.png'),
+                    fit: BoxFit.cover),
               ),
             ),
             width: 300,
@@ -184,7 +182,7 @@ class HomeView extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(color: Colors.white, width: 1.5),
             image: DecorationImage(
-                image: AssetImage("assets/no_meme.jpg"), fit: BoxFit.fill),
+                image: AssetImage("assets/klockren.png"), fit: BoxFit.fill),
             borderRadius: BorderRadius.circular(2),
           ),
           child: SizedBox(
