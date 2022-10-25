@@ -106,7 +106,7 @@ class HomeViewTwo extends StatelessWidget {
                 } else if (categories[index].name == 'WORDLE') {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => (WordleView())));
-                } else if (categories[index].name == 'RANDOM FACTS') {
+                } else if (categories[index].name == 'RANDOM FAKTA') {
                   Provider.of<MyState>(context, listen: false).fetchFact();
 
                   Navigator.push(
@@ -114,7 +114,7 @@ class HomeViewTwo extends StatelessWidget {
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
                               CategoryPage(categories[index])));
-                } else if (categories[index].name == 'CHUCK NORRIS JOKES') {
+                } else if (categories[index].name == 'CHUCK NORRIS-SKÄMT') {
                   Provider.of<MyState>(context, listen: false)
                       .fetchChuckNorris();
 
@@ -123,7 +123,7 @@ class HomeViewTwo extends StatelessWidget {
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
                               CategoryPage(categories[index])));
-                } else if (categories[index].name == 'YO MOMMA JOKES') {
+                } else if (categories[index].name == 'DIN MAMMA-SKÄMT') {
                   Provider.of<MyState>(context, listen: false).fetchYoMamma();
                   Navigator.push(
                       context,

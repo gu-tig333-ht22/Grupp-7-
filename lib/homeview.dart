@@ -45,10 +45,10 @@ class HomeView extends StatelessWidget {
                 flex: 1,
                 child: _dailyRandomFact(context),
               ),
-              Flexible(
+              /*Flexible(
                 flex: 1,
                 child: _dailyMeme(context),
-              ),
+              ),*/
               Flexible(flex: 1, child: _next(context)),
             ],
           )),
@@ -134,8 +134,8 @@ class HomeView extends StatelessWidget {
               child: SingleChildScrollView(
                 // funkar inte
                 child: Text(
-                  textAlign: TextAlign.center,
-                  '${state.fact}',
+                  textAlign: TextAlign.center, 'sten',
+                  //'${state.fact}',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
               ),
