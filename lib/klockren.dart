@@ -40,9 +40,7 @@ class ClockState extends State<Clock> {
         color: const Color.fromARGB(255, 177, 82, 218),
         alignment: const Alignment(0, 0),
         child: Scaffold(
-            appBar: AppBar(
-                iconTheme: const IconThemeData(color: Colors.grey),
-                backgroundColor: Colors.white),
+            appBar: AppBar(),
             body: Center(
               child: Container(
                 //Clock

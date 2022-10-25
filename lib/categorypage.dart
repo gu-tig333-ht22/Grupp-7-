@@ -37,7 +37,7 @@ class CategoryPage extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.grey),
         backgroundColor: Colors.white,
         systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+            SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
         elevation: 0,
       ),
       body: Stack(
