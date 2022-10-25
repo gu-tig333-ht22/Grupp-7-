@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:template/getapi.dart';
+import 'package:template/Data/getapi.dart';
 import 'homeviewtwo.dart';
-import 'getapi.dart';
+import 'Data/getapi.dart';
 
 //https://docs.flutter.dev/cookbook/persistence
 
@@ -80,6 +80,7 @@ class HomeView extends StatelessWidget {
       },
       speed: 800,
       front: Container(
+        height: 200,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.white, width: 2),
             borderRadius: BorderRadius.circular(2),

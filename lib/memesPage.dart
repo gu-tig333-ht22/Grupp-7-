@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:template/data.dart';
-import 'getapi.dart';
+import 'package:template/Data/data.dart';
+import 'Data/getapi.dart';
 
 class MemesPage extends StatelessWidget {
   Widget build(BuildContext context) {

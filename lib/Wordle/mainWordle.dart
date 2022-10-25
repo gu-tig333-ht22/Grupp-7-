@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './statesWordle.dart';
+import 'statesWordle.dart';
 import 'daily_word.dart';
-
-import './data_pers.dart';
+import 'data_pers.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
