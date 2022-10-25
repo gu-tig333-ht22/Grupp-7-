@@ -3,35 +3,51 @@ import 'package:provider/provider.dart';
 import './statesWordle.dart';
 import 'daily_word.dart';
 
+import './data_pers.dart';
+
 void main() {
   runApp(ChangeNotifierProvider(
     create: (context) => MyState(),
-    child: const MyApp(),
+    child: MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeView(),
+    return MaterialApp(
+      home: HomeView(storage: MyAppStorage()),
     );
   }
 }
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({super.key, required this.storage});
+
+  final MyAppStorage storage;
 
   @override
   Widget build(BuildContext context) {
+    var state = Provider.of<MyState>(context, listen: false);
+    state.setRandomWord();
+
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 221, 136, 229),
         appBar: AppBar(),
         body: Center(
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
+              DateTime now = DateTime.now();
+              DateTime date = DateTime(now.year, now.month, now.day);
+              String dateToday = date.toString().substring(0, 10);
+
+              var saveData = MyAppStorage();
+              saveData.writeState(dateToday, 'dailyWord', state.dailyWord);
+
+              print(await saveData.readJsonFile());
+
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => (WordleView())));
             },
@@ -46,28 +62,28 @@ class WordleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    DateTime date = DateTime(now.year, now.month, now.day);
-    String dateToday = date.toString().substring(0, 10);
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 41, 42, 66),
         appBar: AppBar(
           title: const Text('Wördlde'),
         ),
         body: Consumer<MyState>(
-          builder: (context, state, child) => Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(dateToday),
-                guessDisplay(context),
-                _keyBoard(context),
-                _buttonRow(context),
-              ],
-            ),
-          ),
+          builder: (context, state, child) => wordleGame(context),
         ));
+  }
+
+  Widget wordleGame(context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          guessDisplay(context),
+          _keyBoard(context),
+          _buttonRow(context),
+        ],
+      ),
+    );
   }
 
   Widget guessDisplay(context) {
@@ -208,12 +224,12 @@ class WordleView extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: Text('You $result'),
+        title: Text('Wow, you $result!'),
         content: result == 'won'
-            ? const Text(
-                'Good job! Bet you feel great about yourself!\n\n\n\nUp for another round?')
+            ? Text(
+                "Good job! Bet you feel great about yourself!\n\nWell, '${state.dailyWord}'... \nWho would've thought?\n\nUp for another round?")
             : Text(
-                'Too bad, we feel sorry for you. \nThe correct answer was: \n\n\n${state.dailyWord}'),
+                "Too bad, we feel sorry for you. \nThe correct answer was: \n\n\n'${state.dailyWord}'\n\nUp for another round?\n\n"),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, 'Cancel'),
