@@ -57,13 +57,14 @@ class HomeView extends StatelessWidget {
 
   Widget _title(context) {
     return AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-      TyperAnimatedText('Welcome To\nPrankster!', // ska anpassas efter flexible
+      TyperAnimatedText(
+          'Välkommen till\nPrankster!', // ska anpassas efter flexible
           textAlign: TextAlign.center,
           textStyle: TextStyle(
             fontSize: 40,
             fontFamily: "GloriaHallelujah",
             fontWeight: FontWeight.w700,
-            color: Color.fromARGB(255, 28, 68, 51),
+            color: Colors.white,
           ),
           speed: Duration(milliseconds: 70))
     ]);
@@ -104,7 +105,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    'Click to see today\'s\nrandom fact', // ska anpassas efter flexible
+                    'Tryck för att se dagens\nrandom fact', // ska anpassas efter flexible
                     style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
                   )
                 ],
@@ -181,7 +182,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    'Click to see today\'s\nmeme',
+                    'Tryck för att se dagens\nmeme',
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w400,
@@ -218,7 +219,7 @@ class HomeView extends StatelessWidget {
   }
 
   Widget _next(context) {
-    return TextButton(
+    return OutlinedButton(
       onPressed: () {
         Navigator.push(
             context,
@@ -229,9 +230,8 @@ class HomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'CONTINUE THE FUN',
-            style:
-                TextStyle(color: Color.fromARGB(255, 9, 44, 12), fontSize: 16),
+            'KLICKA HÄR FÖR ATT UTFORSKA MER',
+            style: TextStyle(color: Colors.white, fontSize: 16),
           ),
           Icon(
             Icons.arrow_forward,
