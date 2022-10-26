@@ -2,69 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Data/datapers.dart';
 import 'statesWordle.dart';
-import 'dailyword.dart';
-import '../Data/getapi.dart';
-//import '/homeview.dart';
-
-void main() {
-  Provider.debugCheckInvalidValueType = null;
-
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider<MyState>(create: ((_) => MyState())),
-      ChangeNotifierProvider<WordleState>(create: ((_) => WordleState())),
-    ],
-    child: MyApp(),
-  ));
-}
-
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: WordleView(storage: MyAppStorage()),
-    );
-  }
-}
-
-class WordleView extends StatelessWidget {
-  const WordleView({super.key, required this.storage});
-
-  final MyAppStorage storage;
-
-  @override
-  Widget build(BuildContext context) {
-    var state = Provider.of<WordleState>(context, listen: false);
-    state.setRandomWord();
-
-    return Scaffold(
-        backgroundColor: Color.fromARGB(255, 221, 136, 229),
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 212, 137, 203),
-          elevation: 0,
-        ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              DateTime now = DateTime.now();
-              DateTime date = DateTime(now.year, now.month, now.day);
-              String dateToday = date.toString().substring(0, 10);
-
-              var saveData = MyAppStorage();
-              saveData.writeState(dateToday, 'dailyWord', state.dailyWord);
-
-              print(await saveData.readJsonFile());
-
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => (MyWordle())));
-            },
-            child: const Text('Till Wordle'),
-          ),
-        ));
-  }
-}
 
 class MyWordle extends StatelessWidget {
   MyWordle({super.key});
@@ -90,7 +27,7 @@ class MyWordle extends StatelessWidget {
         children: [
           _guessDisplay(context), //ändrat till prviat - fel eller rätt?
           _keyBoard(context),
-          _buttonRow(context),
+          //_buttonRow(context),
         ],
       ),
     );
@@ -182,11 +119,16 @@ class MyWordle extends StatelessWidget {
     return Container(
       height: 190,
       width: 450,
-      child: GridView.count(
-        childAspectRatio: 0.65,
-        crossAxisCount: 11,
-        children: keyBoard,
-      ),
+      child: Stack(children: [
+        Align(
+            alignment: Alignment.centerLeft,
+            child: GridView.count(
+              childAspectRatio: 0.65,
+              crossAxisCount: 11,
+              children: keyBoard,
+            )),
+        Align(alignment: Alignment.bottomRight, child: _buttonRow(context))
+      ]),
     );
   }
 
@@ -199,58 +141,51 @@ class MyWordle extends StatelessWidget {
     var index = state.guessNo;
     var myGuess = state.guesses[index];
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton(
-            onPressed: () async {
-              var dailyWord = WordList.getRandom();
-              print(await dailyWord);
-            },
-            child: const Text('ORDLISTA\n[Debug only]')),
-        ElevatedButton(
-
-            ///Denna knapp ska tas bort sen, endast för testning
-            onPressed: () {
-              state.decrementGuessNo();
-              myGuess = state.guesses[index];
-
-              state.notifyListeners();
-            },
-            child: const Text('Previous\n[Debug only]')),
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 212, 137, 203),
-            ),
-            onPressed: () {
-              myGuess.removeLast();
-              state.notifyListeners();
-            },
-            child: const Text('Ångra')),
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 212, 137, 203),
-            ),
-            onPressed: () async {
-              state.evaluateGuess(myGuess.word);
-              state.setResult();
-              bool isValid = await state.validateGuess();
-              print(isValid);
-
-              var result = state.todaysResult.status;
-              if ((result == 'vann' || result == 'förlorade') &&
-                  (isValid == true)) {
-                var replay = await _resultDialogue(context, state);
-                print(replay);
-                if (replay == 'Avbryt') {
-                  Navigator.pop(context);
+    return Container(
+      width: 164,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 212, 137, 203),
+                fixedSize: Size(81, 64),
+              ),
+              onPressed: () {
+                myGuess.removeLast();
+                state.notifyListeners();
+              },
+              child: const Icon(Icons.backspace)), //const Text('Ångra')),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 212, 137, 203),
+                  fixedSize: Size(81, 64)),
+              onPressed: () async {
+                if (state.todaysResult.status == 'in session') {
+                  state.evaluateGuess(myGuess.word);
+                  state.setResult();
                 } else {
                   state.gameReset();
+                  return;
                 }
-              }
-            },
-            child: const Text('GISSA!')),
-      ],
+
+                var result = state.todaysResult.status;
+                bool isValid = await state.validateGuess();
+
+                if ((result == 'vann' || result == 'förlorade') &&
+                    (isValid == true)) {
+                  var replay = await _resultDialogue(context, state);
+
+                  if (replay == 'Avbryt') {
+                    Navigator.pop(context);
+                  } else {
+                    state.gameReset();
+                  }
+                }
+              },
+              child: const Icon(Icons.spellcheck)),
+        ],
+      ),
     );
   }
 
@@ -262,9 +197,9 @@ class MyWordle extends StatelessWidget {
         title: Text('Se där, du $result!'),
         content: result == 'vann'
             ? Text(
-                "Bra jobbat! Hoppas du känner dig stolt över dig själv!\n\nSå, '${state.dailyWord}'... \nVem hade kunnat ana det?\n\nRedo för en ny runda?")
+                "Bra jobbat! Hoppas du känner dig stolt över dig själv!\n\n\nSå, '${state.dailyWord}'... \n\n\nVem hade kunnat ana det?\n\n\nRedo för en ny runda?\n")
             : Text(
-                "Synd.. Men du kämpade på in i det sista. \n\n\nDet rätta svaret var: \n\n'${state.dailyWord}'\n\nRedo för en ny runda?\n\n"),
+                "Synd.. Men du kämpade på in i det sista. \n\n\nDet rätta svaret var: \n\n'${state.dailyWord}'\n\n\nRedo för en ny runda?\n"),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, 'Avbryt'),
@@ -279,3 +214,63 @@ class MyWordle extends StatelessWidget {
     );
   }
 }
+
+// void main() {
+//   Provider.debugCheckInvalidValueType = null;
+
+//   runApp(MultiProvider(
+//     providers: [
+//       ChangeNotifierProvider<MyState>(create: ((_) => MyState())),
+//       ChangeNotifierProvider<WordleState>(create: ((_) => WordleState())),
+//     ],
+//     child: MyApp(),
+//   ));
+// }
+
+// class MyApp extends StatelessWidget {
+//   MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: WordleView(storage: MyAppStorage()),
+//     );
+//   }
+// }
+
+// class WordleView extends StatelessWidget {
+//   const WordleView({super.key, required this.storage});
+
+//   final MyAppStorage storage;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var state = Provider.of<WordleState>(context, listen: false);
+//     state.setRandomWord();
+
+//     return Scaffold(
+//         backgroundColor: Color.fromARGB(255, 221, 136, 229),
+//         appBar: AppBar(
+//           backgroundColor: Color.fromARGB(255, 212, 137, 203),
+//           elevation: 0,
+//         ),
+//         body: Center(
+//           child: ElevatedButton(
+//             onPressed: () async {
+//               DateTime now = DateTime.now();
+//               DateTime date = DateTime(now.year, now.month, now.day);
+//               String dateToday = date.toString().substring(0, 10);
+
+//               var saveData = MyAppStorage();
+//               saveData.writeState(dateToday, 'dailyWord', state.dailyWord);
+
+//               print(await saveData.readJsonFile());
+
+//               Navigator.push(context,
+//                   MaterialPageRoute(builder: (context) => (MyWordle())));
+//             },
+//             child: const Text('Till Wordle'),
+//           ),
+//         ));
+//   }
+// }

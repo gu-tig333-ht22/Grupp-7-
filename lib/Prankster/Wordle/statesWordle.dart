@@ -149,6 +149,7 @@ class WordleState extends ChangeNotifier {
         todaysResult.lost();
       }
     }
+    notifyListeners();
   }
 
   Future<bool> validateGuess() async {
@@ -220,10 +221,6 @@ class Guess {
     _letters[index] = '';
     _wordFromLetters();
   }
-
-  // void makeValid() {
-  //   _isValid = true;
-  // }
 }
 
 class Result {

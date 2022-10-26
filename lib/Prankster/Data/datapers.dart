@@ -27,24 +27,18 @@ class MyAppStorage {
         print(e);
       }
     }
-
     print('file dont exist!');
     return {};
   }
 
   void writeState(String today, String cat, String cont) async {
     final file = await _localFile;
-    final content = await readJsonFile(); //await readJSON();
+    final content = await readJsonFile();
 
     content[today] = {cat: cont};
 
     var jsonContent = jsonEncode(content);
 
-    // Write the file
     file.writeAsString(jsonContent);
-  }
-
-  void printPath() async {
-    print(await _localPath);
   }
 }
