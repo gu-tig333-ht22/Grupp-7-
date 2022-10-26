@@ -1,5 +1,3 @@
-// Klass för att skapa de olika kategorierna
-
 class Categories {
   final String name;
   final String iconImage;

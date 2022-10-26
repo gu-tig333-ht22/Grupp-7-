@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import './statesWordle.dart';
-import './daily_word.dart';
+import '../Wordle/statesWordle.dart';
+import '../Wordle/dailyword.dart';
 
 class MyState extends ChangeNotifier {
   List<Guess> _guesses = [
@@ -37,7 +37,13 @@ class MyState extends ChangeNotifier {
   Map<String, Color> buttonColorMap = {};
 
   List<Color> startColors() {
-    return [Colors.grey, Colors.grey, Colors.grey, Colors.grey, Colors.grey];
+    return [
+      Color.fromARGB(255, 177, 79, 165),
+      Color.fromARGB(255, 177, 79, 165),
+      Color.fromARGB(255, 177, 79, 165),
+      Color.fromARGB(255, 177, 79, 165),
+      Color.fromARGB(255, 177, 79, 165)
+    ];
   }
 
   void setRandomWord() async {
@@ -67,7 +73,7 @@ class MyState extends ChangeNotifier {
   }
 
   void addToColorMap(key) {
-    buttonColorMap[key] = Colors.grey;
+    buttonColorMap[key] = Color.fromARGB(255, 212, 137, 203);
   }
 
   void flashRed() {
@@ -89,6 +95,7 @@ class MyState extends ChangeNotifier {
   }
 
   Map charsIn(String word) {
+    //ska kanske bort
     Map charMap = {};
 
     for (int i = 0; i < word.length; i++) {
@@ -153,6 +160,7 @@ class MyState extends ChangeNotifier {
   }
 
   Future<bool> validateGuess() async {
+    //används inte just nu
     var word = guesses[guessNo].word;
     var allWords = await ordLista.allWords;
     if (word.length < 5 == true ||

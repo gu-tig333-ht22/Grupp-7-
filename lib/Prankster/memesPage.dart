@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:template/data.dart';
-import 'getapi.dart';
+import 'package:template/Prankster/assethandler.dart';
+import 'Data/getapi.dart';
 
 class MemesPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class MemesPage extends StatelessWidget {
           //iconTheme: IconThemeData(color: Colors.grey),
           backgroundColor: Color.fromARGB(255, 212, 137, 203),
           systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+              SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
           elevation: 0,
         ),
         body: Container(
@@ -39,7 +39,7 @@ class MemesPage extends StatelessWidget {
 
   Widget _viewNext(context) {
     return Container(
-        margin: const EdgeInsets.all(5),
+        margin: const EdgeInsets.all(12),
         width: double.infinity,
         child: TextButton(
           onPressed: () {
@@ -47,7 +47,11 @@ class MemesPage extends StatelessWidget {
           },
           child: Text(
             'NÄSTA MEME',
-            style: TextStyle(color: Colors.white, fontSize: 25),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+                fontFamily: 'Jura',
+                fontWeight: FontWeight.w900),
           ),
         ));
   }

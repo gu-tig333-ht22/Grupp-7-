@@ -1,43 +1,43 @@
-// Hemvy 2 - Välja mellan olika kategorier
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
-import 'package:template/categorypage.dart';
-import 'package:template/getapi.dart';
-import 'data.dart';
+import 'package:template/Prankster/jokeandfactpage.dart';
+import 'package:template/Prankster/Data/getapi.dart';
+import 'assethandler.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'klockren.dart';
 import 'memesPage.dart';
-import './mainWordle.dart';
+import 'Wordle/wordleview.dart';
 import 'package:provider/provider.dart';
 
-// wrappa hela sidan i Flexible
-
-class HomeViewTwo extends StatelessWidget {
+class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 212, 137, 203),
           systemOverlayStyle:
-              const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+              const SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
           elevation: 0,
         ),
-        body: categoryview(context));
+        body: _categoryView(context));
   }
 
-  Widget categoryview(context) {
+  Widget _categoryView(context) {
     return SafeArea(
       bottom: false,
       child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
           Color.fromARGB(255, 212, 137, 203),
           Color.fromARGB(255, 233, 168, 170)
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _haveSomeFunTitel(context),
+            _titel(context),
             _categoryCard(context),
           ],
         ),
@@ -45,29 +45,32 @@ class HomeViewTwo extends StatelessWidget {
     );
   }
 
-  Widget _haveSomeFunTitel(context) {
+  Widget _titel(context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 15),
+            padding: const EdgeInsets.only(left: 15),
             child: Text(
-              'Dags att utforska kategorierna',
+              'Dags att utforska\nkategorierna',
               style: TextStyle(
+                  fontFamily: 'Jura',
                   color: Colors.white,
                   fontSize: 30,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w900),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 15),
+            padding: const EdgeInsets.only(left: 15),
             child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
               TyperAnimatedText('Ha det så skoj!',
                   textStyle: TextStyle(
                     fontSize: 20,
-                    color: Color.fromARGB(255, 233, 229, 229),
+                    fontWeight: FontWeight.w900,
+                    fontFamily: 'Jura',
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   speed: Duration(milliseconds: 70)),
             ]),
@@ -79,7 +82,7 @@ class HomeViewTwo extends StatelessWidget {
 
   Widget _categoryCard(context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12, top: 70),
+      padding: const EdgeInsets.all(12),
       child: Container(
         padding: EdgeInsets.only(left: 28),
         height: 470,
@@ -114,7 +117,7 @@ class HomeViewTwo extends StatelessWidget {
                       context,
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
-                              CategoryPage(categories[index])));
+                              JokeAndFactPage(categories[index])));
                 } else if (categories[index].name == 'CHUCK NORRIS JOKES') {
                   Provider.of<MyState>(context, listen: false)
                       .fetchChuckNorris();
@@ -123,14 +126,14 @@ class HomeViewTwo extends StatelessWidget {
                       context,
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
-                              CategoryPage(categories[index])));
+                              JokeAndFactPage(categories[index])));
                 } else if (categories[index].name == 'YO MOMMA JOKES') {
                   Provider.of<MyState>(context, listen: false).fetchYoMamma();
                   Navigator.push(
                       context,
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
-                              CategoryPage(categories[index])));
+                              JokeAndFactPage(categories[index])));
                 }
               },
               child: Stack(
@@ -159,8 +162,9 @@ class HomeViewTwo extends StatelessWidget {
                                     child: Text(
                                       categories[index].name,
                                       style: TextStyle(
+                                          fontFamily: 'Jura',
                                           letterSpacing: 1,
-                                          fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.w900,
                                           fontSize: 28),
                                       textAlign: TextAlign.center,
                                     ),
@@ -198,8 +202,13 @@ class HomeViewTwo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Utforska kategorin',
-            style: TextStyle(fontSize: 15), textAlign: TextAlign.left),
+        Text('UTFORSKA KATEGORIN',
+            style: TextStyle(
+                letterSpacing: 2,
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Jura'),
+            textAlign: TextAlign.left),
         Icon(Icons.arrow_forward),
       ],
     );

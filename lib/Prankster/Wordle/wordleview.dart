@@ -1,61 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './statesWordle.dart';
-import 'daily_word.dart';
-import './data_pers.dart';
-import './getapi.dart';
-
-void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => MyState(),
-    child: MyApp(),
-  ));
-}
-
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeView(storage: MyAppStorage()),
-    );
-  }
-}
-
-class HomeView extends StatelessWidget {
-  const HomeView({super.key, required this.storage});
-
-  final MyAppStorage storage;
-
-  @override
-  Widget build(BuildContext context) {
-    var state = Provider.of<MyState>(context, listen: false);
-    state.setRandomWord();
-
-    return Scaffold(
-        backgroundColor: Color.fromARGB(255, 221, 136, 229),
-        appBar: AppBar(),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              DateTime now = DateTime.now();
-              DateTime date = DateTime(now.year, now.month, now.day);
-              String dateToday = date.toString().substring(0, 10);
-
-              var saveData = MyAppStorage();
-              saveData.writeState(dateToday, 'dailyWord', state.dailyWord);
-
-              print(await saveData.readJsonFile());
-
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => (WordleView())));
-            },
-            child: const Text('Till Wordle'),
-          ),
-        ));
-  }
-}
+import 'statesWordle.dart';
+import 'dailyword.dart';
+import '../Data/getapi.dart';
 
 class WordleView extends StatelessWidget {
   WordleView({super.key});
@@ -63,9 +10,9 @@ class WordleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 41, 42, 66),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
-          title: const Text('Wördlde'),
+          title: const Text('Wordle'),
         ),
         body: Consumer<MyState>(
           builder: (context, state, child) => wordleGame(context),
@@ -78,7 +25,7 @@ class WordleView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          guessDisplay(context),
+          _guessDisplay(context), //ändrat till prviat - fel eller rätt?
           _keyBoard(context),
           _buttonRow(context),
         ],
@@ -86,7 +33,7 @@ class WordleView extends StatelessWidget {
     );
   }
 
-  Widget guessDisplay(context) {
+  Widget _guessDisplay(context) {
     return Column(children: [
       guessRow(context, 0),
       Container(

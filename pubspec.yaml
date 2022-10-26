@@ -106,9 +106,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: AbrilFatface-Regular
+    - family: Montserrat
       fonts: 
-        - asset: fonts/AbrilFatface-Regular.ttf
+        - asset: fonts/Montserrat-VariableFont_wght.ttf
+  
+    - family: Jura
+      fonts: 
+        - asset:  fonts/Jura-VariableFont_wght.ttf
     
 
     - family: Nabla-Regular
@@ -116,14 +120,7 @@ flutter:
         - asset: fonts/Nabla-Regular-VariableFont_EDPT,EHLT.ttf
     
 
-    - family: SulphurPoint-Bold
-      fonts: 
-        - asset: fonts/SulphurPoint-Bold.ttf
-    
 
-    - family: NotoSansGeorgian
-      fonts: 
-        - asset: fonts/NotoSansGeorgian-VariableFont_wdth,wght.ttf
 
     
 
