@@ -196,7 +196,7 @@ class MyState extends ChangeNotifier {
     todaysResult = Result();
   }
 
-  ////////////////////////////////////////////////////////
+  ///////////////////// APIERNA TILL KORTEN ///////////////////////////////////
   String _fact = '';
   String get fact => _fact;
   String _meme = 'https://i.redd.it/lkzgjs3botu91.jpg';
@@ -281,4 +281,11 @@ class MyState extends ChangeNotifier {
 
     notifyListeners();
   }
+
+//////////////////////// STEN/ SAX / PÅSE ////////////////////////////////
+
+  String _sten_sax_pose = "bajs";
+  String get sten_sax_pose => _sten_sax_pose;
+  bool _redo_att_spela = false;
+  bool get redo_att_spela => _redo_att_spela;
 }

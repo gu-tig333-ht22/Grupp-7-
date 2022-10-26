@@ -37,7 +37,8 @@ class HomeView extends StatelessWidget {
             children: [
               _title(context),
               _dailyRandomFact(context),
-              // _gameButtons()
+              //_gameButtons(),
+              _buttonrow(),
               _next(context)
             ],
           )),
@@ -138,13 +139,11 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  // Widget _gameButtons() {
-  //   return Row(
-  //     children: [
-  //       IconButton(onPressed: {} , icon: Icon(Icons.rock)
-  //     ],
-  //   )
-  // }
+//  Widget _gameButtons() {
+//    return Row(
+//      children: [IconButton(onPressed: () {}, icon: Icon(Icons.rocket))],
+//    );
+//  }
 
   Widget _next(context) {
     return TextButton(
@@ -172,5 +171,41 @@ class HomeView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _buttonrow() {
+    return Row(children: <Widget>[
+      Expanded(
+          child: TextButton(
+              onPressed: () {},
+              child: const Text(
+                "STEN",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'SulphurPoint-Bold'),
+              ))),
+      Expanded(
+          child: TextButton(
+              onPressed: () {},
+              child: const Text("SAX",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'SulphurPoint-Bold')))),
+      Expanded(
+          child: TextButton(
+              onPressed: () {},
+              child: const Text(
+                "PÅSE",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'SulphurPoint-Bold'),
+              )))
+    ]);
   }
 }
