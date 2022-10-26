@@ -15,22 +15,17 @@ class Categories {
 List<Categories> categories = [
   Categories(
       name: 'YO MOMMA JOKES',
-
       iconImage: 'assets/klockren.png',
-
       description: 'A list with ya momma jokes'),
   Categories(
       name: 'RANDOM FACTS',
       iconImage: 'assets/klockren.png',
       description: 'A list with random facts'),
   Categories(
-
-
       name: 'CHUCK NORRIS JOKES',
       iconImage: 'assets/klockren.png',
       description: 'A list with Chuck Norris jokes'),
   Categories(
-
       name: 'MEMES',
       iconImage: 'assets/klockren.png',
       description: 'A list with memes'),
@@ -39,9 +34,8 @@ List<Categories> categories = [
       iconImage: 'assets/klockren.png',
       description: 'A list with memes'),
   Categories(
-      name: 'KLOCKREN',
-      iconImage:
-          'https://365psd.com/images/previews/1c9/cartoon-moose-51988.png',
+      name: 'WORDLE',
+      iconImage: 'assets/klockren.png',
       description: 'A list with memes'),
 ];
 

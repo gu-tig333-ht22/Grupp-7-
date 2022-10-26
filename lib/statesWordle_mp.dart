@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/daily_word.dart';
 
-class MyState extends ChangeNotifier {
+class WordleState extends ChangeNotifier {
   List<Guess> _guesses = [
     Guess(),
     Guess(),
@@ -37,6 +37,8 @@ class MyState extends ChangeNotifier {
   List<Color> startColors() {
     return [Colors.grey, Colors.grey, Colors.grey, Colors.grey, Colors.grey];
   }
+
+  WordleState();
 
   void incrementGuessNo() {
     if (guessNo < 5) {
@@ -143,6 +145,10 @@ class MyState extends ChangeNotifier {
         todaysResult.lost();
       }
     }
+  }
+
+  void notify() {
+    notifyListeners();
   }
 
   Future<bool> validateGuess() async {
@@ -272,7 +278,7 @@ class CustomKeyboard {
   CustomKeyboard(this.context);
 
   List<Widget> keysList() {
-    var state = Provider.of<MyState>(
+    var state = Provider.of<WordleState>(
       context,
       listen: false,
     );
@@ -290,8 +296,8 @@ class CustomKeyboard {
                 backgroundColor:
                     MaterialStateProperty.all(state.buttonColorMap[char])),
             onPressed: () {
-              state.notifyListeners();
               myGuess.addLetter(char);
+              state.notify();
             },
             child: Text(char, style: const TextStyle(fontSize: 18))));
       },
