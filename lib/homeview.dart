@@ -35,7 +35,6 @@ class HomeView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-
               _title(context),
               _dailyRandomFact(context),
               // _gameButtons()
@@ -47,7 +46,7 @@ class HomeView extends StatelessWidget {
 
   Widget _title(context) {
     return AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-      TyperAnimatedText('Wälkommen till\nPrankster!',
+      TyperAnimatedText('Välkommen till\nPrankster!',
           textAlign: TextAlign.center,
           textStyle: TextStyle(
             fontSize: 40,
@@ -58,7 +57,7 @@ class HomeView extends StatelessWidget {
     ]);
   }
 
- Widget _dailyRandomFact(context) {
+  Widget _dailyRandomFact(context) {
     var state = Provider.of<MyState>(context, listen: false);
     return Container(
       height: 200,
@@ -139,8 +138,6 @@ class HomeView extends StatelessWidget {
     );
   }
 
- 
-
   // Widget _gameButtons() {
   //   return Row(
   //     children: [
@@ -150,7 +147,7 @@ class HomeView extends StatelessWidget {
   // }
 
   Widget _next(context) {
-    return OutlinedButton(
+    return TextButton(
       onPressed: () {
         Navigator.push(
             context,
@@ -161,16 +158,12 @@ class HomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-
             'KLICKA HÄR FÖR ATT UTFORSKA MER',
             style: TextStyle(
-                letterSpacing: 2,
-                wordSpacing: 2,
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 fontFamily: 'SulphurPoint-Bold'),
-
           ),
           Icon(
             Icons.arrow_forward,
