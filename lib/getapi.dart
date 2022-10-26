@@ -38,11 +38,11 @@ class MyState extends ChangeNotifier {
 
   List<Color> startColors() {
     return [
-      Color.fromARGB(255, 212, 137, 203),
-      Color.fromARGB(255, 212, 137, 203),
-      Color.fromARGB(255, 212, 137, 203),
-      Color.fromARGB(255, 212, 137, 203),
-      Color.fromARGB(255, 212, 137, 203)
+      Color.fromARGB(255, 177, 79, 165),
+      Color.fromARGB(255, 177, 79, 165),
+      Color.fromARGB(255, 177, 79, 165),
+      Color.fromARGB(255, 177, 79, 165),
+      Color.fromARGB(255, 177, 79, 165)
     ];
   }
 
@@ -73,7 +73,7 @@ class MyState extends ChangeNotifier {
   }
 
   void addToColorMap(key) {
-    buttonColorMap[key] = Color.fromARGB(255, 177, 79, 165);
+    buttonColorMap[key] = Color.fromARGB(255, 212, 137, 203);
   }
 
   void flashRed() {
