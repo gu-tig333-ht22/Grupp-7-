@@ -109,7 +109,7 @@ class CategoryPage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => const Clock()));
                 } else if (categories[index].name == 'WORDLE') {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => (WordleView())));
+                      MaterialPageRoute(builder: (context) => (MyWordle())));
                 } else if (categories[index].name == 'RANDOM FACTS') {
                   Provider.of<MyState>(context, listen: false).fetchFact();
 

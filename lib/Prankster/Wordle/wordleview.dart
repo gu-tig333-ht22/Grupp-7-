@@ -4,10 +4,16 @@ import '../Data/datapers.dart';
 import 'statesWordle.dart';
 import 'dailyword.dart';
 import '../Data/getapi.dart';
+//import '/homeview.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => MyState(),
+  Provider.debugCheckInvalidValueType = null;
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<MyState>(create: ((_) => MyState())),
+      ChangeNotifierProvider<WordleState>(create: ((_) => WordleState())),
+    ],
     child: MyApp(),
   ));
 }
@@ -18,19 +24,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeView(storage: MyAppStorage()),
+      home: WordleView(storage: MyAppStorage()),
     );
   }
 }
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key, required this.storage});
+class WordleView extends StatelessWidget {
+  const WordleView({super.key, required this.storage});
 
   final MyAppStorage storage;
 
   @override
   Widget build(BuildContext context) {
-    var state = Provider.of<MyState>(context, listen: false);
+    var state = Provider.of<WordleState>(context, listen: false);
     state.setRandomWord();
 
     return Scaffold(
@@ -52,7 +58,7 @@ class HomeView extends StatelessWidget {
               print(await saveData.readJsonFile());
 
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => (WordleView())));
+                  MaterialPageRoute(builder: (context) => (MyWordle())));
             },
             child: const Text('Till Wordle'),
           ),
@@ -60,8 +66,8 @@ class HomeView extends StatelessWidget {
   }
 }
 
-class WordleView extends StatelessWidget {
-  WordleView({super.key});
+class MyWordle extends StatelessWidget {
+  MyWordle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +77,7 @@ class WordleView extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 212, 137, 203),
           title: const Text('Wordle'),
         ),
-        body: Consumer<MyState>(
+        body: Consumer<WordleState>(
           builder: (context, state, child) => wordleGame(context),
         ));
   }
@@ -151,7 +157,7 @@ class WordleView extends StatelessWidget {
   }
 
   Widget _displayButton(context, guessIndex, charIndex) {
-    var state = Provider.of<MyState>(
+    var state = Provider.of<WordleState>(
       context,
       listen: false,
     );
@@ -185,7 +191,7 @@ class WordleView extends StatelessWidget {
   }
 
   Widget _buttonRow(context) {
-    var state = Provider.of<MyState>(
+    var state = Provider.of<WordleState>(
       context,
       listen: false,
     );
