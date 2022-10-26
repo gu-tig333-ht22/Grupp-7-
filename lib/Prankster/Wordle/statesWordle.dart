@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './getapi.dart';
-import 'package:template/daily_word.dart';
+import '../Data/getapi.dart';
+import 'package:template/Prankster/Wordle/dailyword.dart';
 
 // class MyState extends ChangeNotifier {
 //   List<Guess> _guesses = [

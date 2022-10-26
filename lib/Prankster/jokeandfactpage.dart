@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:template/data.dart';
-import 'getapi.dart';
+import 'package:template/Prankster/assethandler.dart';
+import 'Data/getapi.dart';
 
-class CategoryPage extends StatelessWidget {
+class JokeAndFactPage extends StatelessWidget {
   final Categories categories;
-  const CategoryPage(this.categories);
+  const JokeAndFactPage(this.categories);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,11 @@ class CategoryPage extends StatelessWidget {
           children: [
             Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _titelCategoryPage(),
-                  _jokeView(),
-                  _viewNext(context),
+                  _titel(),
+                  _jokeAndFactCard(),
+                  _viewNextButton(context),
                 ],
               ),
             ),
@@ -37,20 +38,22 @@ class CategoryPage extends StatelessWidget {
     );
   }
 
-  Widget _titelCategoryPage() {
+  Widget _titel() {
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: Text(
         categories.name,
         textAlign: TextAlign.center,
         style: TextStyle(
+          fontFamily: 'Jura',
+          fontWeight: FontWeight.w900,
           fontSize: 40,
         ),
       ),
     );
   }
 
-  Widget _jokeView() {
+  Widget _jokeAndFactCard() {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Container(
@@ -65,13 +68,21 @@ class CategoryPage extends StatelessWidget {
             child: Consumer<MyState>(
           builder: (context, state, child) =>
               Provider.of<MyState>(context, listen: false).loading
-                  ? Text(' ')
+                  ? Text(
+                      'Loading...', // Ha med eller inte? if-sats längre än 1 sek?
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Jura',
+                          fontSize: 20),
+                    )
                   : Padding(
                       padding: EdgeInsets.only(top: 25, left: 25, right: 25),
                       child: SingleChildScrollView(
                         child: Text('${state.fact}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                                fontFamily: 'Jura',
+                                fontWeight: FontWeight.w900,
                                 fontSize: 35,
                                 color: Color.fromARGB(255, 255, 255, 255))),
                       ),
@@ -81,24 +92,31 @@ class CategoryPage extends StatelessWidget {
     );
   }
 
-  Widget _viewNext(context) {
-    return OutlinedButton(
-        style: OutlinedButton.styleFrom(
-            backgroundColor: Color.fromARGB(255, 212, 137, 203)),
-        onPressed: () {
-          if (categories.name == 'RANDOM FACTS') {
-            Provider.of<MyState>(context, listen: false).fetchFact();
-          }
-          if (categories.name == 'CHUCK NORRIS JOKES') {
-            Provider.of<MyState>(context, listen: false).fetchChuckNorris();
-          }
-          if (categories.name == 'YO MOMMA JOKES') {
-            Provider.of<MyState>(context, listen: false).fetchYoMamma();
-          }
-        },
-        child: Text(
-          'SE NÄSTA',
-          style: TextStyle(color: Colors.white),
-        ));
+  Widget _viewNextButton(context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 212, 137, 203)),
+          onPressed: () {
+            if (categories.name == 'RANDOM FACTS') {
+              Provider.of<MyState>(context, listen: false).fetchFact();
+            }
+            if (categories.name == 'CHUCK NORRIS JOKES') {
+              Provider.of<MyState>(context, listen: false).fetchChuckNorris();
+            }
+            if (categories.name == 'YO MOMMA JOKES') {
+              Provider.of<MyState>(context, listen: false).fetchYoMamma();
+            }
+          },
+          child: Text(
+            'SE NÄSTA',
+            style: TextStyle(
+                letterSpacing: 2,
+                color: Colors.white,
+                fontFamily: 'Jura',
+                fontWeight: FontWeight.w900),
+          )),
+    );
   }
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 
 class WordList {
+  //daily word list - döpa om när fixat?
   static final randomWord = getRandom();
   late final allWords = readJson();
 

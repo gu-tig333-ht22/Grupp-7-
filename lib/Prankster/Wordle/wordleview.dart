@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './statesWordle.dart';
-import 'daily_word.dart';
-import './data_pers.dart';
-import './getapi.dart';
+import '../Data/datapers.dart';
+import 'statesWordle.dart';
+import 'dailyword.dart';
+import '../Data/getapi.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -69,7 +69,7 @@ class WordleView extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 212, 137, 203),
-          title: const Text('Wördlde'),
+          title: const Text('Wordle'),
         ),
         body: Consumer<MyState>(
           builder: (context, state, child) => wordleGame(context),
@@ -82,7 +82,7 @@ class WordleView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          guessDisplay(context),
+          _guessDisplay(context), //ändrat till prviat - fel eller rätt?
           _keyBoard(context),
           _buttonRow(context),
         ],
@@ -90,7 +90,7 @@ class WordleView extends StatelessWidget {
     );
   }
 
-  Widget guessDisplay(context) {
+  Widget _guessDisplay(context) {
     return Column(children: [
       Padding(
         padding: const EdgeInsets.all(4.0),

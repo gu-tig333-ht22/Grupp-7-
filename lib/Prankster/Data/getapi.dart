@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import './statesWordle.dart';
-import './daily_word.dart';
+import '../Wordle/statesWordle.dart';
+import '../Wordle/dailyword.dart';
 
 class MyState extends ChangeNotifier {
   List<Guess> _guesses = [

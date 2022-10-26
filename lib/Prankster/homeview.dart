@@ -1,11 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:template/getapi.dart';
-import 'homeviewtwo.dart';
+import 'package:template/Prankster/Data/getapi.dart';
+import 'categorypage.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -14,15 +13,15 @@ class HomeView extends StatelessWidget {
         builder: (BuildContext context, state, child) => Scaffold(
               appBar: AppBar(
                 systemOverlayStyle:
-                    SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+                    SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
                 backgroundColor: Color.fromARGB(255, 212, 137, 203),
                 elevation: 0,
               ),
-              body: flipcards(context),
+              body: flipCards(context),
             ));
   }
 
-  Widget flipcards(context) {
+  Widget flipCards(context) {
     return SafeArea(
       bottom: false,
       child: Container(
@@ -33,7 +32,7 @@ class HomeView extends StatelessWidget {
             Color.fromARGB(255, 233, 168, 170)
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _title(context),
               _dailyRandomFact(context),
@@ -49,8 +48,9 @@ class HomeView extends StatelessWidget {
       TyperAnimatedText('Välkommen till\nPrankster!',
           textAlign: TextAlign.center,
           textStyle: TextStyle(
-            fontSize: 40,
-            fontWeight: FontWeight.w500,
+            fontSize: 36,
+            fontFamily: 'Jura',
+            fontWeight: FontWeight.w700,
             color: Color.fromARGB(255, 255, 255, 255),
           ),
           speed: Duration(milliseconds: 70))
@@ -92,15 +92,15 @@ class HomeView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     'Klicka för att se dagens\nrandom fakta',
                     style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'NotoSanaGeorgian'),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Jura'),
                   )
                 ],
               ),
               decoration: BoxDecoration(
                   border: Border.all(
-                      color: Color.fromARGB(255, 255, 255, 255), width: 1.5),
+                      color: Color.fromARGB(255, 104, 103, 103), width: 1.5),
                   color: Color.fromARGB(255, 255, 255, 255),
                   shape: BoxShape.circle),
             ),
@@ -108,30 +108,28 @@ class HomeView extends StatelessWidget {
         ),
         back: Container(
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 2),
+              border: Border.all(
+                  color: Color.fromARGB(255, 255, 255, 255), width: 2),
               borderRadius: BorderRadius.circular(2),
               gradient: LinearGradient(colors: [
                 Color.fromARGB(255, 195, 234, 217),
                 Color.fromARGB(255, 255, 255, 255)
               ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-          child: SizedBox(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    '${state.fact}',
-                    style: TextStyle(
-                        fontFamily: 'NotoSansGeorgian',
-                        fontSize: 20,
-                        color: Color.fromARGB(255, 48, 48, 48)),
-                  ),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Text(
+                  textAlign: TextAlign.center,
+                  '${state.fact}',
+                  style: TextStyle(
+                      fontFamily: 'Jura',
+                      fontWeight: FontWeight.w900,
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 48, 48, 48)),
                 ),
               ),
             ),
-            width: 300,
-            height: 200,
           ),
         ),
       ),
@@ -152,18 +150,19 @@ class HomeView extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => HomeViewTwo()));
+                builder: (BuildContext context) => CategoryPage()));
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'KLICKA HÄR FÖR ATT UTFORSKA MER',
+            'UTFORSKA MER',
             style: TextStyle(
+                letterSpacing: 2,
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 18,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'SulphurPoint-Bold'),
+                fontWeight: FontWeight.w900,
+                fontFamily: 'Jura'),
           ),
           Icon(
             Icons.arrow_forward,
