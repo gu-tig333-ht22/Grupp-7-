@@ -15,7 +15,7 @@ class HomeView extends StatelessWidget {
               appBar: AppBar(
                 systemOverlayStyle:
                     SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-                backgroundColor: Color.fromARGB(255, 158, 117, 137),
+                backgroundColor: Color.fromARGB(255, 212, 137, 203),
                 elevation: 0,
               ),
               body: flipcards(context),
@@ -24,32 +24,22 @@ class HomeView extends StatelessWidget {
 
   Widget flipcards(context) {
     return SafeArea(
+      bottom: false,
       child: Container(
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-              // alt. lägga in bakgrundsbild?
               gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 158, 117, 137),
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 158, 117, 137)
+            Color.fromARGB(255, 212, 137, 203),
+            Color.fromARGB(255, 233, 168, 170)
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround, //space around
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Flexible(
-                // fungerar i teorin, men behöver justeras pga inte snyggt
-                flex: 1,
-                child: _title(context),
-              ),
-              Flexible(
-                flex: 1,
-                child: _dailyRandomFact(context),
-              ),
-              /*Flexible(
-                flex: 1,
-                child: _dailyMeme(context),
-              ),*/
-              Flexible(flex: 1, child: _next(context)),
+
+              _title(context),
+              _dailyRandomFact(context),
+              // _gameButtons()
+              _next(context)
             ],
           )),
     );
@@ -57,117 +47,37 @@ class HomeView extends StatelessWidget {
 
   Widget _title(context) {
     return AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-      TyperAnimatedText(
-          'Välkommen till\nPrankster!', // ska anpassas efter flexible
+      TyperAnimatedText('Wälkommen till\nPrankster!',
           textAlign: TextAlign.center,
           textStyle: TextStyle(
             fontSize: 40,
-            fontFamily: "GloriaHallelujah",
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            color: Color.fromARGB(255, 255, 255, 255),
           ),
           speed: Duration(milliseconds: 70))
     ]);
   }
 
-  Widget _dailyRandomFact(context) {
+ Widget _dailyRandomFact(context) {
     var state = Provider.of<MyState>(context, listen: false);
-    return FlipCard(
-      onFlip: () async {
-        Provider.of<MyState>(context, listen: false).fetchFact();
-      },
-      speed: 800,
-      front: Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 2),
-            borderRadius: BorderRadius.circular(2),
-            gradient: LinearGradient(colors: [
-              Color.fromARGB(255, 212, 137, 203),
-              Color.fromARGB(255, 233, 168, 170),
-            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-        child: SizedBox(
-          width: 300,
-          height: 200,
+    return Container(
+      height: 200,
+      width: 300,
+      child: FlipCard(
+        onFlip: () async {
+          Provider.of<MyState>(context, listen: false).fetchFact();
+        },
+        speed: 800,
+        front: Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.white, width: 3),
+              borderRadius: BorderRadius.circular(2),
+              gradient: LinearGradient(colors: [
+                Color.fromARGB(255, 138, 222, 137),
+                Color.fromARGB(255, 143, 212, 249),
+              ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
           child: Padding(
-            padding: const EdgeInsets.all(30),
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'PRANKSTER', // ska anpassas efter flexible
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontFamily: 'PermanentMarker',
-                    ),
-                  ),
-                  Text(
-                    textAlign: TextAlign.center,
-                    'Tryck för att se dagens\nrandom fact', // ska anpassas efter flexible
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
-                  )
-                ],
-              ),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Color.fromARGB(255, 0, 0, 0), width: 1.5),
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  shape: BoxShape.circle),
-            ),
-          ),
-        ),
-      ),
-      back: Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 2),
-            borderRadius: BorderRadius.circular(2),
-            gradient: LinearGradient(colors: [
-              Color.fromARGB(255, 68, 74, 65),
-              Color.fromARGB(255, 138, 141, 133)
-            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-        child: SizedBox(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Center(
-              child: SingleChildScrollView(
-                // funkar inte
-                child: Text(
-                  textAlign: TextAlign.center, 'sten',
-                  //'${state.fact}',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-          width: 300,
-          height: 200,
-        ),
-      ),
-    );
-  }
-
-  Widget _dailyMeme(context) {
-    var state = Provider.of<MyState>(context, listen: false);
-    return FlipCard(
-      onFlip: () async {
-        Provider.of<MyState>(context, listen: false).fetchMeme();
-      },
-      speed: 800,
-      front: Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 2),
-            borderRadius: BorderRadius.circular(2),
-            gradient: LinearGradient(colors: [
-              Color.fromARGB(255, 212, 137, 203),
-              Color.fromARGB(255, 233, 168, 170),
-            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-        child: SizedBox(
-          width: 300,
-          height: 200,
-          child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.all(16),
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -175,48 +85,69 @@ class HomeView extends StatelessWidget {
                   Text(
                     'PRANKSTER',
                     style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontFamily: 'PermanentMarker'),
+                        fontSize: 28,
+                        fontFamily: 'Nabla-Regular',
+                        fontWeight: FontWeight.w700),
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    'Tryck för att se dagens\nmeme',
+                    'Klicka för att se dagens\nrandom fakta',
                     style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
-                    ),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'NotoSanaGeorgian'),
                   )
                 ],
               ),
               decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Color.fromARGB(255, 0, 0, 0), width: 2),
+                  border: Border.all(
+                      color: Color.fromARGB(255, 255, 255, 255), width: 1.5),
                   color: Color.fromARGB(255, 255, 255, 255),
                   shape: BoxShape.circle),
             ),
           ),
         ),
-      ),
-      back: Container(
+        back: Container(
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white, width: 2),
               borderRadius: BorderRadius.circular(2),
               gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 68, 74, 65),
-                Color.fromARGB(255, 138, 141, 133)
+                Color.fromARGB(255, 195, 234, 217),
+                Color.fromARGB(255, 255, 255, 255)
               ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-          width: 300,
-          height: 200,
-          child: Center(
-            child: Image(
-                image: NetworkImage(state.meme),
-                fit: BoxFit.fill // fungerar inte?
+          child: SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    '${state.fact}',
+                    style: TextStyle(
+                        fontFamily: 'NotoSansGeorgian',
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 48, 48, 48)),
+                  ),
                 ),
-          )),
+              ),
+            ),
+            width: 300,
+            height: 200,
+          ),
+        ),
+      ),
     );
   }
+
+ 
+
+  // Widget _gameButtons() {
+  //   return Row(
+  //     children: [
+  //       IconButton(onPressed: {} , icon: Icon(Icons.rock)
+  //     ],
+  //   )
+  // }
 
   Widget _next(context) {
     return OutlinedButton(
@@ -230,12 +161,20 @@ class HomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
+
             'KLICKA HÄR FÖR ATT UTFORSKA MER',
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: TextStyle(
+                letterSpacing: 2,
+                wordSpacing: 2,
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'SulphurPoint-Bold'),
+
           ),
           Icon(
             Icons.arrow_forward,
-            color: Color.fromARGB(255, 9, 44, 12),
+            color: Color.fromARGB(255, 255, 255, 255),
           )
         ],
       ),

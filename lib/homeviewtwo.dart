@@ -28,6 +28,7 @@ class HomeViewTwo extends StatelessWidget {
 
   Widget categoryview(context) {
     return SafeArea(
+      bottom: false,
       child: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [

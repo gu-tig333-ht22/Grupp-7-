@@ -11,10 +11,10 @@ class Categories {
 }
 
 List<Categories> categories = [
-  Categories(name: 'DIN MAMMA-SKÄMT', iconImage: 'assets/klockren.png'),
-  Categories(name: 'RANDOM FAKTA', iconImage: 'assets/klockren.png'),
-  Categories(name: 'CHUCK NORRIS-SKÄMT', iconImage: 'assets/klockren.png'),
-  Categories(name: 'MEMES', iconImage: 'assets/klockren.png'),
+  Categories(name: 'YO MOMMA JOKES', iconImage: 'assets/yo_mama.png'),
+  Categories(name: 'RANDOM FACTS', iconImage: 'assets/random_fact.png'),
+  Categories(name: 'CHUCK NORRIS JOKES', iconImage: 'assets/chuck_norris.png'),
+  Categories(name: 'MEMES', iconImage: 'assets/meme.png'),
   Categories(name: 'KLOCKREN', iconImage: 'assets/klockren.png'),
-  Categories(name: 'WORDLE', iconImage: 'assets/klockren.png')
+  Categories(name: 'WORDLE', iconImage: 'assets/Wordle.png')
 ];

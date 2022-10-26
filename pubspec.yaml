@@ -83,6 +83,11 @@ flutter:
   - assets/klockren.png 
   - assets/siffror_klocka.png
   - assets/five_letter_words_swe.json
+  - assets/Wordle.png
+  - assets/random_fact.png
+  - assets/meme.png
+  - assets/chuck_norris.png
+  - assets/yo_mama.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -101,13 +106,27 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: PermanentMarker
-      fonts:
-        - asset: fonts/PermanentMarker-Regular.ttf
+    - family: AbrilFatface-Regular
+      fonts: 
+        - asset: fonts/AbrilFatface-Regular.ttf
+    
 
-    - family: GloriaHallelujah
-      fonts:
-        - asset: fonts/GloriaHallelujah-Regular.ttf
+    - family: Nabla-Regular
+      fonts: 
+        - asset: fonts/Nabla-Regular-VariableFont_EDPT,EHLT.ttf
+    
+
+    - family: SulphurPoint-Bold
+      fonts: 
+        - asset: fonts/SulphurPoint-Bold.ttf
+    
+
+    - family: NotoSansGeorgian
+      fonts: 
+        - asset: fonts/NotoSansGeorgian-VariableFont_wdth,wght.ttf
+
+    
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
