@@ -35,7 +35,10 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 221, 136, 229),
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 212, 137, 203),
+          elevation: 0,
+        ),
         body: Center(
           child: ElevatedButton(
             onPressed: () async {
@@ -63,8 +66,9 @@ class WordleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 41, 42, 66),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 212, 137, 203),
           title: const Text('Wördlde'),
         ),
         body: Consumer<MyState>(
@@ -88,27 +92,45 @@ class WordleView extends StatelessWidget {
 
   Widget guessDisplay(context) {
     return Column(children: [
-      guessRow(context, 0),
+      Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: guessRow(context, 0),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 1),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 1),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 2),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 2),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 3),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 3),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 4),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 4),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 5),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 5),
+      ),
       Container(
         height: 15,
       ),
