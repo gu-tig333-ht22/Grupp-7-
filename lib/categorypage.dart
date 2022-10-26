@@ -8,10 +8,6 @@ class CategoryPage extends StatelessWidget {
   final Categories categories;
   const CategoryPage(this.categories);
 
-  static String nogot = 'lala';
-
-  // wrappa hela sidan i Flexible
-
   @override
   Widget build(BuildContext context) {
     return Consumer<MyState>(
@@ -90,17 +86,14 @@ class CategoryPage extends StatelessWidget {
         style: OutlinedButton.styleFrom(
             backgroundColor: Color.fromARGB(255, 212, 137, 203)),
         onPressed: () {
-          if (categories.name == 'RANDOM FAKTA') {
+          if (categories.name == 'RANDOM FACTS') {
             Provider.of<MyState>(context, listen: false).fetchFact();
           }
-          if (categories.name == 'CHUCK NORRIS-SKÄMT') {
+          if (categories.name == 'CHUCK NORRIS JOKES') {
             Provider.of<MyState>(context, listen: false).fetchChuckNorris();
           }
-          if (categories.name == 'DIN MAMMA-SKÄMT') {
+          if (categories.name == 'YO MOMMA JOKES') {
             Provider.of<MyState>(context, listen: false).fetchYoMamma();
-          }
-          if (categories.name == 'DEVELOPER JOKES') {
-            Provider.of<MyState>(context, listen: false).fetchDevYoke();
           }
         },
         child: Text(
