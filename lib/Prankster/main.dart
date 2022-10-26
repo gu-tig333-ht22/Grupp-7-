@@ -3,7 +3,7 @@ import 'homeview.dart';
 import 'package:provider/provider.dart';
 import 'Data/getapi.dart';
 
-import './Wordle/statesWordle.dart';
+import 'Wordle/states_wordle.dart';
 
 void main() {
   Provider.debugCheckInvalidValueType = null;

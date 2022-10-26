@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Data/getapi.dart';
-import 'package:template/Prankster/Wordle/dailyword.dart';
+import 'package:template/Prankster/Wordle/word_data.dart';
 
 class WordleState extends ChangeNotifier {
   List<Guess> _guesses = [
@@ -17,10 +16,10 @@ class WordleState extends ChangeNotifier {
   int _guessNo = 0;
   int get guessNo => _guessNo;
 
-  var todaysResult = Result();
+  Result todaysResult = Result();
 
   final ordLista = WordList();
-  String dailyWord = "coola".toUpperCase();
+  String hiddenWord = "coola".toUpperCase();
 
   late Map<String, List<Color>> _displayColor = {
     "0": startColors(),
@@ -40,7 +39,7 @@ class WordleState extends ChangeNotifier {
   }
 
   void setRandomWord() async {
-    dailyWord = await WordList.randomWord;
+    hiddenWord = await WordList.randomWord;
     notifyListeners();
   }
 
@@ -48,14 +47,6 @@ class WordleState extends ChangeNotifier {
     if (guessNo < 5) {
       _guessNo++;
 
-      notifyListeners();
-    }
-  }
-
-  void decrementGuessNo() {
-    //denna ska tas bort, endast för testning
-    if (guessNo > 0) {
-      _guessNo--;
       notifyListeners();
     }
   }
@@ -99,7 +90,7 @@ class WordleState extends ChangeNotifier {
 
   void evaluateGuess(String word) async {
     var allWords = await ordLista.allWords;
-    var charsInWord = charsIn(dailyWord);
+    var charsInWord = charsIn(hiddenWord);
     var charsInGuess = charsIn(_guesses[guessNo].word);
 
     if (word.length < 5 == true ||
@@ -117,10 +108,10 @@ class WordleState extends ChangeNotifier {
         charsInWord[char] = 0;
       }
 
-      if (dailyWord[i] == char) {
+      if (hiddenWord[i] == char) {
         buttonColorMap[char] = Colors.green;
         changeColorTo = Colors.green;
-      } else if (dailyWord.contains(char) && dailyWord[i] != char) {
+      } else if (hiddenWord.contains(char) && hiddenWord[i] != char) {
         charsInGuess[char]--;
         if (charsInWord[char] > charsInGuess[char]) {
           changeColorTo = Colors.purple;
@@ -141,7 +132,7 @@ class WordleState extends ChangeNotifier {
   }
 
   void setResult() {
-    if (_guesses[guessNo].word == dailyWord.toUpperCase()) {
+    if (_guesses[guessNo].word == hiddenWord.toUpperCase()) {
       todaysResult.won();
       notifyListeners();
     } else {
@@ -184,7 +175,7 @@ class WordleState extends ChangeNotifier {
     };
     buttonColorMap = {};
     notifyListeners();
-    dailyWord = await WordList.getRandom();
+    hiddenWord = await WordList.getRandom();
     todaysResult = Result();
   }
 }

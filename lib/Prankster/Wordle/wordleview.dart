@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Data/datapers.dart';
-import 'statesWordle.dart';
+import 'states_wordle.dart';
+import 'word_data.dart';
+import '../Data/getapi.dart';
 
 class MyWordle extends StatelessWidget {
   MyWordle({super.key});
@@ -161,16 +163,19 @@ class MyWordle extends StatelessWidget {
                   backgroundColor: Color.fromARGB(255, 212, 137, 203),
                   fixedSize: Size(81, 64)),
               onPressed: () async {
+                bool isValid = await state.validateGuess();
+
                 if (state.todaysResult.status == 'in session') {
                   state.evaluateGuess(myGuess.word);
-                  state.setResult();
+                  if (isValid) {
+                    state.setResult();
+                  }
                 } else {
                   state.gameReset();
                   return;
                 }
 
                 var result = state.todaysResult.status;
-                bool isValid = await state.validateGuess();
 
                 if ((result == 'vann' || result == 'förlorade') &&
                     (isValid == true)) {
@@ -197,9 +202,9 @@ class MyWordle extends StatelessWidget {
         title: Text('Se där, du $result!'),
         content: result == 'vann'
             ? Text(
-                "Bra jobbat! Hoppas du känner dig stolt över dig själv!\n\n\nSå, '${state.dailyWord}'... \n\n\nVem hade kunnat ana det?\n\n\nRedo för en ny runda?\n")
+                "Bra jobbat! Hoppas du känner dig stolt över dig själv!\n\n\nSå, '${state.hiddenWord}'... \n\n\nVem hade kunnat ana det?\n\n\nRedo för en ny runda?\n")
             : Text(
-                "Synd.. Men du kämpade på in i det sista. \n\n\nDet rätta svaret var: \n\n'${state.dailyWord}'\n\n\nRedo för en ny runda?\n"),
+                "Synd.. Men du kämpade på in i det sista. \n\n\nDet rätta svaret var: \n\n'${state.hiddenWord}'\n\n\nRedo för en ny runda?\n"),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, 'Avbryt'),
@@ -262,7 +267,7 @@ class MyWordle extends StatelessWidget {
 //               String dateToday = date.toString().substring(0, 10);
 
 //               var saveData = MyAppStorage();
-//               saveData.writeState(dateToday, 'dailyWord', state.dailyWord);
+//               saveData.writeState(dateToday, 'hiddenWord', state.hiddenWord);
 
 //               print(await saveData.readJsonFile());
 
