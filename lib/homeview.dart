@@ -35,6 +35,7 @@ class HomeView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+
               _title(context),
               _dailyRandomFact(context),
               // _gameButtons()
@@ -46,7 +47,7 @@ class HomeView extends StatelessWidget {
 
   Widget _title(context) {
     return AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-      TyperAnimatedText('Welcome to\nPrankster!',
+      TyperAnimatedText('Wälkommen till\nPrankster!',
           textAlign: TextAlign.center,
           textStyle: TextStyle(
             fontSize: 40,
@@ -57,7 +58,7 @@ class HomeView extends StatelessWidget {
     ]);
   }
 
-  Widget _dailyRandomFact(context) {
+ Widget _dailyRandomFact(context) {
     var state = Provider.of<MyState>(context, listen: false);
     return Container(
       height: 200,
@@ -90,7 +91,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    'Click to see today\'s\nrandom fact',
+                    'Klicka för att se dagens\nrandom fakta',
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -138,6 +139,8 @@ class HomeView extends StatelessWidget {
     );
   }
 
+ 
+
   // Widget _gameButtons() {
   //   return Row(
   //     children: [
@@ -147,7 +150,7 @@ class HomeView extends StatelessWidget {
   // }
 
   Widget _next(context) {
-    return TextButton(
+    return OutlinedButton(
       onPressed: () {
         Navigator.push(
             context,
@@ -158,7 +161,8 @@ class HomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'CONTINUE THE FUN',
+
+            'KLICKA HÄR FÖR ATT UTFORSKA MER',
             style: TextStyle(
                 letterSpacing: 2,
                 wordSpacing: 2,
@@ -166,6 +170,7 @@ class HomeView extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 fontFamily: 'SulphurPoint-Bold'),
+
           ),
           Icon(
             Icons.arrow_forward,

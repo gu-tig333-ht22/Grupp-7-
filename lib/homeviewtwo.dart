@@ -8,6 +8,7 @@ import 'data.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'klockren.dart';
 import 'memesPage.dart';
+import './mainWordle.dart';
 import 'package:provider/provider.dart';
 
 // wrappa hela sidan i Flexible
@@ -53,17 +54,17 @@ class HomeViewTwo extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 15),
             child: Text(
-              'Have some fun',
+              'Dags att utforska kategorierna',
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 38,
+                  fontSize: 30,
                   fontWeight: FontWeight.w700),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 15),
             child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-              TyperAnimatedText('Have some fun',
+              TyperAnimatedText('Ha det så skoj!',
                   textStyle: TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 233, 229, 229),
@@ -103,7 +104,10 @@ class HomeViewTwo extends StatelessWidget {
                 } else if (categories[index].name == 'KLOCKREN') {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Clock()));
-                } else if (categories[index].name == 'RANDOM FACTS') {
+                } else if (categories[index].name == 'WORDLE') {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => (WordleView())));
+                } else if (categories[index].name == 'RANDOM FAKTA') {
                   Provider.of<MyState>(context, listen: false).fetchFact();
 
                   Navigator.push(
@@ -111,7 +115,7 @@ class HomeViewTwo extends StatelessWidget {
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
                               CategoryPage(categories[index])));
-                } else if (categories[index].name == 'CHUCK NORRIS JOKES') {
+                } else if (categories[index].name == 'CHUCK NORRIS-SKÄMT') {
                   Provider.of<MyState>(context, listen: false)
                       .fetchChuckNorris();
 
@@ -120,7 +124,7 @@ class HomeViewTwo extends StatelessWidget {
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
                               CategoryPage(categories[index])));
-                } else if (categories[index].name == 'YO MOMMA JOKES') {
+                } else if (categories[index].name == 'DIN MAMMA-SKÄMT') {
                   Provider.of<MyState>(context, listen: false).fetchYoMamma();
                   Navigator.push(
                       context,
@@ -194,7 +198,7 @@ class HomeViewTwo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Explore this category',
+        Text('Utforska kategorin',
             style: TextStyle(fontSize: 15), textAlign: TextAlign.left),
         Icon(Icons.arrow_forward),
       ],
