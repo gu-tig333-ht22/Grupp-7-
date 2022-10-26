@@ -224,7 +224,6 @@ class Guess {
   // void makeValid() {
   //   _isValid = true;
   // }
-
 }
 
 class Result {
@@ -232,11 +231,11 @@ class Result {
   String get status => _status;
 
   void won() {
-    _status = "won";
+    _status = "vann";
   }
 
   void lost() {
-    _status = "lost";
+    _status = "förlorade";
   }
 }
 

@@ -1,8 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../Data/datapers.dart';
 import 'statesWordle.dart';
 import 'dailyword.dart';
 import '../Data/getapi.dart';
+
+void main() {
+  runApp(ChangeNotifierProvider(
+    create: (context) => MyState(),
+    child: MyApp(),
+  ));
+}
+
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeView(storage: MyAppStorage()),
+    );
+  }
+}
+
+class HomeView extends StatelessWidget {
+  const HomeView({super.key, required this.storage});
+
+  final MyAppStorage storage;
+
+  @override
+  Widget build(BuildContext context) {
+    var state = Provider.of<MyState>(context, listen: false);
+    state.setRandomWord();
+
+    return Scaffold(
+        backgroundColor: Color.fromARGB(255, 221, 136, 229),
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 212, 137, 203),
+          elevation: 0,
+        ),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () async {
+              DateTime now = DateTime.now();
+              DateTime date = DateTime(now.year, now.month, now.day);
+              String dateToday = date.toString().substring(0, 10);
+
+              var saveData = MyAppStorage();
+              saveData.writeState(dateToday, 'dailyWord', state.dailyWord);
+
+              print(await saveData.readJsonFile());
+
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => (WordleView())));
+            },
+            child: const Text('Till Wordle'),
+          ),
+        ));
+  }
+}
 
 class WordleView extends StatelessWidget {
   WordleView({super.key});
@@ -12,6 +68,7 @@ class WordleView extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 212, 137, 203),
           title: const Text('Wordle'),
         ),
         body: Consumer<MyState>(
@@ -35,27 +92,45 @@ class WordleView extends StatelessWidget {
 
   Widget _guessDisplay(context) {
     return Column(children: [
-      guessRow(context, 0),
+      Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: guessRow(context, 0),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 1),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 1),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 2),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 2),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 3),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 3),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 4),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 4),
+      ),
       Container(
         height: 7,
       ),
-      guessRow(context, 5),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: guessRow(context, 5),
+      ),
       Container(
         height: 15,
       ),
@@ -138,12 +213,18 @@ class WordleView extends StatelessWidget {
             },
             child: const Text('Previous\n[Debug only]')),
         ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 212, 137, 203),
+            ),
             onPressed: () {
               myGuess.removeLast();
               state.notifyListeners();
             },
-            child: const Text('Backspace')),
+            child: const Text('Ångra')),
         ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 212, 137, 203),
+            ),
             onPressed: () async {
               state.evaluateGuess(myGuess.word);
               state.setResult();
@@ -151,17 +232,18 @@ class WordleView extends StatelessWidget {
               print(isValid);
 
               var result = state.todaysResult.status;
-              if ((result == 'won' || result == 'lost') && (isValid == true)) {
+              if ((result == 'vann' || result == 'förlorade') &&
+                  (isValid == true)) {
                 var replay = await _resultDialogue(context, state);
                 print(replay);
-                if (replay == 'Cancel') {
+                if (replay == 'Avbryt') {
                   Navigator.pop(context);
                 } else {
                   state.gameReset();
                 }
               }
             },
-            child: const Text('GUESS!')),
+            child: const Text('GISSA!')),
       ],
     );
   }
@@ -171,20 +253,20 @@ class WordleView extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: Text('Wow, you $result!'),
-        content: result == 'won'
+        title: Text('Se där, du $result!'),
+        content: result == 'vann'
             ? Text(
-                "Good job! Bet you feel great about yourself!\n\nWell, '${state.dailyWord}'... \nWho would've thought?\n\nUp for another round?")
+                "Bra jobbat! Hoppas du känner dig stolt över dig själv!\n\nSå, '${state.dailyWord}'... \nVem hade kunnat ana det?\n\nRedo för en ny runda?")
             : Text(
-                "Too bad, we feel sorry for you. \nThe correct answer was: \n\n\n'${state.dailyWord}'\n\nUp for another round?\n\n"),
+                "Synd.. Men du kämpade på in i det sista. \n\n\nDet rätta svaret var: \n\n'${state.dailyWord}'\n\nRedo för en ny runda?\n\n"),
         actions: <Widget>[
           TextButton(
-            onPressed: () => Navigator.pop(context, 'Cancel'),
-            child: const Text('Maybe later...'),
+            onPressed: () => Navigator.pop(context, 'Avbryt'),
+            child: const Text('Kanske senare...'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, 'OK'),
-            child: const Text('Of Course!'),
+            child: const Text('Såklart!'),
           ),
         ],
       ),
