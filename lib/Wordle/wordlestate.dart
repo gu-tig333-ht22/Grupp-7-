@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:template/Prankster/Data/word_data.dart';
+import 'package:template/Data/word_data.dart';
 
 class WordleState extends ChangeNotifier {
   List<Guess> _guesses = [

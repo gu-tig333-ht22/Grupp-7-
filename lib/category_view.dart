@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
-import 'package:template/Prankster/joke_fact_view.dart';
-import 'package:template/Prankster/Data/getapi.dart';
+import 'package:template/joke_fact_view.dart';
+import 'package:template/Data/getapi.dart';
 import 'assets_handler.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'klockren_view.dart';
