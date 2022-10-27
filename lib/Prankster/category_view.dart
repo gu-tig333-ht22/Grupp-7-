@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
-import 'package:template/Prankster/jokeandfactpage.dart';
+import 'package:template/Prankster/joke_fact_view.dart';
 import 'package:template/Prankster/Data/getapi.dart';
-import 'assethandler.dart';
+import 'assets_handler.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'klockren.dart';
-import 'memesPage.dart';
-import 'Wordle/wordleview.dart';
+import 'klockren_view.dart';
+import 'memes_view.dart';
+import 'Wordle/wordle_view.dart';
 import 'package:provider/provider.dart';
 
-class CategoryPage extends StatelessWidget {
+class CategoryView extends StatelessWidget {
+  const CategoryView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,10 +105,12 @@ class CategoryPage extends StatelessWidget {
                 if (categories[index].name == 'MEMES') {
                   Provider.of<MyState>(context, listen: false).fetchMeme();
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MemesPage()));
+                      MaterialPageRoute(builder: (context) => MemesView()));
                 } else if (categories[index].name == 'KLOCKREN') {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Clock()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ClockView()));
                 } else if (categories[index].name == 'WORDLE') {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => (MyWordle())));
@@ -117,7 +121,7 @@ class CategoryPage extends StatelessWidget {
                       context,
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
-                              JokeAndFactPage(categories[index])));
+                              JokeAndFactView(categories[index])));
                 } else if (categories[index].name == 'CHUCK NORRIS JOKES') {
                   Provider.of<MyState>(context, listen: false)
                       .fetchChuckNorris();
@@ -126,14 +130,14 @@ class CategoryPage extends StatelessWidget {
                       context,
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
-                              JokeAndFactPage(categories[index])));
+                              JokeAndFactView(categories[index])));
                 } else if (categories[index].name == 'YO MOMMA JOKES') {
                   Provider.of<MyState>(context, listen: false).fetchYoMamma();
                   Navigator.push(
                       context,
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
-                              JokeAndFactPage(categories[index])));
+                              JokeAndFactView(categories[index])));
                 }
               },
               child: Stack(

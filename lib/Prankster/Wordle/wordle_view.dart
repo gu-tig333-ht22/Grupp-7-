@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Data/datapers.dart';
-import 'states_wordle.dart';
-import 'word_data.dart';
-import '../Data/getapi.dart';
+import 'wordlestate.dart';
 
 class MyWordle extends StatelessWidget {
   MyWordle({super.key});

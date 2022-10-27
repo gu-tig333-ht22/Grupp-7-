@@ -4,14 +4,14 @@ import 'dart:math';
 
 import 'package:flutter/services.dart';
 
-class Clock extends StatefulWidget {
-  const Clock({Key? key}) : super(key: key);
+class ClockView extends StatefulWidget {
+  const ClockView({Key? key}) : super(key: key);
 
   @override
-  ClockState createState() => ClockState();
+  ClockViewState createState() => ClockViewState();
 }
 
-class ClockState extends State<Clock> {
+class ClockViewState extends State<ClockView> {
   double minutesAngle = 0;
   double secondsAngle = 0;
   double hoursAngle = 0;
@@ -56,7 +56,7 @@ class ClockState extends State<Clock> {
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
                 child: Center(
                   child: Container(
-                    //Clock
+                    //ClockView
                     width: 370,
                     height: 370,
                     decoration: BoxDecoration(
@@ -64,7 +64,7 @@ class ClockState extends State<Clock> {
                           color: Color.fromARGB(115, 230, 182, 226), width: 8),
                       borderRadius: BorderRadius.circular(200),
                     ),
-                    //Clock
+                    //ClockView
                     child: Stack(
                       children: <Widget>[
                         Image(

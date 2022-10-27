@@ -88,6 +88,7 @@ flutter:
   - assets/meme.png
   - assets/chuck_norris.png
   - assets/yo_mama.png
+  - assets/lyckokaka.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

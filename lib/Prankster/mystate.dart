@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
-import 'Wordle/states_wordle.dart';
-import 'Wordle/word_data.dart';
+import 'Wordle/wordlestate.dart';
+import 'Data/word_data.dart';
