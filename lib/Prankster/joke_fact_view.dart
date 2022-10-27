@@ -1,39 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:template/Prankster/assethandler.dart';
+import 'package:template/Prankster/assets_handler.dart';
 import 'Data/getapi.dart';
 
-class JokeAndFactPage extends StatelessWidget {
+class JokeAndFactView extends StatelessWidget {
   final Categories categories;
-  const JokeAndFactPage(this.categories);
+  const JokeAndFactView(this.categories, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MyState>(
-      builder: (BuildContext context, state, child) => Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.grey),
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.grey),
-          backgroundColor: Colors.white,
-          systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
-          elevation: 0,
-        ),
-        body: Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _titel(),
-                  _jokeAndFactCard(),
-                  _viewNextButton(context),
-                ],
-              ),
+        systemOverlayStyle:
+            SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _titel(),
+                _jokeAndFactCard(),
+                _viewNextButton(context),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -68,13 +66,7 @@ class JokeAndFactPage extends StatelessWidget {
             child: Consumer<MyState>(
           builder: (context, state, child) =>
               Provider.of<MyState>(context, listen: false).loading
-                  ? Text(
-                      'Loading...', // Ha med eller inte? if-sats längre än 1 sek?
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Jura',
-                          fontSize: 20),
-                    )
+                  ? Text('')
                   : Padding(
                       padding: EdgeInsets.only(top: 25, left: 25, right: 25),
                       child: SingleChildScrollView(

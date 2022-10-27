@@ -7,9 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:template/Prankster/homeview.dart';
+import 'package:template/Prankster/home_view.dart';
 
-import 'package:template/Prankster/main.dart';
+import 'package:template/Prankster/lib/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

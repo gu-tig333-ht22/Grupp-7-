@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:template/Prankster/Data/getapi.dart';
-import 'categorypage.dart';
+import 'category_view.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -36,7 +36,7 @@ class HomeView extends StatelessWidget {
             children: [
               _title(context),
               _dailyRandomFact(context),
-              // _gameButtons()
+              _fortuneCookie(context),
               _next(context)
             ],
           )),
@@ -136,13 +136,42 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  // Widget _gameButtons() {
-  //   return Row(
-  //     children: [
-  //       IconButton(onPressed: {} , icon: Icon(Icons.rock)
-  //     ],
-  //   )
-  // }
+  Widget _fortuneCookie(context) {
+    return IconButton(
+        icon: Image.asset('assets/lyckokaka.png'),
+        iconSize: 150,
+        onPressed: () {
+          Provider.of<MyState>(context, listen: false).fetchFortuneCookie();
+          showDialog(
+            context: context,
+            builder: (context) {
+              return Dialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40)),
+                elevation: 16,
+                child: Container(
+                  height: 100,
+                  width: 200,
+                  child: Center(
+                    child: Consumer<MyState>(
+                      builder: (context, state, child) =>
+                          Provider.of<MyState>(context, listen: false).loading
+                              ? Text('')
+                              : Text(
+                                  '${state.fact}',
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        });
+  }
 
   Widget _next(context) {
     return TextButton(
@@ -150,7 +179,7 @@ class HomeView extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => CategoryPage()));
+                builder: (BuildContext context) => CategoryView()));
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
