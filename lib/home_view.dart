@@ -3,7 +3,8 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:template/Prankster/Data/getapi.dart';
+import 'package:template/Data/getapi.dart';
+
 import 'category_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -146,24 +147,31 @@ class HomeView extends StatelessWidget {
             context: context,
             builder: (context) {
               return Dialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
                 elevation: 16,
                 child: Container(
-                  height: 100,
-                  width: 200,
-                  child: Center(
-                    child: Consumer<MyState>(
-                      builder: (context, state, child) =>
-                          Provider.of<MyState>(context, listen: false).loading
-                              ? Text('')
-                              : Text(
-                                  '${state.fact}',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                  height: 80,
+                  width: 350,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: Center(
+                      child: Consumer<MyState>(
+                        builder: (context, state, child) =>
+                            Provider.of<MyState>(context, listen: false).loading
+                                ? Text('')
+                                : SingleChildScrollView(
+                                    child: Text(
+                                      '${state.fact}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: 'Satisfy-Regular',
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                      ),
+                                    ),
+                                  ),
+                      ),
                     ),
                   ),
                 ),

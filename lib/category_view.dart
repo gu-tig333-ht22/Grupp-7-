@@ -1,14 +1,15 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
-import 'package:template/Prankster/joke_fact_view.dart';
-import 'package:template/Prankster/Data/getapi.dart';
+import 'package:provider/provider.dart';
+
 import 'assets_handler.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'Data/getapi.dart';
+import 'joke_fact_view.dart';
 import 'klockren_view.dart';
 import 'memes_view.dart';
 import 'Wordle/wordle_view.dart';
-import 'package:provider/provider.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});
@@ -158,9 +159,9 @@ class CategoryView extends StatelessWidget {
                             height: 300,
                             child: Center(
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SizedBox(height: 50),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 30),
                                     child: Text(
@@ -169,7 +170,7 @@ class CategoryView extends StatelessWidget {
                                           fontFamily: 'Jura',
                                           letterSpacing: 1,
                                           fontWeight: FontWeight.w900,
-                                          fontSize: 28),
+                                          fontSize: 32),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -209,7 +210,7 @@ class CategoryView extends StatelessWidget {
         Text('UTFORSKA KATEGORIN',
             style: TextStyle(
                 letterSpacing: 2,
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: FontWeight.w700,
                 fontFamily: 'Jura'),
             textAlign: TextAlign.left),
