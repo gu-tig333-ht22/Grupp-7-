@@ -120,7 +120,10 @@ flutter:
       fonts: 
         - asset: fonts/Nabla-Regular-VariableFont_EDPT,EHLT.ttf
     
-
+    - family: Satisfy-Regular
+      fonts: 
+        - asset: fonts/Satisfy-Regular.ttf
+    
 
 
     

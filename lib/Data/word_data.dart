@@ -1,6 +1,7 @@
-import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'dart:math';
+
+import 'package:flutter/services.dart' show rootBundle;
 
 class WordList {
   //daily word list - döpa om när fixat?

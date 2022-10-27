@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'wordlestate.dart';
 
 class MyWordle extends StatelessWidget {
@@ -14,19 +15,18 @@ class MyWordle extends StatelessWidget {
           title: const Text('Wordle'),
         ),
         body: Consumer<WordleState>(
-          builder: (context, state, child) => wordleGame(context),
+          builder: (context, state, child) => _wordleGame(context),
         ));
   }
 
-  Widget wordleGame(context) {
+  Widget _wordleGame(context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _guessDisplay(context), //ändrat till prviat - fel eller rätt?
+          _guessDisplay(context),
           _keyBoard(context),
-          //_buttonRow(context),
         ],
       ),
     );
@@ -115,19 +115,22 @@ class MyWordle extends StatelessWidget {
   Widget _keyBoard(context) {
     var keyBoard = CustomKeyboard(context).swedishKeyboard;
 
-    return Container(
-      height: 190,
-      width: 450,
-      child: Stack(children: [
-        Align(
-            alignment: Alignment.centerLeft,
-            child: GridView.count(
-              childAspectRatio: 0.65,
-              crossAxisCount: 11,
-              children: keyBoard,
-            )),
-        Align(alignment: Alignment.bottomRight, child: _buttonRow(context))
-      ]),
+    return Padding(
+      padding: const EdgeInsets.only(left: 4, right: 4),
+      child: Container(
+        height: 190,
+        width: 450,
+        child: Stack(children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: GridView.count(
+                childAspectRatio: 0.64,
+                crossAxisCount: 11,
+                children: keyBoard,
+              )),
+          Align(alignment: Alignment.bottomRight, child: _buttonRow(context))
+        ]),
+      ),
     );
   }
 
@@ -141,14 +144,16 @@ class MyWordle extends StatelessWidget {
     var myGuess = state.guesses[index];
 
     return Container(
-      width: 164,
+      width: 153,
+      height: 70.5,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color.fromARGB(255, 212, 137, 203),
-                fixedSize: Size(81, 64),
+                fixedSize: Size(70, 60),
               ),
               onPressed: () {
                 myGuess.removeLast();
@@ -158,7 +163,7 @@ class MyWordle extends StatelessWidget {
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 212, 137, 203),
-                  fixedSize: Size(81, 64)),
+                  fixedSize: Size(83, 60)),
               onPressed: () async {
                 bool isValid = await state.validateGuess();
 
@@ -185,7 +190,7 @@ class MyWordle extends StatelessWidget {
                   }
                 }
               },
-              child: const Icon(Icons.spellcheck)),
+              child: const Icon(Icons.check)),
         ],
       ),
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:template/assets_handler.dart';
+import 'package:provider/provider.dart';
+
 import 'Data/getapi.dart';
 
 class JokeAndFactView extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'home_view.dart';
 import 'package:provider/provider.dart';
-import 'Data/getapi.dart';
 
+import 'Data/getapi.dart';
+import 'home_view.dart';
 import 'Wordle/wordlestate.dart';
 
 void main() {
