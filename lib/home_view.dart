@@ -3,11 +3,15 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:template/Data/data_pers.dart';
 import 'package:template/Data/getapi.dart';
 
 import 'category_view.dart';
 
 class HomeView extends StatelessWidget {
+  var storage;
+  HomeView({this.storage});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<MyState>(
@@ -58,14 +62,21 @@ class HomeView extends StatelessWidget {
     ]);
   }
 
+
+
+
+
+
   Widget _ideasTodo(context) {
+
+    Future<Map<String, dynamic>> appData = storage.readJsonFile();
     var state = Provider.of<MyState>(context, listen: false);
     return Container(
       height: 200,
       width: 300,
       child: FlipCard(
         onFlip: () async {
-          Provider.of<MyState>(context, listen: false).fetchFact();
+          Provider.of<MyState>(context, listen: false).fetchDailyFact();
         },
         speed: 800,
         front: Container(

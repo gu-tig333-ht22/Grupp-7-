@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:template/Data/data_pers.dart';
 
 class MyState extends ChangeNotifier {
+  MyAppStorage appStorage = MyAppStorage();
   Future fetchFortuneCookie() async {
     _loading = true;
     notifyListeners();
@@ -28,7 +30,8 @@ class MyState extends ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
-  Future fetchIdeasTodo() async {
+
+  fetchIdeasTodo() async {
     _loading = true;
     notifyListeners();
     http.Response response =
@@ -41,7 +44,7 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future fetchPunchlineYokes() async {
+  fetchPunchlineYokes() async {
     _loading = true;
     notifyListeners();
     http.Response response = await http
@@ -57,23 +60,47 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future fetchFact() async {
+
+  fetchFact() async {
     _loading = true;
     notifyListeners();
 
     http.Response response = await http
         .get(Uri.parse('https://uselessfacts.jsph.pl/random.json?language=en'));
     var result = response.body;
-    print(result);
-    var fact = jsonDecode(result);
-    _fact = fact['text'];
+
+    _fact = jsonDecode(result)['text'];
 
     _loading = false;
+    notifyListeners();
+  }
+
+  fetchDailyFact() async {
+    var appData = await appStorage.readJsonFile();
+    DateTime now = DateTime.now();
+    DateTime date = DateTime(now.year, now.month, now.day);
+    String dateToday = date.toString().substring(0, 10);
+
+    _loading = true;
+    notifyListeners();
+
+    http.Response response = await http
+        .get(Uri.parse('https://uselessfacts.jsph.pl/random.json?language=en'));
+    var result = response.body;
+
+    if (await appData.containsKey(dateToday)) {
+      _fact = await appData[dateToday]['fact'];
+    } else {
+      _fact = jsonDecode(result)['text'];
+      appStorage.writeState(dateToday, 'fact', _fact);
+
+      _loading = false;
+    }
 
     notifyListeners();
   }
 
-  Future fetchChuckNorris() async {
+  fetchChuckNorris() async {
     _loading = true;
     notifyListeners();
 
@@ -88,22 +115,8 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future fetchYoMamma() async {
-    _loading = true;
-    notifyListeners();
 
-    http.Response response =
-        await http.get(Uri.parse('https://yomomma-api.herokuapp.com/jokes'));
-    var result = response.body;
-    var fact = jsonDecode(result);
-    _fact = fact['joke'];
-
-    _loading = false;
-
-    notifyListeners();
-  }
-
-  Future fetchMeme() async {
+  fetchMeme() async {
     _loading = true;
     notifyListeners();
     var uri = Uri.parse('https://meme-api.herokuapp.com/gimme');
