@@ -119,6 +119,10 @@ flutter:
       fonts: 
         - asset: fonts/Nabla-Regular-VariableFont_EDPT,EHLT.ttf
     
+    - family: BadScript-Regular
+      fonts: 
+        - asset: fonts/BadScript-Regular.ttf
+    
 
     
 
