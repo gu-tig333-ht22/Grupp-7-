@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:template/Wordle/wordlestate.dart';
 
-import 'assets_handler.dart';
+import 'category_handler.dart';
 import 'Data/getapi.dart';
 import 'joke_fact_view.dart';
-import 'klockren_view.dart';
+import 'clock_view.dart';
 import 'memes_view.dart';
 import 'Wordle/wordle_view.dart';
 
@@ -40,7 +41,7 @@ class CategoryView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _titel(context),
+            _title(context),
             _categoryCard(context),
           ],
         ),
@@ -48,7 +49,7 @@ class CategoryView extends StatelessWidget {
     );
   }
 
-  Widget _titel(context) {
+  Widget _title(context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -113,10 +114,12 @@ class CategoryView extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const ClockView()));
                 } else if (categories[index].name == 'WORDLE') {
+                  Provider.of<WordleState>(context, listen: false)
+                      .setRandomWord();
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => (MyWordle())));
-                } else if (categories[index].name == 'RANDOM FACTS') {
-                  Provider.of<MyState>(context, listen: false).fetchFact();
+                } else if (categories[index].name == 'UTTRÅKAD?') {
+                  Provider.of<MyState>(context, listen: false).fetchIdeasTodo();
 
                   Navigator.push(
                       context,
@@ -132,8 +135,9 @@ class CategoryView extends StatelessWidget {
                       PageRouteBuilder(
                           pageBuilder: (context, a, b) =>
                               JokeAndFactView(categories[index])));
-                } else if (categories[index].name == 'YO MOMMA JOKES') {
-                  Provider.of<MyState>(context, listen: false).fetchYoMamma();
+                } else if (categories[index].name == 'PUNCHLINE JOKES') {
+                  Provider.of<MyState>(context, listen: false)
+                      .fetchPunchlineYokes();
                   Navigator.push(
                       context,
                       PageRouteBuilder(
@@ -210,7 +214,7 @@ class CategoryView extends StatelessWidget {
         Text('UTFORSKA KATEGORIN',
             style: TextStyle(
                 letterSpacing: 2,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
                 fontFamily: 'Jura'),
             textAlign: TextAlign.left),

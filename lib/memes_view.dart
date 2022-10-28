@@ -9,6 +9,11 @@ class MemesView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        title: Text(
+          'MEMES',
+          style: TextStyle(
+              fontSize: 24, fontFamily: 'Jura', fontWeight: FontWeight.w700),
+        ),
         backgroundColor: Color.fromARGB(255, 212, 137, 203),
         systemOverlayStyle:
             SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),

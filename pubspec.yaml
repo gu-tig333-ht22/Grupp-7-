@@ -79,16 +79,18 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-  - assets/no_meme.jpg 
-  - assets/klockren.png 
-  - assets/siffror_klocka.png
+
+  - assets/moose.png 
+  - assets/clock.png
   - assets/five_letter_words_swe.json
   - assets/Wordle.png
   - assets/random_fact.png
   - assets/meme.png
   - assets/chuck_norris.png
-  - assets/yo_mama.png
-  - assets/lyckokaka.png
+  - assets/yo_momma.png
+  - assets/fortune_cookie.png
+  - assets/punch.png
+  - assets/yawn.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -107,9 +109,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Montserrat
-      fonts: 
-        - asset: fonts/Montserrat-VariableFont_wght.ttf
   
     - family: Jura
       fonts: 
@@ -120,9 +119,7 @@ flutter:
       fonts: 
         - asset: fonts/Nabla-Regular-VariableFont_EDPT,EHLT.ttf
     
-    - family: Satisfy-Regular
-      fonts: 
-        - asset: fonts/Satisfy-Regular.ttf
+
     
 
 
