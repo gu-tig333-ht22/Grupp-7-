@@ -40,7 +40,7 @@ class HomeView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _title(context),
-              _ideasTodo(context),
+              _dailyFact(context),
               _fortuneCookie(context),
               _next(context)
             ],
@@ -50,7 +50,7 @@ class HomeView extends StatelessWidget {
 
   Widget _title(context) {
     return AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-      TyperAnimatedText('Välkommen till\n Lattjo Lajban!',
+      TyperAnimatedText('Välkommen till\n LATTJO LAJBAN !',
           textAlign: TextAlign.center,
           textStyle: TextStyle(
             fontSize: 36,
@@ -62,13 +62,7 @@ class HomeView extends StatelessWidget {
     ]);
   }
 
-
-
-
-
-
-  Widget _ideasTodo(context) {
-
+  Widget _dailyFact(context) {
     Future<Map<String, dynamic>> appData = storage.readJsonFile();
     var state = Provider.of<MyState>(context, listen: false);
     return Container(
@@ -162,12 +156,14 @@ class HomeView extends StatelessWidget {
               return Dialog(
                 elevation: 16,
                 child: Container(
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color.fromARGB(255, 109, 109, 109))),
                   height: 80,
                   width: 350,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 8, bottom: 8),
                     child: Center(
                       child: Consumer<MyState>(
                         builder: (context, state, child) =>
@@ -178,8 +174,8 @@ class HomeView extends StatelessWidget {
                                       '${state.cookie}',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: 20,
-                                        fontFamily: 'Satisfy-Regular',
+                                        fontSize: 18,
+                                        fontFamily: 'BadScript-Regular',
                                         color: Color.fromARGB(255, 0, 0, 0),
                                       ),
                                     ),
