@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/services.dart' show rootBundle;
 
 class WordList {
-  //daily word list - döpa om när fixat?
   static final randomWord = getRandom();
   late final allWords = readJson();
 

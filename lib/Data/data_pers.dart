@@ -27,7 +27,6 @@ class MyAppStorage {
         print(e);
       }
     }
-    print('file dont exist!');
     return {};
   }
 
