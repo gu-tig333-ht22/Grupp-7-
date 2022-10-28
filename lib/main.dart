@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'Data/getapi.dart';
 import 'home_view.dart';
 import 'Wordle/wordlestate.dart';
+import 'Data/data_pers.dart';
 
 void main() {
   Provider.debugCheckInvalidValueType = null;
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyState(),
       child: MaterialApp(
-        home: HomeView(),
+        home: HomeView(storage: MyAppStorage()),
         debugShowCheckedModeBanner: false,
       ),
     );
