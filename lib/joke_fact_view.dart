@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:template/assets_handler.dart';
+import 'package:template/category_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'Data/getapi.dart';
@@ -26,7 +26,7 @@ class JokeAndFactView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _titel(),
+                _title(),
                 _jokeAndFactCard(),
                 _viewNextButton(context),
               ],
@@ -37,7 +37,7 @@ class JokeAndFactView extends StatelessWidget {
     );
   }
 
-  Widget _titel() {
+  Widget _title() {
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: Text(
@@ -92,14 +92,15 @@ class JokeAndFactView extends StatelessWidget {
           style: OutlinedButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 212, 137, 203)),
           onPressed: () {
-            if (categories.name == 'RANDOM FACTS') {
-              Provider.of<MyState>(context, listen: false).fetchFact();
+            if (categories.name == 'UTTRÅKAD?') {
+              Provider.of<MyState>(context, listen: false).fetchIdeasTodo();
             }
             if (categories.name == 'CHUCK NORRIS JOKES') {
               Provider.of<MyState>(context, listen: false).fetchChuckNorris();
             }
-            if (categories.name == 'YO MOMMA JOKES') {
-              Provider.of<MyState>(context, listen: false).fetchYoMamma();
+            if (categories.name == 'PUNCHLINE JOKES') {
+              Provider.of<MyState>(context, listen: false)
+                  .fetchPunchlineYokes();
             }
           },
           child: Text(

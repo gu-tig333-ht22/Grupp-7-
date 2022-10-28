@@ -68,14 +68,14 @@ class ClockViewState extends State<ClockView> {
                     child: Stack(
                       children: <Widget>[
                         Image(
-                            image: AssetImage('assets/siffror_klocka.png'),
+                            image: AssetImage('assets/clock.png'),
                             fit: BoxFit.cover),
                         Positioned(
                           top: 30,
                           child: SizedBox(
                             height: 237,
                             child: Image(
-                                image: AssetImage('assets/klockren.png'),
+                                image: AssetImage('assets/moose.png'),
                                 fit: BoxFit.cover),
                           ),
                         ),
