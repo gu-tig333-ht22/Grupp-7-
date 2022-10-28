@@ -13,24 +13,53 @@ class MyState extends ChangeNotifier {
       'https://digital-fortune-cookies-api.herokuapp.com/fortune',
     ));
     var result = response.body;
-    print(result);
+    var cookiedata = jsonDecode(result);
+    var fortunecookie = cookiedata['cookie'];
 
-    var lyckadkaka = jsonDecode(result);
-    print(lyckadkaka);
-    var visakakan = lyckadkaka['cookie'];
-    print(visakakan);
-    _fact = visakakan['fortune'];
-    print(_fact);
+    _cookie = fortunecookie['fortune'];
     _loading = false;
     notifyListeners();
   }
 
+  String _cookie = '';
+  String get cookie => _cookie;
   String _fact = '';
   String get fact => _fact;
   String _meme = 'https://i.redd.it/lkzgjs3botu91.jpg';
   String get meme => _meme;
   bool _loading = false;
   bool get loading => _loading;
+
+
+  fetchIdeasTodo() async {
+    _loading = true;
+    notifyListeners();
+    http.Response response =
+        await http.get(Uri.parse('https://www.boredapi.com/api/activity'));
+    var result = response.body;
+    var fact = jsonDecode(result);
+    _fact = fact['activity'];
+
+    _loading = false;
+    notifyListeners();
+  }
+
+  fetchPunchlineYokes() async {
+    _loading = true;
+    notifyListeners();
+    http.Response response = await http
+        .get(Uri.parse('https://official-joke-api.appspot.com/random_joke'));
+    var result = response.body;
+    var fact = jsonDecode(result);
+    var setup = fact['setup'];
+    var space = '  ';
+    var punchline = fact['punchline'];
+    _fact = setup + space + punchline;
+
+    _loading = false;
+    notifyListeners();
+  }
+
 
   fetchFact() async {
     _loading = true;
@@ -71,7 +100,7 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future fetchChuckNorris() async {
+  fetchChuckNorris() async {
     _loading = true;
     notifyListeners();
 
@@ -86,22 +115,8 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future fetchYoMamma() async {
-    _loading = true;
-    notifyListeners();
 
-    http.Response response =
-        await http.get(Uri.parse('https://yomomma-api.herokuapp.com/jokes'));
-    var result = response.body;
-    var fact = jsonDecode(result);
-    _fact = fact['joke'];
-
-    _loading = false;
-
-    notifyListeners();
-  }
-
-  Future fetchMeme() async {
+  fetchMeme() async {
     _loading = true;
     notifyListeners();
     var uri = Uri.parse('https://meme-api.herokuapp.com/gimme');
@@ -113,24 +128,4 @@ class MyState extends ChangeNotifier {
 
     notifyListeners();
   }
-
-//  TA BORT?? Future fetchDevYoke() async {
-//     _loading = true;
-//     notifyListeners();
-
-//     //funkar inte än
-//     http.Response response = await http
-//         .get(Uri.parse('https://backend-omega-seven.vercel.app/api/getjoke'));
-//     var result = response.body;
-//     print(result);
-//     var qandP = jsonDecode(result);
-//     var Q = qandP['question'];
-//     var P = qandP['punchline'];
-//     _fact = '$Q $P';
-
-//     _loading = false;
-
-//     notifyListeners();
-//   }
-//
 }

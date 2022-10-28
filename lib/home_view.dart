@@ -40,7 +40,7 @@ class HomeView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _title(context),
-              _dailyRandomFact(context),
+              _ideasTodo(context),
               _fortuneCookie(context),
               _next(context)
             ],
@@ -50,7 +50,7 @@ class HomeView extends StatelessWidget {
 
   Widget _title(context) {
     return AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
-      TyperAnimatedText('Välkommen till\nPrankster!',
+      TyperAnimatedText('Välkommen till\n Lattjo Lajban!',
           textAlign: TextAlign.center,
           textStyle: TextStyle(
             fontSize: 36,
@@ -62,13 +62,14 @@ class HomeView extends StatelessWidget {
     ]);
   }
 
-  Widget _dailyRandomFact(context) {
-    // DateTime now = DateTime.now();
-    // DateTime date = DateTime(now.year, now.month, now.day);
-    // String dateToday = date.toString().substring(0, 10);
+
+
+
+
+
+  Widget _ideasTodo(context) {
 
     Future<Map<String, dynamic>> appData = storage.readJsonFile();
-
     var state = Provider.of<MyState>(context, listen: false);
     return Container(
       height: 200,
@@ -87,22 +88,24 @@ class HomeView extends StatelessWidget {
                 Color.fromARGB(255, 143, 212, 249),
               ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(8),
             child: Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'PRANKSTER',
+                    'DAGENS FAKTA',
                     style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 26,
                         fontFamily: 'Nabla-Regular',
                         fontWeight: FontWeight.w700),
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    'Klicka för att se dagens\nrandom fakta',
+                    'KLICKA HÄR!',
                     style: TextStyle(
+                        letterSpacing: 2,
+                        color: Colors.white,
                         fontSize: 13,
                         fontWeight: FontWeight.w900,
                         fontFamily: 'Jura'),
@@ -111,8 +114,8 @@ class HomeView extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                   border: Border.all(
-                      color: Color.fromARGB(255, 104, 103, 103), width: 1.5),
-                  color: Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(255, 255, 255, 255), width: 1.5),
+                  color: Color.fromARGB(255, 68, 8, 63),
                   shape: BoxShape.circle),
             ),
           ),
@@ -149,7 +152,7 @@ class HomeView extends StatelessWidget {
 
   Widget _fortuneCookie(context) {
     return IconButton(
-        icon: Image.asset('assets/lyckokaka.png'),
+        icon: Image.asset('assets/fortune_cookie.png'),
         iconSize: 150,
         onPressed: () {
           Provider.of<MyState>(context, listen: false).fetchFortuneCookie();
@@ -172,7 +175,7 @@ class HomeView extends StatelessWidget {
                                 ? Text('')
                                 : SingleChildScrollView(
                                     child: Text(
-                                      '${state.fact}',
+                                      '${state.cookie}',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 20,
