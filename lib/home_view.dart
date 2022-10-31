@@ -95,7 +95,7 @@ class HomeView extends StatelessWidget {
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    'KLICKA HÄR!',
+                    'TRYCK HÄR!',
                     style: TextStyle(
                         letterSpacing: 2,
                         color: Colors.white,

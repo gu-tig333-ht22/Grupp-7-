@@ -19,7 +19,7 @@ class WordleState extends ChangeNotifier {
   Result todaysResult = Result();
 
   final ordLista = WordList();
-  String hiddenWord = "coola".toUpperCase();
+  String hiddenWord = ''.toUpperCase();
 
   late Map<String, List<Color>> _displayColor = {
     "0": startColors(),
