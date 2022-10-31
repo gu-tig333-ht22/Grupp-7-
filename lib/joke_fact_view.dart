@@ -14,10 +14,10 @@ class JokeAndFactView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.grey),
+        iconTheme: const IconThemeData(color: Colors.grey),
         backgroundColor: Colors.white,
         systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+            const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
         elevation: 0,
       ),
       body: Stack(
@@ -43,7 +43,7 @@ class JokeAndFactView extends StatelessWidget {
       child: Text(
         categories.name,
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'Jura',
           fontWeight: FontWeight.w900,
           fontSize: 40,
@@ -59,7 +59,7 @@ class JokeAndFactView extends StatelessWidget {
         height: 430,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(colors: [
+            gradient: const LinearGradient(colors: [
               Color.fromARGB(255, 212, 137, 203),
               Color.fromARGB(255, 233, 168, 170)
             ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
@@ -67,13 +67,14 @@ class JokeAndFactView extends StatelessWidget {
             child: Consumer<MyState>(
           builder: (context, state, child) =>
               Provider.of<MyState>(context, listen: false).loading
-                  ? Text('')
+                  ? const Text('')
                   : Padding(
-                      padding: EdgeInsets.only(top: 25, left: 25, right: 25),
+                      padding:
+                          const EdgeInsets.only(top: 25, left: 25, right: 25),
                       child: SingleChildScrollView(
-                        child: Text('${state.fact}',
+                        child: Text(state.fact,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: 'Jura',
                                 fontWeight: FontWeight.w900,
                                 fontSize: 35,
@@ -90,7 +91,7 @@ class JokeAndFactView extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: OutlinedButton(
           style: OutlinedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 212, 137, 203)),
+              backgroundColor: const Color.fromARGB(255, 212, 137, 203)),
           onPressed: () {
             if (categories.name == 'UTTRÅKAD?') {
               Provider.of<MyState>(context, listen: false).fetchIdeasTodo();
@@ -103,7 +104,7 @@ class JokeAndFactView extends StatelessWidget {
                   .fetchPunchlineYokes();
             }
           },
-          child: Text(
+          child: const Text(
             'SE NÄSTA',
             style: TextStyle(
                 letterSpacing: 2,

@@ -33,7 +33,7 @@ class CategoryView extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
           Color.fromARGB(255, 212, 137, 203),
           Color.fromARGB(255, 233, 168, 170)
@@ -55,8 +55,8 @@ class CategoryView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
+          const Padding(
+            padding: EdgeInsets.only(left: 15),
             child: Text(
               'Dags att utforska\nkategorierna',
               style: TextStyle(
@@ -70,13 +70,13 @@ class CategoryView extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15),
             child: AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
               TyperAnimatedText('Ha det så skoj!',
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w900,
                     fontFamily: 'Jura',
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
-                  speed: Duration(milliseconds: 70)),
+                  speed: const Duration(milliseconds: 70)),
             ]),
           )
         ],
@@ -88,10 +88,10 @@ class CategoryView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
-        padding: EdgeInsets.only(left: 28),
+        padding: const EdgeInsets.only(left: 28),
         height: 470,
         child: Swiper(
-          pagination: SwiperPagination(
+          pagination: const SwiperPagination(
               margin: EdgeInsets.only(top: 20),
               builder: DotSwiperPaginationBuilder(
                   activeColor: Colors.white, color: Colors.grey)),
@@ -106,8 +106,10 @@ class CategoryView extends StatelessWidget {
               onTap: () {
                 if (categories[index].name == 'MEMES') {
                   Provider.of<MyState>(context, listen: false).fetchMeme();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MemesView()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MemesView()));
                 } else if (categories[index].name == 'KLOCKREN') {
                   Navigator.push(
                       context,
@@ -116,8 +118,10 @@ class CategoryView extends StatelessWidget {
                 } else if (categories[index].name == 'WORDLE') {
                   Provider.of<WordleState>(context, listen: false)
                       .setRandomWord();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => (MyWordle())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => (const MyWordle())));
                 } else if (categories[index].name == 'UTTRÅKAD?') {
                   Provider.of<MyState>(context, listen: false).fetchIdeasTodo();
 
@@ -149,7 +153,7 @@ class CategoryView extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 90,
                       ),
                       Card(
@@ -170,7 +174,7 @@ class CategoryView extends StatelessWidget {
                                     padding: const EdgeInsets.only(top: 30),
                                     child: Text(
                                       categories[index].name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontFamily: 'Jura',
                                           letterSpacing: 1,
                                           fontWeight: FontWeight.w900,
@@ -210,7 +214,7 @@ class CategoryView extends StatelessWidget {
   Widget _exploreButton() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: const [
         Text('UTFORSKA KATEGORIN',
             style: TextStyle(
                 letterSpacing: 2,

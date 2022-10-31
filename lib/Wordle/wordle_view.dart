@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 import 'wordlestate.dart';
 
 class MyWordle extends StatelessWidget {
-  MyWordle({super.key});
+  const MyWordle({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 212, 137, 203),
+          backgroundColor: const Color.fromARGB(255, 212, 137, 203),
           title: const Text('Wordle'),
         ),
         body: Consumer<WordleState>(
@@ -116,7 +116,7 @@ class MyWordle extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(left: 4, right: 4),
-      child: Container(
+      child: SizedBox(
         height: 190,
         width: 450,
         child: Stack(children: [
@@ -142,7 +142,7 @@ class MyWordle extends StatelessWidget {
     var index = state.guessNo;
     var myGuess = state.guesses[index];
 
-    return Container(
+    return SizedBox(
       width: 153,
       height: 70.5,
       child: Row(
@@ -151,18 +151,18 @@ class MyWordle extends StatelessWidget {
         children: [
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 212, 137, 203),
-                fixedSize: Size(70, 60),
+                backgroundColor: const Color.fromARGB(255, 212, 137, 203),
+                fixedSize: const Size(70, 60),
               ),
               onPressed: () {
                 myGuess.removeLast();
                 state.notifyListeners();
               },
-              child: const Icon(Icons.backspace)), //const Text('Ångra')),
+              child: const Icon(Icons.backspace)),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 212, 137, 203),
-                  fixedSize: Size(83, 60)),
+                  backgroundColor: const Color.fromARGB(255, 212, 137, 203),
+                  fixedSize: const Size(83, 60)),
               onPressed: () async {
                 bool isValid = await state.validateGuess();
 

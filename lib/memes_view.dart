@@ -5,22 +5,25 @@ import 'package:provider/provider.dart';
 import 'Data/getapi.dart';
 
 class MemesView extends StatelessWidget {
+  const MemesView({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'MEMES',
           style: TextStyle(
               fontSize: 24, fontFamily: 'Jura', fontWeight: FontWeight.w700),
         ),
-        backgroundColor: Color.fromARGB(255, 212, 137, 203),
+        backgroundColor: const Color.fromARGB(255, 212, 137, 203),
         systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
+            const SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
           Color.fromARGB(255, 212, 137, 203),
           Color.fromARGB(255, 233, 168, 170)
@@ -31,7 +34,7 @@ class MemesView extends StatelessWidget {
             Consumer<MyState>(
               builder: (context, state, child) =>
                   Provider.of<MyState>(context, listen: false).loading
-                      ? Text(' ')
+                      ? const Text(' ')
                       : Flexible(
                           flex: 9,
                           child: Image(
@@ -55,7 +58,7 @@ class MemesView extends StatelessWidget {
         onPressed: () {
           Provider.of<MyState>(context, listen: false).fetchMeme();
         },
-        child: Text(
+        child: const Text(
           'NÄSTA MEME',
           style: TextStyle(
               color: Colors.white,

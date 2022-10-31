@@ -13,11 +13,13 @@ void main() {
       ChangeNotifierProvider<MyState>(create: ((_) => MyState())),
       ChangeNotifierProvider<WordleState>(create: ((_) => WordleState())),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
