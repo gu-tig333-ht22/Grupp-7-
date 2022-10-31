@@ -108,8 +108,7 @@ class MyWordle extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(displayColor?[charIndex]),
         ),
         child: Text(myGuess.letters[charIndex],
-            style: const TextStyle(fontSize: 30) //, fontFamily: 'MetalLord'),
-            ));
+            style: const TextStyle(fontSize: 30)));
   }
 
   Widget _keyBoard(context) {
@@ -221,63 +220,3 @@ class MyWordle extends StatelessWidget {
     );
   }
 }
-
-// void main() {
-//   Provider.debugCheckInvalidValueType = null;
-
-//   runApp(MultiProvider(
-//     providers: [
-//       ChangeNotifierProvider<MyState>(create: ((_) => MyState())),
-//       ChangeNotifierProvider<WordleState>(create: ((_) => WordleState())),
-//     ],
-//     child: MyApp(),
-//   ));
-// }
-
-// class MyApp extends StatelessWidget {
-//   MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: WordleView(storage: MyAppStorage()),
-//     );
-//   }
-// }
-
-// class WordleView extends StatelessWidget {
-//   const WordleView({super.key, required this.storage});
-
-//   final MyAppStorage storage;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var state = Provider.of<WordleState>(context, listen: false);
-//     state.setRandomWord();
-
-//     return Scaffold(
-//         backgroundColor: Color.fromARGB(255, 221, 136, 229),
-//         appBar: AppBar(
-//           backgroundColor: Color.fromARGB(255, 212, 137, 203),
-//           elevation: 0,
-//         ),
-//         body: Center(
-//           child: ElevatedButton(
-//             onPressed: () async {
-//               DateTime now = DateTime.now();
-//               DateTime date = DateTime(now.year, now.month, now.day);
-//               String dateToday = date.toString().substring(0, 10);
-
-//               var saveData = MyAppStorage();
-//               saveData.writeState(dateToday, 'hiddenWord', state.hiddenWord);
-
-//               print(await saveData.readJsonFile());
-
-//               Navigator.push(context,
-//                   MaterialPageRoute(builder: (context) => (MyWordle())));
-//             },
-//             child: const Text('Till Wordle'),
-//           ),
-//         ));
-//   }
-// }
