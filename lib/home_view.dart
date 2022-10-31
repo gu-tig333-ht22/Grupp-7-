@@ -9,16 +9,16 @@ import 'category_view.dart';
 
 class HomeView extends StatelessWidget {
   var storage;
-  HomeView({this.storage});
+  HomeView({super.key, this.storage});
 
   @override
   Widget build(BuildContext context) {
     return Consumer<MyState>(
         builder: (BuildContext context, state, child) => Scaffold(
               appBar: AppBar(
-                systemOverlayStyle:
-                    SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
-                backgroundColor: Color.fromARGB(255, 212, 137, 203),
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarBrightness: Brightness.dark),
+                backgroundColor: const Color.fromARGB(255, 212, 137, 203),
                 elevation: 0,
               ),
               body: flipCards(context),
@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
       bottom: false,
       child: Container(
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(colors: [
             Color.fromARGB(255, 212, 137, 203),
             Color.fromARGB(255, 233, 168, 170)
@@ -51,20 +51,21 @@ class HomeView extends StatelessWidget {
     return AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
       TyperAnimatedText('Välkommen till\n LATTJO LAJBAN !',
           textAlign: TextAlign.center,
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
             fontSize: 36,
             fontFamily: 'Jura',
             fontWeight: FontWeight.w700,
             color: Color.fromARGB(255, 255, 255, 255),
           ),
-          speed: Duration(milliseconds: 70))
+          speed: const Duration(milliseconds: 70))
     ]);
   }
 
   Widget _dailyFact(context) {
-    Future<Map<String, dynamic>> appData = storage.readJsonFile();
+    Future<Map<String, dynamic>>;
+    storage.readJsonFile();
     var state = Provider.of<MyState>(context, listen: false);
-    return Container(
+    return SizedBox(
       height: 200,
       width: 300,
       child: FlipCard(
@@ -76,16 +77,22 @@ class HomeView extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white, width: 3),
               borderRadius: BorderRadius.circular(2),
-              gradient: LinearGradient(colors: [
+              gradient: const LinearGradient(colors: [
                 Color.fromARGB(255, 138, 222, 137),
                 Color.fromARGB(255, 143, 212, 249),
               ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      width: 1.5),
+                  color: const Color.fromARGB(255, 68, 8, 63),
+                  shape: BoxShape.circle),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Text(
                     'DAGENS FAKTA',
                     style: TextStyle(
@@ -105,20 +112,15 @@ class HomeView extends StatelessWidget {
                   )
                 ],
               ),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Color.fromARGB(255, 255, 255, 255), width: 1.5),
-                  color: Color.fromARGB(255, 68, 8, 63),
-                  shape: BoxShape.circle),
             ),
           ),
         ),
         back: Container(
           decoration: BoxDecoration(
               border: Border.all(
-                  color: Color.fromARGB(255, 255, 255, 255), width: 2),
+                  color: const Color.fromARGB(255, 255, 255, 255), width: 2),
               borderRadius: BorderRadius.circular(2),
-              gradient: LinearGradient(colors: [
+              gradient: const LinearGradient(colors: [
                 Color.fromARGB(255, 195, 234, 217),
                 Color.fromARGB(255, 255, 255, 255)
               ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
@@ -128,8 +130,8 @@ class HomeView extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Text(
                   textAlign: TextAlign.center,
-                  '${state.fact}',
-                  style: TextStyle(
+                  state.fact,
+                  style: const TextStyle(
                       fontFamily: 'Jura',
                       fontWeight: FontWeight.w900,
                       fontSize: 18,
@@ -157,7 +159,7 @@ class HomeView extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       border: Border.all(
-                          color: Color.fromARGB(255, 109, 109, 109))),
+                          color: const Color.fromARGB(255, 109, 109, 109))),
                   height: 80,
                   width: 350,
                   child: Padding(
@@ -167,12 +169,12 @@ class HomeView extends StatelessWidget {
                       child: Consumer<MyState>(
                         builder: (context, state, child) =>
                             Provider.of<MyState>(context, listen: false).loading
-                                ? Text('')
+                                ? const Text('')
                                 : SingleChildScrollView(
                                     child: Text(
-                                      '${state.cookie}',
+                                      state.cookie,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontFamily: 'BadScript-Regular',
                                         color: Color.fromARGB(255, 0, 0, 0),
@@ -195,11 +197,11 @@ class HomeView extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => CategoryView()));
+                builder: (BuildContext context) => const CategoryView()));
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: const [
           Text(
             'UTFORSKA MER',
             style: TextStyle(

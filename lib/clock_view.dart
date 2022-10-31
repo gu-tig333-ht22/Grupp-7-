@@ -40,13 +40,13 @@ class ClockViewState extends State<ClockView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 212, 137, 203),
+          backgroundColor: const Color.fromARGB(255, 212, 137, 203),
           systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+              const SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
           elevation: 0,
         ),
         body: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(colors: [
               Color.fromARGB(255, 212, 137, 203),
               Color.fromARGB(255, 233, 168, 170)
@@ -58,16 +58,17 @@ class ClockViewState extends State<ClockView> {
                 height: 370,
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: Color.fromARGB(115, 230, 182, 226), width: 8),
+                      color: const Color.fromARGB(115, 230, 182, 226),
+                      width: 8),
                   borderRadius: BorderRadius.circular(200),
                 ),
                 //ClockView
                 child: Stack(
                   children: <Widget>[
-                    Image(
+                    const Image(
                         image: AssetImage('assets/clock.png'),
                         fit: BoxFit.cover),
-                    Positioned(
+                    const Positioned(
                       top: 30,
                       child: SizedBox(
                         height: 237,

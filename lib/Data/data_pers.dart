@@ -23,9 +23,7 @@ class MyAppStorage {
       try {
         var fileContent = await file.readAsString();
         return jsonDecode(fileContent);
-      } catch (e) {
-        print(e);
-      }
+      } catch (e) {}
     }
     return {};
   }

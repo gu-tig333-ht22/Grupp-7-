@@ -102,7 +102,7 @@ class WordleState extends ChangeNotifier {
     for (int i = 0; i < word.length; i++) {
       var char = _guesses[guessNo].word[i];
 
-      Color changeColorTo = Color.fromARGB(255, 103, 103, 103);
+      Color changeColorTo = const Color.fromARGB(255, 103, 103, 103);
 
       if (charsInWord[char] == null) {
         charsInWord[char] = 0;
@@ -128,7 +128,6 @@ class WordleState extends ChangeNotifier {
     }
     incrementGuessNo();
     notifyListeners();
-    print('$charsInGuess\n$charsInWord');
   }
 
   void setResult() {
@@ -185,9 +184,6 @@ class Guess {
   List<String> get letters => _letters;
   String _word = '';
   String get word => _word;
-
-  // bool _isValid = false;
-  // bool get isValid => _isValid;
 
   Guess();
 

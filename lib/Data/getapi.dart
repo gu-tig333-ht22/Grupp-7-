@@ -30,7 +30,6 @@ class MyState extends ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
-
   fetchIdeasTodo() async {
     _loading = true;
     notifyListeners();
@@ -60,7 +59,6 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-
   fetchFact() async {
     _loading = true;
     notifyListeners();
@@ -88,7 +86,7 @@ class MyState extends ChangeNotifier {
         .get(Uri.parse('https://uselessfacts.jsph.pl/random.json?language=en'));
     var result = response.body;
 
-    if (await appData.containsKey(dateToday)) {
+    if (appData.containsKey(dateToday)) {
       _fact = await appData[dateToday]['fact'];
     } else {
       _fact = jsonDecode(result)['text'];
@@ -114,7 +112,6 @@ class MyState extends ChangeNotifier {
 
     notifyListeners();
   }
-
 
   fetchMeme() async {
     _loading = true;
