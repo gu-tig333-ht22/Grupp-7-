@@ -3,7 +3,6 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:template/Data/data_pers.dart';
 import 'package:template/Data/getapi.dart';
 
 import 'category_view.dart';
